@@ -1,0 +1,7 @@
+papillon_home:
+    pattern:  /
+    defaults: { _controller: PapillonUserBundle:User:index }
+
+papillon_fos_user:
+    resource: "@PapillonUserBundle/Resources/config/routing/fos_user.yml"
+

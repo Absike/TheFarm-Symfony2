@@ -1,0 +1,2 @@
+papillon_:
+    resource: "@PapillonUserBundle/Resources/config/routing.yml"
