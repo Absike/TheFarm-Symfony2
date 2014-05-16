@@ -5,25 +5,35 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
 
-            {% stylesheets '@PapillonUserBundle/Resources/public/css/nyroModal.css' %}
+            {% stylesheets output='css/login.min.css'
+            '@PapillonUserBundle/Resources/public/css/papillon.css'
+            '@PapillonUserBundle/Resources/public/css/theme/black.css'
+            '@PapillonUserBundle/Resources/public/css/theme/reset.css'
+            '@PapillonUserBundle/Resources/public/css/theme/styles.css' %}
             <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
             {% endstylesheets %}
 
         {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
 
         {# block javascripts #}
         {% block javascripts %}
 
             {% javascripts
             '@PapillonUserBundle/Resources/public/js/jquery-1.11.0.min.js'
+            '@PapillonUserBundle/Resources/public/js/bootstrap.min.js'
             '@PapillonUserBundle/Resources/public/js/jquery.nyroModal.custom.js' %}
             <script src="{{ asset_url }}"></script>
 
             {% endjavascripts %}
         {% endblock %}
+
+    </head>
+    <body>
+
+        {% block header %}{% endblock %}
+        {% block content %}{% endblock %}
+
     </body>
 </html>

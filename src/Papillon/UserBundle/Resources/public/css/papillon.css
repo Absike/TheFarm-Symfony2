@@ -1,0 +1,23 @@
+html, body, div, span, a, img, form, label,
+table, tbody, thead, tr, th, td {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+}
+
+body {
+    background: #60912b;
+    font-family: "Lucida Grande", verdana, "Lucida Sans Unicode", sans-serif;
+    font-size: 58%;
+}
+
+.form-signin {
+    margin: 0 auto;
+    max-width: 365px;
+    padding: 15px;
+}
