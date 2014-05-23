@@ -1,4 +1,5 @@
 {% extends '::base.html.twig' %}
+{% set current_route = app.request.attributes.get('_route') %}
 
 {% block header %}
 
@@ -16,20 +17,21 @@
 
             <div id="login">
 
-                <p>Bonjour <span class="highlight">&nbsp;
-                  Hassan Absike &nbsp;</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;15/05/2014
+                <p>Hi <span class="highlight">&nbsp;
+                        Hassan Absike &nbsp;</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; {{ "now"|date("d/m/Y") }}
                     <span class="highlight">&nbsp;</span>
                  </p>
             </div>
 
             <div id="nav">
                 <ul>
-                    <li><a href="" class="png_bg">Mes activités</a></li>
-                    <li><a href="" class="png_bg">Alertes</a></li>
-                    <li><a href="" >Administration</a></li>
-                    <li><a href=""class="png_bg">Mes projets</a></li>
-                    <li><a href="" class="png_bg">Clients</a></li>
-                    <li><a href="" class="active png_bg">Dashboard</a></li>
+                    <li><a href="{{ path('tasks') }}" class="png_bg {% if current_route == 'tasks' %}active{% endif %}">Mes activités</a></li>
+                    <li><a href="{{ path('alert') }}" class="png_bg {% if current_route == 'alert' %}active{% endif %}">Alertes</a></li>
+                    <li><a href="{{ path('users') }}" class="png_bg {% if current_route == 'users' %}active{% endif %}">Administration</a></li>
+                    <li><a href="{{ path('projects') }}" class="png_bg {% if current_route == 'projects' %}active{% endif %}" >Mes projets</a></li>
+                    <li><a href="{{ path('customers') }}" class="png_bg {% if current_route == 'customers' %}active{% endif %}">Clients</a></li>
+                    <li><a href="{{ path('dashboard') }}" class="png_bg {% if current_route == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+
                     <li><a href="{{ path('fos_user_security_logout') }}" class="png_bg">Déconnexion</a></li>
                 </ul>
             </div>

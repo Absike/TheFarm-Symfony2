@@ -1,2 +1,7 @@
 papillon_:
     resource: "@PapillonUserBundle/Resources/config/routing.yml"
+
+PapillonUserBundle:
+    resource: "@PapillonUserBundle/Controller/"
+    type: annotation
+    prefix: /
