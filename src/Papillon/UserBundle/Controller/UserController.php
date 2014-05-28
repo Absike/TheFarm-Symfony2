@@ -18,4 +18,14 @@ class UserController extends Controller
     {
         return array();
     }
+
+
+    /**
+     * @Route("/bootstrap" , name="bootstrap")
+     * @Template("PapillonUserBundle:User:bootstrap.html.twig")
+     */
+    public function bootstrapAction()
+    {
+        return array();
+    }
 }

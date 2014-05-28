@@ -5,11 +5,15 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
 
-            {% stylesheets output='css/login.min.css'
+            {#@PapillonUserBundle/Resources/public/css/flat-ui.css#}
+
+            {% stylesheets
             '@PapillonUserBundle/Resources/public/css/papillon.css'
             '@PapillonUserBundle/Resources/public/css/theme/black.css'
             '@PapillonUserBundle/Resources/public/css/theme/reset.css'
-            '@PapillonUserBundle/Resources/public/css/theme/styles.css' %}
+            '@PapillonUserBundle/Resources/public/css/theme/styles.css'
+            '@PapillonUserBundle/Resources/public/css/bootstrap.min.css'
+            '@PapillonUserBundle/Resources/public/css/datatables/dataTables.bootstrap.css' %}
             <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
             {% endstylesheets %}
 
@@ -23,6 +27,8 @@
             {% javascripts
             '@PapillonUserBundle/Resources/public/js/jquery-1.11.0.min.js'
             '@PapillonUserBundle/Resources/public/js/bootstrap.min.js'
+            '@PapillonUserBundle/Resources/public/js/datatables/jquery.dataTables.js'
+            '@PapillonUserBundle/Resources/public/js/datatables/dataTables.bootstrap.js'
             '@PapillonUserBundle/Resources/public/js/jquery.nyroModal.custom.js' %}
             <script src="{{ asset_url }}"></script>
 
@@ -33,7 +39,11 @@
     <body>
 
         {% block header %}{% endblock %}
-        {% block content %}{% endblock %}
+
+        <div id="container">
+            {% block content %}{% endblock %}
+        </div>
+
 
     </body>
 </html>
