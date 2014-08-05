@@ -27,6 +27,9 @@ security:
             form_login:                      # On définit notre méthode d'authentification
                 provider:    fos_userbundle  # On lit l'authentification au provider définit plus haut
                 remember_me: true            # On active la possibilité du "Se souvenir de moi" (désactivé par défaut)
+                always_use_default_target_path: true
+                default_target_path: /dashboard/home
+                use_referer: true
             remember_me:
                 key:         %secret%        # On définit la clé pour le remember_me (%secret% est un parametre de parameters.ini)
             anonymous:       false            # On autorise les utilisateurs anonymes (non identifiés)

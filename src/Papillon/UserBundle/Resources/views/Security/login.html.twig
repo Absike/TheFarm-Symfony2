@@ -6,40 +6,52 @@
 
 
     <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"  style="margin-top:50px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please sign in</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form accept-charset="UTF-8" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+                            <fieldset>
 
-        <form class="form-signin" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">
+                                        {{ error|trans }}
+                                    </div>
+                                {% endif %}
 
-            <h2 class="form-signin-heading"> <img src="{{ asset('bundles/papillonuser/images/logo.png') }}" alt=""/></h2>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="_username" placeholder="Username or E-mail" autofocus>
+                                </div>
 
+                                <div class="form-group">
+                                    <input class="form-control" type="password" value="" name="_password" placeholder="Password">
+                                </div>
 
-            {% if error %}
-                <div class="alert alert-danger">
-                    {{ error|trans }}
+                                <div class="checkbox">
+                                    <label>
+                                        <a class="pull-right" href="#">Forgot password?</a>
+                                        <input name="_remember_me" type="checkbox" value="Remember Me"> Remember Me
+                                    </label>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <input type="submit" class="btn btn-success btn-block" value="Sign In">
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <a href="" class="btn btn-primary btn-block">Register</a>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-            {% endif %}
-
-            <input type="text" id="username" name="_username" class="form-control" placeholder="{{ 'security.login.username'|trans }}" required
-                   autofocus>
-
-            <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'security.login.password'|trans }}" required>
-
-            <label class="checkbox">
-                <input type="checkbox" value="remember-me" id="remember_me" name="_remember_me"> Remember me
-            </label>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
-
-
-        </form>
-
-
-{#        <div class="lien" align="right">
-            <a href="" class="nyroModal">Obtenir un compte &nbsp;|</a>
-            <a href="" class="nyroModal">&nbsp;Mot de passe oublié ?</a>
+            </div>
         </div>
-
-        <div id="copy">Copyright © 2014 Hassan Absike. Tous droits réservés</div>#}
     </div>
-
 
 
     <script type="text/javascript">

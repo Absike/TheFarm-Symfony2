@@ -28,4 +28,14 @@ class UserController extends Controller
     {
         return array();
     }
+
+
+    /**
+     * @Route("/forms" , name="forms")
+     * @Template("PapillonUserBundle:User:forms.html.twig")
+     */
+    public function formsAction()
+    {
+        return array();
+    }
 }

@@ -2,40 +2,98 @@
 {% set current_route = app.request.attributes.get('_route') %}
 
 {% block header %}
-
-    <div id="header" class="png_bg">
-
-        <div id="head_wrap">
-
-            <div id="logo">
-                <a href="">
-                    <img src="" alt="Logo" class="png_bg"/>
-                </a>
-            </div>
-
-            <br>
-
-            <div id="login">
-
-                <p>Hi <span class="highlight">&nbsp;
-                        Hassan Absike &nbsp;</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; {{ "now"|date("d/m/Y") }}
-                    <span class="highlight">&nbsp;</span>
-                 </p>
-            </div>
-
-            <div id="nav">
-                <ul>
-                    <li><a href="{{ path('tasks') }}" class="png_bg {% if current_route == 'tasks' %}active{% endif %}">Mes activités</a></li>
-                    <li><a href="{{ path('alert') }}" class="png_bg {% if current_route == 'alert' %}active{% endif %}">Alertes</a></li>
-                    <li><a href="{{ path('users') }}" class="png_bg {% if current_route == 'users' %}active{% endif %}">Administration</a></li>
-                    <li><a href="{{ path('projects') }}" class="png_bg {% if current_route == 'projects' %}active{% endif %}" >Mes projets</a></li>
-                    <li><a href="{{ path('customers') }}" class="png_bg {% if current_route == 'customers' %}active{% endif %}">Clients</a></li>
-                    <li><a href="{{ path('dashboard') }}" class="png_bg {% if current_route == 'dashboard' %}active{% endif %}">Dashboard</a></li>
-
-                    <li><a href="{{ path('fos_user_security_logout') }}" class="png_bg">Déconnexion</a></li>
-                </ul>
-            </div>
+    <!-- Inverse navigation bar without icons -->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-4">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Papillon</a>
         </div>
-    </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-4">
+            <ul class="nav navbar-nav">
+                <li class="{% if current_route == 'dashboard' %}active{% endif %}"><a href="{{ path('dashboard') }}">Dashboard</a></li>
+                <li class="{% if current_route == 'tasks' %}active{% endif %}"><a href="{{ path('tasks') }}">Mes activités</a></li>
+                <!-- Dropdown -->
+                <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
+                    <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('users') }}">Users</a></li>
+                        <li class="{% if current_route == 'customers' %}active{% endif %}"><a href="#">Clients</a></li>
+                        <li><a href="{{ path('bootstrap') }}">Bootstrap stuff</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Regular link</a></li>
+                        <li class="disabled"><a href="#">Disabled link</a></li>
+                        <li><a href="#">Another action</a></li><li class="dropdown-submenu"><a href="#">Options <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!-- E-mail dropdown -->
+                <li class="dropdown {% if current_route == 'projects' %}active{% endif %}">
+                    <a href="{{ path('projects') }}" class="dropdown-toggle" data-toggle="dropdown">Mes projets <span class="badge">14 </span><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Compose Mail</a></li>
+                        <li><a href="#">Inbox <span class="badge">10</span></a></li>
+                        <li><a href="#">Starred <span class="badge">1</span></a></li>
+                        <li><a href="#">Important</a></li>
+                        <li><a href="#">Drafts <span class="badge">2</span></a></li>
+                        <li><a href="#">Sent Mail</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Spam</a></li>
+                        <li><a href="#">Trash <span class="badge">1</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Login form dropdown -->
+            <ul class="nav navbar-nav navbar-right">
+     {#           <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
+                    <ul class="dropdown-menu">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="center">
+                                <button class="btn btn-default" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </ul>
+                </li>#}
 
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                </li>
+
+                <!-- Search form dropdown -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search</a>
+                    <ul class="dropdown-menu">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">Go!</button>
+									</span>
+                            </div>
+                        </form>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav><!-- /.navbar -->
 {% endblock %}

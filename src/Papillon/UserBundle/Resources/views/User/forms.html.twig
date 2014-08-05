@@ -1,0 +1,182 @@
+{% extends "PapillonUserBundle::layout.html.twig" %}
+
+{% block title %}Bootstrap 3 | Forms {% endblock title %}
+
+{% block content %}
+
+    <div id="content_wrapper">
+
+
+        <fieldset class="">
+
+
+            <blockquote>
+                <h2>Bootstrap 3 Form</h2>
+            </blockquote>
+
+            <div class="row">
+
+                <form role="form" style="width:400px; margin: 0 auto;">
+                    <h1>Contact us</h1>
+
+                    <div class="required-field-block">
+                        <input type="text" placeholder="Name" class="form-control">
+
+                        <div class="required-icon">
+                            <div class="text">*</div>
+                        </div>
+                    </div>
+
+                    <div class="required-field-block">
+                        <input type="text" placeholder="Email" class="form-control">
+
+                        <div class="required-icon">
+                            <div class="text">*</div>
+                        </div>
+                    </div>
+
+                    <input type="text" placeholder="Phone" class="form-control">
+
+                    <div class="required-field-block">
+                        <textarea rows="3" class="form-control" placeholder="Message"></textarea>
+
+                        <div class="required-icon">
+                            <div class="text">*</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">Send</button>
+                </form>
+
+            </div>
+
+            <hr/>
+
+            <div class="row">
+                <h2>Use butons to simulate radio butons</h2>
+
+                <div class="form-group">
+                    <label for="happy" class="col-sm-4 col-md-4 control-label text-right">Are you happy ?</label>
+
+                    <div class="col-sm-7 col-md-7">
+                        <div class="input-group">
+                            <div id="radioBtn" class="btn-group">
+                                <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="Y">YES</a>
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="N">NO</a>
+                            </div>
+                            <input type="hidden" name="happy" id="happy">
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+
+                <div class="form-group">
+                    <label for="fun" class="col-sm-4 col-md-4 control-label text-right">Is it fun ?</label>
+
+                    <div class="col-sm-7 col-md-7">
+                        <div class="input-group">
+                            <div id="radioBtn" class="btn-group">
+                                <a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="Y">YES</a>
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="X">I don't
+                                    know</a>
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="N">NO</a>
+                            </div>
+                            <input type="hidden" name="fun" id="fun">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="alert alert-success">
+                         <span class="glyphicon glyphicon-send"></span>
+                         <strong>   Success! Message sent. (If form ok!) </strong>
+                    </div>
+
+                    <div class="alert alert-danger">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <strong> Error! Please check the inputs. (If form error!)</strong>
+                    </div>
+                </div>
+
+                <form role="form" action="" method="post">
+
+
+                        <div class="form-group">
+                            <label for="InputName">Your Name</label>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="InputName" id="InputName"
+                                       placeholder="Enter Name" required>
+                                <span class="input-group-addon"><i
+                                            class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Your Email</label>
+
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="InputEmail" name="InputEmail"
+                                       placeholder="Enter Email" required>
+                                <span class="input-group-addon"><i
+                                            class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputMessage">Message</label>
+
+                            <div class="input-group"
+                                    >
+                                <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5"
+                                          required></textarea>
+                                <span class="input-group-addon"><i
+                                            class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="InputReal">What is 4+3? (Simple Spam Checker)</label>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="InputReal" id="InputReal" required>
+                                <span class="input-group-addon"><i
+                                            class="glyphicon glyphicon-ok form-control-feedback"></i></span></div>
+                        </div>
+                        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+
+                </form>
+
+            </div>
+
+
+
+
+        </fieldset>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.required-icon').tooltip({
+                placement: 'left',
+                title: 'Required field'
+            });
+
+
+            $('#radioBtn a').on('click', function () {
+                var sel = $(this).data('title');
+                var tog = $(this).data('toggle');
+                $('#' + tog).prop('value', sel);
+
+                $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+                $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+            })
+        });
+
+    </script>
+
+{% endblock %}
