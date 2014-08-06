@@ -6,3 +6,10 @@ Papillon\UserBundle\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
+    fields:
+        first_name:
+            type: string
+            length: '80'
+        last_name:
+            type: string
+            length: '80'

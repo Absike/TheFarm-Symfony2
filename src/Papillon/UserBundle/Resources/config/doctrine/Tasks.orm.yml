@@ -1,0 +1,29 @@
+Papillon\UserBundle\Entity\Tasks:
+    type: entity
+    table: tasks
+    repositoryClass: Papillon\UserBundle\Entity\TasksRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        priority:
+            type: string
+            length: '30'
+        status:
+            type: string
+            length: '30'
+        time_spent:
+            type: integer
+        description:
+            type: text
+        created_at:
+            type: datetime
+        updated_at:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks:
+      prePersist: [ setCreatedAtValue ]
+      preUpdate: [ setUpdatedAtValue ]

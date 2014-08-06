@@ -12,19 +12,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Papillon</a>
+            <a class="navbar-brand" href="{{ path('dashboard') }}">Papillon</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-4">
             <ul class="nav navbar-nav">
                 <li class="{% if current_route == 'dashboard' %}active{% endif %}"><a href="{{ path('dashboard') }}">Dashboard</a></li>
-                <li class="{% if current_route == 'tasks' %}active{% endif %}"><a href="{{ path('tasks') }}">Mes activités</a></li>
+                <li class="{% if current_route == 'tasks' %}active{% endif %}"><a href="{{ path('tasks') }}">My tasks</a></li>
                 <!-- Dropdown -->
                 <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
                     <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('users') }}">Users</a></li>
                         <li class="{% if current_route == 'customers' %}active{% endif %}"><a href="#">Clients</a></li>
+                        <li class="{% if current_route == 'new_task' %}active{% endif %}"><a href="{{ path('new_task') }}">Tasks</a></li>
                         <li><a href="{{ path('bootstrap') }}">Bootstrap stuff</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Regular link</a></li>
@@ -40,7 +41,7 @@
                 </li>
                 <!-- E-mail dropdown -->
                 <li class="dropdown {% if current_route == 'projects' %}active{% endif %}">
-                    <a href="{{ path('projects') }}" class="dropdown-toggle" data-toggle="dropdown">Mes projets <span class="badge">14 </span><span class="caret"></span></a>
+                    <a href="{{ path('projects') }}" class="dropdown-toggle" data-toggle="dropdown">Projets <span class="badge">14 </span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Compose Mail</a></li>
                         <li><a href="#">Inbox <span class="badge">10</span></a></li>
@@ -96,4 +97,18 @@
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav><!-- /.navbar -->
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="flash_message success">
+            <div data-bind="message" class="message text-center"> {{ flashMessage }}</div>
+            <div class="close_button"></div>
+        </div>
+    {% endfor %}
+
+    <script type="text/javascript">
+        $(function() {
+            $('.flash_message').delay(4000).slideUp("slow");
+        });
+    </script>
+
 {% endblock %}
