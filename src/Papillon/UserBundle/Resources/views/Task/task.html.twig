@@ -13,18 +13,24 @@
         <table id="example" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th>priority</th>
-                <th>status</th>
-                <th>dateCreated</th>
+                <th>{{ 'priority'|trans }}</th>
+                <th>{{ 'status'|trans }}</th>
+                <th>{{ 'dateCreated'|trans }}</th>
+                <th>Temps passé</th>
             </tr>
             </thead>
             <tbody>
 
             {% for item in tasks %}
                 <tr>
-                    <td>{{ item.priority }}</td>
-                    <td>{{ item.status }}</td>
+                    <td>{{ item.priority|trans }}</td>
+                    <td>{{ item.status|trans }}</td>
                     <td>{{ item.createdAt|date('Y-m-d') }}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: {{ item.timeSpent }}%;"></div>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
 
