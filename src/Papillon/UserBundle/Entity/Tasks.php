@@ -5,45 +5,63 @@ namespace Papillon\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tasks
+ * @ORM\Table(name="tasks")
+ * @ORM\Entity(repositoryClass="Papillon\UserBundle\Entity\TasksRepository")
  */
 class Tasks
 {
     /**
-     * @var integer
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
+     * @var string $priority
+     * @ORM\Column(name="priority", type="string", length=30)
      */
     private $priority;
 
     /**
-     * @var string
+     * @var string $status
+     *
+     * @ORM\Column(name="status", type="string", length=30)
      */
     private $status;
 
     /**
-     * @var integer
+     * @var integer $time_spent
+     * @ORM\Column(name="time_spent", type="integer")
      */
     private $time_spent;
 
     /**
-     * @var string
+     * @var string $description
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
-     * @var \DateTime
+     * @var datetime $created_at
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $created_at;
 
     /**
-     * @var \DateTime
+     * @var datetime $updated_at
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updated_at;
 
+
+
+    public function __construct() {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
 
     /**
      * Get id
