@@ -20,7 +20,7 @@ class TasksType extends AbstractType
 
         $builder
             ->add('priority','choice', array('choices'   => $priority,'required'  => false))
-            ->add('status','choice', array('choices'   => $status,'required'  => false))
+            ->add('status','choice', array('choices'   => $status,'required'  => false,'data' => 'new'))
             ->add('description', 'textarea')
         ;
     }

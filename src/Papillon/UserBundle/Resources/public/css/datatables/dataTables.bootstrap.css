@@ -105,7 +105,7 @@ table.table-bordered thead td {
 	border-left-width: 0;
 	border-top-width: 0;
 }
-table.table-bordered tbody th,
+table.t;able-bordered tbody th,
 table.table-bordered tbody td {
 	border-left-width: 0;
 	border-bottom-width: 0;
@@ -118,7 +118,23 @@ div.dataTables_scrollHead table.table-bordered {
 	border-bottom-width: 0;
 }
 
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-top: 1px solid #ddd;
+    line-height: 34px!important;
+    padding: 0 0 0 13px!important;
+    vertical-align: middle !important;
+}
 
+.table .progress {
+    margin-bottom: 0 !important;
+    height: 14px !important;
+    margin-right: 8px !important;
+}
 
 
 /*
@@ -175,7 +191,7 @@ ul.DTTT_dropdown.dropdown-menu li:hover a {
 }
 
 div.DTTT_collection_background {
-	z-index: 2002;	
+	z-index: 2002;
 }
 
 /* TableTools information display */
@@ -210,7 +226,7 @@ table.DTFC_Cloned tr.even {
     background-color: white;
     margin-bottom: 0;
 }
- 
+
 div.DTFC_RightHeadWrapper table ,
 div.DTFC_LeftHeadWrapper table {
     margin-bottom: 0 !important;
@@ -218,7 +234,7 @@ div.DTFC_LeftHeadWrapper table {
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
- 
+
 div.DTFC_RightHeadWrapper table thead tr:last-child th:first-child,
 div.DTFC_RightHeadWrapper table thead tr:last-child td:first-child,
 div.DTFC_LeftHeadWrapper table thead tr:last-child th:first-child,
@@ -226,20 +242,20 @@ div.DTFC_LeftHeadWrapper table thead tr:last-child td:first-child {
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
- 
+
 div.DTFC_RightBodyWrapper table,
 div.DTFC_LeftBodyWrapper table {
     border-top: none;
     margin: 0 !important;
 }
- 
+
 div.DTFC_RightBodyWrapper tbody tr:first-child th,
 div.DTFC_RightBodyWrapper tbody tr:first-child td,
 div.DTFC_LeftBodyWrapper tbody tr:first-child th,
 div.DTFC_LeftBodyWrapper tbody tr:first-child td {
     border-top: none;
 }
- 
+
 div.DTFC_RightFootWrapper table,
 div.DTFC_LeftFootWrapper table {
     border-top: none;

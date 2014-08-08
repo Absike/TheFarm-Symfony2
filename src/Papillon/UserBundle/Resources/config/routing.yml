@@ -1,7 +1,12 @@
-papillon_home:
-    pattern:  /
+homepage:
+    path:     /
     defaults: { _controller: PapillonUserBundle:Dashboard:index }
 
-papillon_fos_user:
-    resource: "@PapillonUserBundle/Resources/config/routing/fos_user.yml"
+login_check:
+    pattern: /auth
+    requirements: { _method: POST }
+
+signout:
+    pattern: /logout
+
 

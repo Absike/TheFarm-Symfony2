@@ -365,7 +365,16 @@ body {
     }
 }
 
-
+.img-circle {
+    border-radius: 50%;
+    width: 58px;
+}
+.notifications.dropdown .dropdown-menu > li > ul > li .image .img-circle {
+    border: 2px solid #FFF;
+}
+.page-container.horizontal-menu header.navbar ul.nav > li.dropdown .dropdown-menu > li > ul > li .image .img-circle {
+    border: 2px solid #FFF;
+}
 /******* FLASH MESSAGE *******/
 
 .flash_message{
@@ -422,6 +431,23 @@ body {
     width: 18px;
 }
 
+.label-low {
+    background-color: #0073b7;
+}
+.label-normal {
+    background-color: #49bf67;
+}
+
+.label-urgent {
+    background-color: #f34541;
+}
+
+.label-high {
+    background-color: #f8a326;
+}
+.label-immediate {
+    background-color: #cda70d;
+}
 /******* CUSTOM PAGINATION *******/
 
 .pagination > .active > a,
@@ -430,4 +456,36 @@ body {
 .pagination > .active > a:focus, .pagination > .active > span:focus {
     background-color: #60912b !important;
     border-color: #60912b !important;
+}
+
+/******* Dashboard ************/
+
+.tile-stats {
+    position: relative;
+    display: block;
+    background: #303641;
+    padding: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.tile-stats.tile-red {
+    background: #f56954;
+}
+
+.tile-stats.tile-green {
+    background: #00a65a;
+}
+
+.tile-stats.tile-blue {
+    background: #0073b7;
+}
+
+.tile-stats.tile-aqua {
+    background: #00c0ef;
 }

@@ -4,16 +4,70 @@
 
 {% block content %}
 
-    <div id="content_wrapper">
-
         <div class="newtask">
             <h2>Tableau de bord</h2>
         </div>
 
         <fieldset class="filtre">
 
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="tile-stats tile-red">
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="tile-stats tile-green">
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="tile-stats tile-aqua">
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="tile-stats tile-blue">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="panel panel-primary" id="charts_env">
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="line-chart">
+                                    <div id="charts-line" ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <div id="charts-pie"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </fieldset>
 
-    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function(){
+
+            POCKET.Charts['xy']('charts-line');
+            POCKET.Charts['pie']('charts-pie');
+
+        });
+    </script>
 
 {% endblock %}
