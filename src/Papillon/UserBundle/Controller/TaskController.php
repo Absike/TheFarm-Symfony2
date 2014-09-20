@@ -5,9 +5,17 @@ namespace Papillon\UserBundle\Controller;
 use Papillon\UserBundle\Entity\Tasks;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Papillon\UserBundle\Form\TasksType;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Papillon\UserBundle\Form\TasksType;
+use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+
 
 class TaskController extends Controller
 {
@@ -18,8 +26,9 @@ class TaskController extends Controller
      */
     public function taskAction()
     {
+        $user = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $oTasks = $em->getRepository('PapillonUserBundle:Tasks')->getTasksByUser(1);
+        $oTasks = $em->getRepository('PapillonUserBundle:Tasks')->getTasksByUser($user);
 
         return $this->render('PapillonUserBundle:Task:task.html.twig', array(
             'tasks' => $oTasks
@@ -56,6 +65,31 @@ class TaskController extends Controller
       return $this->render('PapillonUserBundle:Task:newTask.html.twig', array('form' => $form->createView()));
     }
 
+
+    /**
+     * List of tasks
+     * @param Request $request
+     * @return Response
+     */
+    public function listAction(Request $request)
+    {
+
+        $user = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $oTasks = $em->getRepository('PapillonUserBundle:Tasks')->getTasksByUser($user);
+
+        //initialisation du serializer
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($serializer->serialize($oTasks, 'json'));
+
+        return $response;
+
+    }
 
     /**
      * @Route("/alert", name="alert")

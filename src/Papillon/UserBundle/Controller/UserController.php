@@ -54,14 +54,6 @@ class UserController extends Controller
     public function signinAction(Request $request)
     {
         $session = $request->getSession();
-
-        /*if ($username = $session->get(SecurityContext::LAST_USERNAME)) {
-            $session->remove(SecurityContext::LAST_USERNAME);
-        }
-        if ($error = $session->get(SecurityContext::AUTHENTICATION_ERROR)) {
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }*/
-
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(
