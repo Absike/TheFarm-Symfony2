@@ -11,9 +11,8 @@ table, tbody, thead, tr, th, td {
 }
 
 body {
-    background: #222;
+    background-color: #ffffff;
     font-family: "Lucida Grande", verdana, "Lucida Sans Unicode", sans-serif;
-    font-size: 58%;
 }
 
 .form-signin {

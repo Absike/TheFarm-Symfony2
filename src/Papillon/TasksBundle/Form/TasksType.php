@@ -1,7 +1,7 @@
 <?php
 
-namespace Papillon\UserBundle\Form;
-use Papillon\UserBundle\Entity\User;
+namespace Papillon\TasksBundle\Form;
+use Papillon\TasksBundle\Entity\Tasks;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -31,7 +31,7 @@ class TasksType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Papillon\UserBundle\Entity\Tasks',
+            'data_class' => 'Papillon\TasksBundle\Entity\Tasks',
             'csrf_protection' => false
         ));
     }

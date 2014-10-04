@@ -1,18 +1,7 @@
-homepage:
-    path:     /
-    defaults: { _controller: PapillonUserBundle:Dashboard:index }
-
 login_check:
     pattern: /auth
     requirements: { _method: POST }
 
 signout:
     pattern: /logout
-
-list_tasks:
-    pattern:  /tasks/list.{_format}
-    defaults: { _controller: PapillonUserBundle:Task:list , _format: ~ }
-    requirements:
-          _method: GET
-
 

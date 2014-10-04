@@ -1,6 +1,6 @@
 <?php
 
-namespace Papillon\UserBundle\Controller;
+namespace Papillon\TasksBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,13 +9,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Class DashboardController
  * @Route("dashboard")
- * @package Papillon\UserBundle\Controller
+ * @package Papillon\TasksBundle\Controller
  */
 class DashboardController extends Controller
 {
     /**
      * @Route("/home" , name="dashboard")
-     * @Template("PapillonUserBundle:Dashboard:index.html.twig")
+     * @Template("PapillonTasksBundle:Dashboard:index.html.twig")
      */
     public function indexAction()
     {
@@ -25,7 +25,7 @@ class DashboardController extends Controller
 
     /**
      * @Route("/customers" , name="customers")
-     * @Template("PapillonUserBundle:Dashboard:customers.html.twig")
+     * @Template("PapillonTasksBundle:Dashboard:customers.html.twig")
      */
     public function customersAction()
     {
@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
     /**
      * @Route("/projects" , name="projects")
-     * @Template("PapillonUserBundle:Dashboard:projects.html.twig")
+     * @Template("PapillonTasksBundle:Dashboard:projects.html.twig")
      */
     public function projectsAction()
     {

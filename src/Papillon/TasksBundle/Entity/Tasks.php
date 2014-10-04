@@ -1,12 +1,12 @@
 <?php
 
-namespace Papillon\UserBundle\Entity;
+namespace Papillon\TasksBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="tasks")
- * @ORM\Entity(repositoryClass="Papillon\UserBundle\Entity\TasksRepository")
+ * @ORM\Entity(repositoryClass="Papillon\TasksBundle\Entity\TasksRepository")
  */
 class Tasks
 {

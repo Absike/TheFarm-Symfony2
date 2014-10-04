@@ -1,11 +1,11 @@
 <?php
 
-namespace Papillon\UserBundle\Controller;
+namespace Papillon\TasksBundle\Controller;
 
-use Papillon\UserBundle\Entity\Tasks;
+use Papillon\TasksBundle\Entity\Tasks;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Papillon\UserBundle\Form\TasksType;
+use Papillon\TasksBundle\Form\TasksType;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,15 +22,15 @@ class TaskController extends Controller
 
     /**
      * @Route("/tasks", name="tasks")
-     * @Template("PapillonUserBundle:Task:task.html.twig")
+     * @Template("PapillonTasksBundle:Task:task.html.twig")
      */
     public function taskAction()
     {
         $user = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $oTasks = $em->getRepository('PapillonUserBundle:Tasks')->getTasksByUser($user);
+        $oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->getTasksByUser($user);
 
-        return $this->render('PapillonUserBundle:Task:task.html.twig', array(
+        return $this->render('PapillonTasksBundle:Task:task.html.twig', array(
             'tasks' => $oTasks
         ));
     }
@@ -38,7 +38,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/new_task", name="new_task")
-     * @Template("PapillonUserBundle:Task:newTask.html.twig")
+     * @Template("PapillonTasksBundle:Task:newTask.html.twig")
      */
     public function newTaskAction(Request $request)
     {
@@ -62,7 +62,7 @@ class TaskController extends Controller
         }
 
 
-      return $this->render('PapillonUserBundle:Task:newTask.html.twig', array('form' => $form->createView()));
+      return $this->render('PapillonTasksBundle:Task:newTask.html.twig', array('form' => $form->createView()));
     }
 
 
@@ -76,7 +76,7 @@ class TaskController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
-        $oTasks = $em->getRepository('PapillonUserBundle:Tasks')->getTasksByUser($user);
+        $oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->getTasksByUser($user);
 
         //initialisation du serializer
         $encoders = array(new XmlEncoder(), new JsonEncoder());
@@ -93,7 +93,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/alert", name="alert")
-     * @Template("PapillonUserBundle:Task:alert.html.twig")
+     * @Template("PapillonTasksBundle:Task:alert.html.twig")
      */
     public function alertAction()
     {
