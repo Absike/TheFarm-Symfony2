@@ -1,0 +1,11 @@
+homepage:
+    path:     /
+    defaults: { _controller: PapillonTasksBundle:Dashboard:index }
+
+list_tasks:
+    pattern:  /tasks/list.{_format}
+    defaults: { _controller: PapillonUserBundle:Task:list , _format: ~ }
+    requirements:
+          _method: GET
+
+

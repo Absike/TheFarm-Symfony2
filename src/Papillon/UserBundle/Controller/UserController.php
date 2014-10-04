@@ -14,15 +14,6 @@ class UserController extends Controller
 {
 
     /**
-     * @Route("/users",name="users")
-     * @Template("PapillonUserBundle:User:index.html.twig")
-     */
-    public function indexAction()
-    {
-        return array();
-    }
-
-    /**
      * @Route("/signup", name="signup")
      * @Template("PapillonUserBundle:User:signup.html.twig")
      */
@@ -72,22 +63,4 @@ class UserController extends Controller
 
     }
 
-    /**
-     * @Route("/bootstrap" , name="bootstrap")
-     * @Template("PapillonUserBundle:User:bootstrap.html.twig")
-     */
-    public function bootstrapAction()
-    {
-        return array();
-    }
-
-
-    /**
-     * @Route("/forms" , name="forms")
-     * @Template("PapillonUserBundle:User:forms.html.twig")
-     */
-    public function formsAction()
-    {
-        return array();
-    }
 }

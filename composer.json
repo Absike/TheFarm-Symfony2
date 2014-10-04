@@ -20,6 +20,9 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
 
+        "twbs/bootstrap": "3.2.*",
+        "components/jquery": "1.9.*",
+
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "doctrine/doctrine-fixtures-bundle": "2.1.*@dev",
         "doctrine/migrations": "dev-master",

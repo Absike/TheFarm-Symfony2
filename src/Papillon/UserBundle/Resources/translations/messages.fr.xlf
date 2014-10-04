@@ -3,41 +3,6 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>new</source>
-                <target>Nouveau</target>
-            </trans-unit>
-
-            <trans-unit id="2">
-                <source>in_progress</source>
-                <target>En cours</target>
-            </trans-unit>
-
-            <trans-unit id="3">
-                <source>resolved</source>
-                <target>Résolu</target>
-            </trans-unit>
-
-            <trans-unit id="4">
-                <source>awaiting_return</source>
-                <target>En attente de retour</target>
-            </trans-unit>
-
-            <trans-unit id="5">
-                <source>priority</source>
-                <target>Priorité</target>
-            </trans-unit>
-
-            <trans-unit id="6">
-                <source>status</source>
-                <target>Statut</target>
-            </trans-unit>
-
-            <trans-unit id="7">
-                <source>dateCreated</source>
-                <target>Début</target>
-            </trans-unit>
-
-            <trans-unit id="8">
                 <source>Bad credentials</source>
                 <target>Les informations entrées ne correspondent à aucun compte, veuillez essayer à nouveau.</target>
             </trans-unit>

@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Papillon\UserBundle\PapillonUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Papillon\TasksBundle\PapillonTasksBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
