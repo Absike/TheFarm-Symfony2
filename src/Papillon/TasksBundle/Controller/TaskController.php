@@ -37,12 +37,11 @@ class TaskController extends Controller
 
 
     /**
-     * @Route("/new_task", name="new_task")
+     * @Route("/tasks/new", name="new_task")
      * @Template("PapillonTasksBundle:Task:newTask.html.twig")
      */
-    public function newTaskAction(Request $request)
+    public function newAction(Request $request)
     {
-
         $tasks = new Tasks();
         $form = $this->createForm(new TasksType(), $tasks);
 
@@ -51,18 +50,19 @@ class TaskController extends Controller
         if ($request->isMethod('POST')) {
 
             $em = $this->getDoctrine()->getManager();
-            $tasks->setTimeSpent(10);
+            $tasks->setTimeSpent(0);
 
             $em->persist($tasks);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success','Task added.');
+            $this->get('session')->getFlashBag()->add('success', 'Task added.');
             return $this->redirect($this->generateUrl('tasks'));
 
         }
-
-
-      return $this->render('PapillonTasksBundle:Task:newTask.html.twig', array('form' => $form->createView()));
+        return $this->render('PapillonTasksBundle:Task:new.html.twig', array(
+            'entity' => $tasks,
+            'form' => $form->createView(),
+        ));
     }
 
 

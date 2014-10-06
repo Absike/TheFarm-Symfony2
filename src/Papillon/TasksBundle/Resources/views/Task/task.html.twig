@@ -23,7 +23,7 @@
 
             {% for item in tasks %}
                 <tr>
-                    <td>{{ item.createdAt|date('Y-m-d') }}</td>
+                    <td>{{ item.createdAt|date("d F Y") }}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar progress-bar-info" style="width: {{ item.timeSpent }}%;"></div>
@@ -48,18 +48,46 @@
 
             </tbody>
         </table>
-        </div>
+    </div>
 
 
     <script type="text/javascript" charset="utf-8">
-        $(document).ready(function() {
-            $('#example').dataTable();
+        $(document).ready(function () {
 
+
+            var oTable = $('#example').dataTable({
+                "sPaginationType": "full_numbers",
+                "bFilter": true,
+                "bSort": true,
+                //"bStateSave": true,
+                //"bAutoWidth": false,
+                "bInfo": true,
+                "bLengthChange": true,
+                "iDisplayLength": 10,
+                fnDrawCallback: function () {
+                    var wrapper = this.parent();
+                    var rowsPerPage = this.fnSettings()._iDisplayLength;
+                    var rowsToShow = this.fnSettings().fnRecordsDisplay();
+                    var minRowsPerPage = this.fnSettings().aLengthMenu[0][0];
+                    if (rowsToShow <= rowsPerPage || rowsPerPage == -1) {
+                        $('.dataTables_paginate', wrapper).css('visibility', 'hidden');
+                    }
+                    else {
+                        $('.dataTables_paginate', wrapper).css('visibility', 'visible');
+                    }
+                    if (rowsToShow <= minRowsPerPage) {
+                        $('.dataTables_length', wrapper).css('visibility', 'hidden');
+                    }
+                    else {
+                        $('.dataTables_length', wrapper).css('visibility', 'visible');
+                    }
+                }
+            });
 
             // For demo to fit into DataTables site builder...
             $('#example')
-                    .removeClass( 'display' )
+                    .removeClass('display')
                     .addClass('table table-striped table-bordered');
-        } );
+        });
     </script>
 {% endblock %}

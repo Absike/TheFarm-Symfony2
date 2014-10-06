@@ -3,13 +3,23 @@
 namespace Papillon\TasksBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Table(name="tasks")
  * @ORM\Entity(repositoryClass="Papillon\TasksBundle\Entity\TasksRepository")
  */
 class Tasks
 {
+
+
+    /**
+     * @var Author
+     *
+     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User", inversedBy="Tasks")
+     * @ORM\JoinColumn(name="author_id",referencedColumnName="id")
+     */
+    private $author;
+
     /**
      * @var integer $id
      *
@@ -226,5 +236,28 @@ class Tasks
     public function setUpdatedAtValue()
     {
         $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Papillon\UserBundle\Entity\User $author
+     * @return Tasks
+     */
+    public function setAuthor(\Papillon\UserBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Papillon\UserBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

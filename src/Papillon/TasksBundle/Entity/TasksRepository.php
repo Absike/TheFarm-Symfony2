@@ -19,7 +19,7 @@ class TasksRepository extends EntityRepository
             ->orderBy('t.created_at', 'DESC');
 
         if($assigned_to){
-           // $qb->where('t.addedBy = :addedBy')->setParameter('addedBy', $assigned_to);
+            $qb->where('t.author = :author')->setParameter('author', $assigned_to);
         }
 
         $query = $qb->getQuery();

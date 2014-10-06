@@ -19,9 +19,15 @@ class TasksType extends AbstractType
         $status = array('low' => 'Low','normal' => 'Normal','high' => 'High','urgent' => 'Urgent','immediate'=>'immediate');
 
         $builder
-            ->add('priority','choice', array('choices'   => $priority,'required'  => false))
-            ->add('status','choice', array('choices'   => $status,'required'  => false,'data' => 'new'))
+            ->add('priority','choice', array('choices'   => $priority,'data' => 'new','required'  => true,'empty_value' => 'Choose something'))
+            ->add('status','choice', array('choices'   => $status,'required'  => true,'empty_value' => 'Choose something...'))
             ->add('description', 'textarea')
+            ->add('author', 'entity', array(
+                'class' => 'PapillonUserBundle:User',
+                'query_builder' => function($repository) { return $repository->createQueryBuilder('c')->orderBy('c.username'); },
+                'property' => 'getUsername',
+                'empty_value' => 'Assigned to ...',
+            ))
         ;
     }
     

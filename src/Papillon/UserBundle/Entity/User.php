@@ -2,7 +2,9 @@
 
 namespace Papillon\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,6 +18,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Papillon\TasksBundle\Entity\Tasks",mappedBy="User")
+     */
+    private $tasks;
+
     /**
      * @var integer $id
      *
@@ -87,6 +97,7 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->tasks = new ArrayCollection();
         $this->isActive  = true;
         $this->isAdmin   = false;
         $this->expiresAt = new \DateTime('+30 days');
@@ -284,5 +295,38 @@ class User implements UserInterface
     public function getExpiresAt()
     {
         return $this->expiresAt;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \Papillon\TasksBundle\Entity\Tasks $tasks
+     * @return User
+     */
+    public function addTask(\Papillon\TasksBundle\Entity\Tasks $tasks)
+    {
+        $this->tasks[] = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \Papillon\TasksBundle\Entity\Tasks $tasks
+     */
+    public function removeTask(\Papillon\TasksBundle\Entity\Tasks $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 }

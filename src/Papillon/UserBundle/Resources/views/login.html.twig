@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
 
-    {% stylesheets output='css/login.min.css'
-    '@PapillonUserBundle/Resources/public/css/bootstrap.min.css'
-    '@PapillonUserBundle/Resources/public/css/papillon.css'
-    '@PapillonUserBundle/Resources/public/css/nyroModal.css' %}
+    {% stylesheets filter="cssrewrite"
+    '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css' %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
     {% endstylesheets %}
 
