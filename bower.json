@@ -1,0 +1,36 @@
+{
+    "name": "bowersiko",
+    "version": "0.0.1",
+    "authors": [
+        { "name": "Hassan Absike", "email": "absike@gmail.com" }
+    ],
+    "description": "Bsiko custom bower library frontend",
+    "keywords": [
+        "css",
+        "js",
+        "less",
+        "responsive",
+        "front-end",
+        "web"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "source",
+        "spec",
+        ".gitignore",
+        "bower.json",
+        "package.json",
+        "README.md"
+    ],
+    "dependencies": {
+        "jquery": "1.11.*",
+        "jquery-ui": "1.10.*",
+        "bootstrap": "3.2.*",
+        "moment": "2.8.*",
+        "numeral": "1.5.*",
+        "underscore": "1.7.*",
+        "highcharts": "4.0.*"
+    },
+    "homepage": "https://github.com/Absike/bowersiko"
+}

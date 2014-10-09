@@ -1,52 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets
+            'libs/bootstrap/dist/css/bootstrap.min.css'
+            '@PapillonUserBundle/Resources/public/css/papillon.css'
+            '@PapillonUserBundle/Resources/public/css/theme/styles.css'
+            '@PapillonUserBundle/Resources/public/css/custom-forms.css'
+            '@PapillonUserBundle/Resources/public/css/datatables/dataTables.bootstrap.css' %}
+            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+            {% endstylesheets %}
 
-        {% stylesheets filter="cssrewrite"
-        '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
-        '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
+        {% endblock %}
 
-        '@PapillonUserBundle/Resources/public/css/papillon.css'
-        '@PapillonUserBundle/Resources/public/css/custom-forms.css'
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-        '@PapillonUserBundle/Resources/public/css/datatables/dataTables.bootstrap.css'
-        %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
-        {% endstylesheets %}
+        {% block javascripts %}
 
-    {% endblock %}
+            {% javascripts
+            'libs/jquery/dist/jquery.js'
+            'libs/bootstrap/dist/js/bootstrap.min.js'
+            'libs/highcharts/highcharts.js'
+            'libs/underscore/underscore-min.js'
+            'libs/moment/min/moment.min.js'
+            '@PapillonUserBundle/Resources/public/js/datatables/jquery.dataTables.js'
+            '@PapillonUserBundle/Resources/public/js/datatables/dataTables.bootstrap.js'
+            '@PapillonUserBundle/Resources/public/js/highcharts/papi-graph.js' %}
+            <script src="{{ asset_url }}"></script>
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            {% endjavascripts %}
+        {% endblock %}
 
-    {% block javascripts %}
+    </head>
+    <body>
 
-        {% javascripts
+        {% block header %}{% endblock %}
 
-        '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
-        '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
-
-        '@PapillonUserBundle/Resources/public/js/datatables/jquery.dataTables.js'
-        '@PapillonUserBundle/Resources/public/js/datatables/dataTables.bootstrap.js'
-
-        '@PapillonUserBundle/Resources/public/js/highcharts/highcharts.js'
-        '@PapillonUserBundle/Resources/public/js/highcharts/papi-graph.js' %}
-        <script src="{{ asset_url }}"></script>
-
-        {% endjavascripts %}
-    {% endblock %}
-
-</head>
-<body>
-
-{% block header %}{% endblock %}
-
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
 
 
-</body>
+    </body>
 </html>
