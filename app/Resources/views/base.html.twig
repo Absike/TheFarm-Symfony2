@@ -5,11 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets
-            'libs/bootstrap/dist/css/bootstrap.min.css'
+            'assets/css/bootstrap.min.css'
+            'assets/css/jquery.dataTables.css'
+
             '@PapillonUserBundle/Resources/public/css/papillon.css'
-            '@PapillonUserBundle/Resources/public/css/theme/styles.css'
-            '@PapillonUserBundle/Resources/public/css/custom-forms.css'
-            '@PapillonUserBundle/Resources/public/css/datatables/dataTables.bootstrap.css' %}
+            '@PapillonUserBundle/Resources/public/css/custom-forms.css' %}
             <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
             {% endstylesheets %}
 
@@ -20,14 +20,14 @@
         {% block javascripts %}
 
             {% javascripts
-            'libs/jquery/dist/jquery.js'
-            'libs/bootstrap/dist/js/bootstrap.min.js'
-            'libs/highcharts/highcharts.js'
-            'libs/underscore/underscore-min.js'
-            'libs/moment/min/moment.min.js'
-            '@PapillonUserBundle/Resources/public/js/datatables/jquery.dataTables.js'
-            '@PapillonUserBundle/Resources/public/js/datatables/dataTables.bootstrap.js'
-            '@PapillonUserBundle/Resources/public/js/highcharts/papi-graph.js' %}
+            'assets/js/jquery.js'
+            'assets/js/bootstrap.min.js'
+            'assets/js/highcharts.js'
+            'assets/js/underscore-min.js'
+            'assets/js/moment.min.js'
+            'assets/js/jquery.dataTables.js'
+
+            '@PapillonUserBundle/Resources/public/js/papi-graph.js' %}
             <script src="{{ asset_url }}"></script>
 
             {% endjavascripts %}

@@ -43,11 +43,7 @@ input, textarea, button { margin-top:10px }
     transition: color 0.2s ease;
 }
 
-.required-field-bloc
-            <div class="row">
-
-
-            </div>k .required-icon:after {
+.required-field-block .required-icon:after {
     position: absolute;
     content: "";
     right: 1px;
