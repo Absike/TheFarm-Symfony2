@@ -20,8 +20,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-4">
             <ul class="nav navbar-nav">
+
                 <li class="{% if current_route == 'dashboard' %}active{% endif %}"><a href="{{ path('dashboard') }}">Dashboard</a></li>
-                <li class="{% if current_route == 'tasks' %}active{% endif %}"><a href="{{ path('tasks') }}">My tasks</a></li>
+
+                <li class="dropdown {% if current_route == 'tasks' %}active{% endif %}">
+                    <a href="{{ path('tasks') }}" class="dropdown-toggle" data-toggle="dropdown">Tasks <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('tasks') }}">My tasks</a></li>
+                        <li><a href="{{ path('new_task') }}">Create task</a></li>
+                    </ul>
+                </li>
                 <!-- Dropdown -->
                 <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
                     <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>

@@ -21,6 +21,14 @@ class Tasks
     private $author;
 
     /**
+     * @var AssignedBy
+     *
+     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User", inversedBy="Tasks")
+     * @ORM\JoinColumn(name="assigned_by",referencedColumnName="id")
+     */
+    private $assignedBy;
+
+    /**
      * @var integer $id
      *
      * @ORM\Column(name="id", type="integer")
@@ -259,5 +267,28 @@ class Tasks
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set assignedBy
+     *
+     * @param \Papillon\UserBundle\Entity\User $assignedBy
+     * @return Tasks
+     */
+    public function setAssignedBy(\Papillon\UserBundle\Entity\User $assignedBy = null)
+    {
+        $this->assignedBy = $assignedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get assignedBy
+     *
+     * @return \Papillon\UserBundle\Entity\User 
+     */
+    public function getAssignedBy()
+    {
+        return $this->assignedBy;
     }
 }

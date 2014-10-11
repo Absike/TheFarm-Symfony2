@@ -44,12 +44,14 @@ class TaskController extends Controller
     {
         $tasks = new Tasks();
         $form = $this->createForm(new TasksType(), $tasks);
+        $user = $this->get('security.context')->getToken()->getUser();
 
         $form->handleRequest($request);
 
         if ($request->isMethod('POST')) {
 
             $em = $this->getDoctrine()->getManager();
+            $tasks->setAssignedBy($user);
             $tasks->setTimeSpent(0);
 
             $em->persist($tasks);
