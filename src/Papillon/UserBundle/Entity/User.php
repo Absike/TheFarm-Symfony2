@@ -69,18 +69,18 @@ class User implements UserInterface
     private $salt;
 
     /**
-     * @var boolean $isActive
+     * @var boolean $active
      *
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $isActive;
+    private $active;
 
     /**
-     * @var boolean $isAdmin
+     * @var boolean $admin
      *
-     * @ORM\Column(name="is_admin", type="boolean")
+     * @ORM\Column(name="admin", type="boolean")
      */
-    private $isAdmin;
+    private $admin;
 
     /**
      * @var datetime $expiresAt
@@ -98,8 +98,8 @@ class User implements UserInterface
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
-        $this->isActive  = true;
-        $this->isAdmin   = false;
+        $this->active  = true;
+        $this->admin   = false;
         $this->expiresAt = new \DateTime('+30 days');
     }
 
@@ -117,7 +117,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        if ($this->isAdmin) {
+        if ($this->admin) {
             return array('ROLE_ADMIN');
         }
 
@@ -238,43 +238,43 @@ class User implements UserInterface
     }
 
     /**
-     * Set isActive
+     * Set active
      *
-     * @param boolean $isActive
+     * @param boolean $active
      */
-    public function setIsActive($isActive)
+    public function setActive($active)
     {
-        $this->isActive = $isActive;
+        $this->active = $active;
     }
 
     /**
-     * Get isActive
+     * Get active
      *
      * @return boolean
      */
-    public function getIsActive()
+    public function getActive()
     {
-        return $this->isActive;
+        return $this->active;
     }
 
     /**
-     * Set isAdmin
+     * Set admin
      *
-     * @param boolean $isAdmin
+     * @param boolean $admin
      */
-    public function setIsAdmin($isAdmin)
+    public function setAdmin($admin)
     {
-        $this->isAdmin = $isAdmin;
+        $this->admin = $admin;
     }
 
     /**
-     * Get isAdmin
+     * Get admin
      *
      * @return boolean
      */
-    public function getIsAdmin()
+    public function getAdmin()
     {
-        return $this->isAdmin;
+        return $this->admin;
     }
 
     /**
