@@ -5,6 +5,7 @@ use Papillon\TasksBundle\Entity\Tasks;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Papillon\UserBundle\Entity\UserRepository;
 
 class TasksType extends AbstractType
 {
@@ -24,7 +25,7 @@ class TasksType extends AbstractType
             ->add('description', 'textarea')
             ->add('author', 'entity', array(
                 'class' => 'PapillonUserBundle:User',
-                'query_builder' => function($repository) { return $repository->createQueryBuilder('c')->orderBy('c.username'); },
+                'query_builder' => function(UserRepository $repository) { return $repository->getAllUser(); },
                 'property' => 'getUsername',
                 'empty_value' => 'Assigned to ...',
             ))

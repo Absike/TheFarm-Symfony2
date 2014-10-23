@@ -20,6 +20,20 @@ class UserRepository extends EntityRepository implements UserProviderInterface
 {
 
     /**
+     * Get all users
+     * @return array
+     */
+    public function getAllUser()
+    {
+
+        $qb = $this->createQueryBuilder('u')
+            ->orderBy('c.username');
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
+
+    /**
      * Loads the user for the given username.
      *
      * This method must throw UsernameNotFoundException if the user is not
