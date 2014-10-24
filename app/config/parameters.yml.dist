@@ -13,3 +13,4 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretButIsSpecialToComposerAsAService
+    session_name:      papillon
