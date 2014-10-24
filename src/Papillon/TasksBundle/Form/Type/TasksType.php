@@ -1,7 +1,7 @@
 <?php
 
 namespace Papillon\TasksBundle\Form;
-use Papillon\TasksBundle\Entity\Tasks;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
