@@ -4,7 +4,7 @@ homepage:
 
 list_tasks:
     pattern:  /tasks/list.{_format}
-    defaults: { _controller: PapillonUserBundle:Task:list , _format: ~ }
+    defaults: { _controller: PapillonTasksBundle:Task:list , _format: ~ }
     requirements:
           _method: GET
 
