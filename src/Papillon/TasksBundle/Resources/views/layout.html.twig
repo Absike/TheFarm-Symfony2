@@ -30,29 +30,45 @@
                         <li><a href="{{ path('new_task') }}">Create task</a></li>
                     </ul>
                 </li>
+
+                <li class=""><a href="#">Projets <span class="badge">5 </span></a></li>
+
                 <!-- Dropdown -->
                 <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
                     <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('users') }}">Users</a></li>
-                        <li class="{% if current_route == 'customers' %}active{% endif %}"><a href="#">Clients</a></li>
-                        <li class="{% if current_route == 'new_task' %}active{% endif %}"><a href="{{ path('new_task') }}">Tasks</a></li>
-                        <li><a href="{{ path('bootstrap') }}">Bootstrap stuff</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Regular link</a></li>
-                        <li class="disabled"><a href="#">Disabled link</a></li>
-                        <li><a href="#">Another action</a></li><li class="dropdown-submenu"><a href="#">Options <b class="caret"></b></a>
+                        <li class="dropdown-submenu {% if current_route == 'users' %}active{% endif %}">
+                            <a href="#">Users <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="{{ path('users') }}">All Users</a></li>
+                                <li><a href="{{ path('new_user') }}">New User</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown-submenu {% if current_route == 'projets' %}active{% endif %}">
+                            <a href="#">Projets <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('projects') }}">All projets</a></li>
+                                <li><a href="{{ path('new_project') }}">New projet</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu {% if current_route == 'customers' %}active{% endif %}">
+                            <a href="#">Clients <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('customers') }}">All clients</a></li>
+                                <li><a href="{{ path('new_customer') }}">New client</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('bootstrap') }}">Bootstrap stuff</a></li>
+                        <li><a href="{{ path('forms') }}">Forms stuff</a></li>
                     </ul>
                 </li>
+
+
+
                 <!-- E-mail dropdown -->
                 <li class="dropdown {% if current_route == 'projects' %}active{% endif %}">
-                    <a href="{{ path('projects') }}" class="dropdown-toggle" data-toggle="dropdown">Projets <span class="badge">14 </span><span class="caret"></span></a>
+                    <a href="{{ path('projects') }}" class="dropdown-toggle" data-toggle="dropdown">others <span class="badge">14 </span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Compose Mail</a></li>
                         <li><a href="#">Inbox <span class="badge">10</span></a></li>
@@ -68,24 +84,24 @@
             </ul>
             <!-- Login form dropdown -->
             <ul class="nav navbar-nav navbar-right">
-     {#           <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
-                    <ul class="dropdown-menu">
-                        <form class="navbar-form" role="search">
-                            <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                <input type="text" class="form-control" placeholder="Username">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="password" class="form-control" placeholder="Password">
-                            </div>
-                            <div class="center">
-                                <button class="btn btn-default" type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </ul>
-                </li>#}
+                {#           <li class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
+                               <ul class="dropdown-menu">
+                                   <form class="navbar-form" role="search">
+                                       <div class="input-group">
+                                           <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                           <input type="text" class="form-control" placeholder="Username">
+                                       </div>
+                                       <div class="input-group">
+                                           <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                           <input type="password" class="form-control" placeholder="Password">
+                                       </div>
+                                       <div class="center">
+                                           <button class="btn btn-default" type="submit">Submit</button>
+                                       </div>
+                                   </form>
+                               </ul>
+                           </li>#}
 
                 <li>
                     <a href="{{ path('signout') }}">Déconnexion</a>
