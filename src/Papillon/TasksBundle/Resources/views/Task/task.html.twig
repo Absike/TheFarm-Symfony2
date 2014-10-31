@@ -10,7 +10,7 @@
             <h2>mes activités</h2>
         </div>
 
-        <table id="example" class="display" cellspacing="0" width="100%">
+        <table id="example" class="dataTable  table table-striped" cellspacing="1" width="100%" rowsS>
             <thead>
             <tr>
                 <th>{{ 'dateCreated'|trans }}</th>
@@ -34,7 +34,7 @@
                         <span class="label label-{{ item.priority }}">{{ item.status }}</span>
                     </td>
                     <td>
-                        <div class="text-right">
+                        <div class="text-center">
                             <a href="#">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
@@ -56,7 +56,7 @@
 
 
             var oTable = $('#example').dataTable({
-                "sPaginationType": "full_numbers",
+                //"sPaginationType": "full_numbers",
                 "bFilter": true,
                 "bSort": true,
                 //"bStateSave": true,
@@ -85,9 +85,9 @@
             });
 
             // For demo to fit into DataTables site builder...
-            $('#example')
+            /*$('#example')
                     .removeClass('display')
-                    .addClass('table table-striped table-bordered');
+                    .addClass('table table-striped table-bordered');*/
         });
     </script>
 {% endblock %}
