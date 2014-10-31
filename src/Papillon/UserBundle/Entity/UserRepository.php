@@ -25,12 +25,10 @@ class UserRepository extends EntityRepository implements UserProviderInterface
      */
     public function getAllUser()
     {
-
         $qb = $this->createQueryBuilder('u')
-            ->orderBy('c.username');
+            ->orderBy('u.username');
 
-        $query = $qb->getQuery();
-        return $query->getResult();
+        return $qb;
     }
 
     /**

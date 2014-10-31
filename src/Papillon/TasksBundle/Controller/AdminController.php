@@ -12,14 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class AdminController extends Controller
 {
-    /**
-     * @Route("/users",name="users")
-     * @Template("PapillonTasksBundle:Admin:index.html.twig")
-     */
-    public function indexAction()
-    {
-        return array();
-    }
 
     /**
      * @Route("/bootstrap" , name="bootstrap")

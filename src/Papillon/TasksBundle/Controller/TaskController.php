@@ -59,7 +59,6 @@ class TaskController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'Task added.');
             return $this->redirect($this->generateUrl('tasks'));
-
         }
         return $this->render('PapillonTasksBundle:Task:new.html.twig', array(
             'entity' => $tasks,

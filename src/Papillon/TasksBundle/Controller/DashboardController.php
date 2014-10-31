@@ -23,22 +23,4 @@ class DashboardController extends Controller
     }
 
 
-    /**
-     * @Route("/customers" , name="customers")
-     * @Template("PapillonTasksBundle:Dashboard:customers.html.twig")
-     */
-    public function customersAction()
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/projects" , name="projects")
-     * @Template("PapillonTasksBundle:Dashboard:projects.html.twig")
-     */
-    public function projectsAction()
-    {
-        return array();
-    }
-
 }

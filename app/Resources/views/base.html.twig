@@ -5,7 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets
-            'assets/css/bootstrap.min.css'
+            '@bootstrap_css'
             'assets/css/jquery.dataTables.css'
 
             '@PapillonUserBundle/Resources/public/css/papillon.css'
@@ -20,8 +20,10 @@
         {% block javascripts %}
 
             {% javascripts
-            'assets/js/jquery.js'
-            'assets/js/bootstrap.min.js'
+
+            '@jquery'
+            '@bootstrap_js'
+
             'assets/js/highcharts.js'
             'assets/js/underscore-min.js'
             'assets/js/moment.min.js'
