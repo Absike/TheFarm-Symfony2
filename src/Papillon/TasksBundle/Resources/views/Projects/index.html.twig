@@ -4,16 +4,96 @@
 
 {% block content %}
 
-    <div id="content_wrapper">
+    <div class="container">
 
         <div class="newtask">
             <h2>Mes projets</h2>
         </div>
 
-        <fieldset class="filtre">
-
-        </fieldset>
-
+        <table id="tasks_list" class="dataTable  table table-striped" cellspacing="1" width="100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Customer</th>
+                <th>Opening</th>
+                <th>Closing</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+
+
+            ajaxCall("/api/projects",{},
+                function(data){
+
+                    var tasks = [];
+                    $('#badge_project').html(data.length);
+                    $.each(data,function(key,value){
+                        tasks.push([
+                            value['name'],
+                            value['type'],
+                            value['customers']['name'],
+                            value['date_closing'],
+                            value['date_opening'],
+                        ]);
+                    });
+
+                    $('#tasks_list').dataTable({
+                        "bFilter": true,
+                        "bSort": true,
+                        "bInfo": true,
+                        "bLengthChange": true,
+                        "iDisplayLength": 10,
+                        "aaData": tasks
+                       /*,"aoColumns": [
+                            { "sTitle": "Name" },
+                            { "sTitle": "Type" },
+                            { "sTitle": "Customer" },
+                            { "sTitle": "Opening", "sClass": "center" },
+                            { "sTitle": "Closing", "sClass": "center" }
+                        ]*/
+                        ,
+                        fnDrawCallback: function () {
+                            var wrapper = this.parent();
+                            var rowsPerPage = this.fnSettings()._iDisplayLength;
+                            var rowsToShow = this.fnSettings().fnRecordsDisplay();
+                            var minRowsPerPage = this.fnSettings().aLengthMenu[0][0];
+                            if (rowsToShow <= rowsPerPage || rowsPerPage == -1) {
+                                $('.dataTables_paginate', wrapper).css('visibility', 'hidden');
+                            }
+                            else {
+                                $('.dataTables_paginate', wrapper).css('visibility', 'visible');
+                            }
+                            if (rowsToShow <= minRowsPerPage) {
+                                $('.dataTables_length', wrapper).css('visibility', 'hidden');
+                            }
+                            else {
+                                $('.dataTables_length', wrapper).css('visibility', 'visible');
+                            }
+                        }
+                    })
+
+                }
+            )
+
+        });
+
+
+        var ajaxCall = function (pUrl,pData,callback){
+
+            $.ajax({
+                url: 'http://' + location.host + '/app_dev.php' + pUrl,
+                type: 'get',
+                data: pData,
+                success: callback
+            });
+
+        };
+
+    </script>
 {% endblock %}

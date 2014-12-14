@@ -17,3 +17,10 @@ papillon_all_tasks:
     defaults: { _controller: ApiRestBundle:Task:all, _format: json }
     requirements:
         _method: GET
+
+
+papillon_all_projects:
+    pattern:  /api/projects
+    defaults: { _controller: ApiRestBundle:Projects:all, _format: json }
+    requirements:
+        _method: GET
