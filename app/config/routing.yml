@@ -1,3 +1,8 @@
+api_rest:
+    type : rest
+    resource: "@ApiRestBundle/Resources/config/routing.yml"
+    prefix:   /
+
 papillon_tasks:
     resource: "@PapillonTasksBundle/Resources/config/routing.yml"
     prefix:   /

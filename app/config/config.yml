@@ -41,10 +41,10 @@ assetic:
     assets:
         bootstrap_js:
             inputs:
-                - assets/js/bootstrap.js
+                - assets/js/bootstrap.min.js
         bootstrap_css:
             inputs:
-                - assets/css/bootstrap.css
+                - assets/css/bootstrap.min.css
             filters: [cssrewrite]
 
         bootstrap_glyphicons_ttf:
@@ -98,5 +98,10 @@ swiftmailer:
 sensio_framework_extra:
     router:  { annotations: true }
     request: { converters: true }
-    view:    { annotations: true }
+    view:    { annotations: false }
     cache:   { annotations: true }
+
+fos_rest:
+    format_listener: true
+    view:
+        view_response_listener: true
