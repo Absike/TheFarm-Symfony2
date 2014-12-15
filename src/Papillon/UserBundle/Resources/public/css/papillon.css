@@ -492,3 +492,7 @@ body {
 .ui-datepicker-trigger {
     cursor: pointer;
 }
+
+div.ui-datepicker{
+    font-size:14px;
+}

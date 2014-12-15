@@ -82,16 +82,18 @@
 
             $("#projects_dateOpening").datepicker({
                 dateFormat: 'yy-m-dd',
-                showOn: "button",
+                showOn: "buttom",
                 buttonImage : '{{ asset('bundles/papillontasks/images/icon-calender.gif') }}',
-                buttonImageOnly: true
+                buttonImageOnly: true,
+                buttonText: "Choose your date"
             });
 
             $("#projects_dateClosing").datepicker({
                 dateFormat: 'yy-m-dd',
-                showOn: "button",
+                showOn: "buttom",
                 buttonImage : '{{ asset('bundles/papillontasks/images/icon-calender.gif') }}',
-                buttonImageOnly: true
+                buttonImageOnly: true,
+                buttonText: "Choose your date"
             });
         })
 
