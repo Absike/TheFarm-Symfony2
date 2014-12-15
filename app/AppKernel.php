@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new Papillon\TasksBundle\PapillonTasksBundle(),
             new Api\RestBundle\ApiRestBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

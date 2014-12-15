@@ -18,8 +18,8 @@ class ProjectsType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('type')
-            ->add('dateOpening')
-            ->add('dateClosing')
+            ->add('dateOpening' , 'genemu_jquerydate', array('widget' => 'single_text'))
+            ->add('dateClosing' , 'genemu_jquerydate', array('widget' => 'single_text'))
             ->add('customers', 'entity', array(
                 'class' => 'PapillonTasksBundle:Customers',
                 'property' => 'name',

@@ -13,20 +13,28 @@ module.exports = function (grunt) {
                     'js/highcharts.js':        'highcharts/highcharts.js',
                     'js/underscore-min.js':    'underscore/underscore-min.js',
                     'js/moment.min.js':        'moment/min/moment.min.js',
-                    'js/jquery.dataTables.js': 'datatables/media/js/jquery.dataTables.js'
+                    'js/jquery.dataTables.js': 'datatables/media/js/jquery.dataTables.js',
+                    'js/jquery-ui.min.js':     'jquery-ui/ui/minified/jquery-ui.min.js'
                 }
             },
             stylesheets: {
                 files: {
                     'css/bootstrap.min.css':     'bootstrap/dist/css/bootstrap.min.css',
                     'css/font-awesome.css':      'font-awesome/css/font-awesome.css',
-                    'css/jquery.dataTables.css': 'datatables/media/css/jquery.dataTables.css'
+                    'css/jquery.dataTables.css': 'datatables/media/css/jquery.dataTables.css',
+                    'css/jquery-ui.min.css': 'jquery-ui/themes/flick/jquery-ui.min.css'
                 }
             },
             fonts: {
                 files: {
                     'fonts': 'font-awesome/fonts',
                     'fonts': 'bootstrap/fonts/*'
+                }
+            },
+            images: {
+                files: {
+                    'images': 'datatables/media/images/*',
+                    'images': 'jquery-ui/themes/flick/images/*'
                 }
             }
         }

@@ -105,3 +105,6 @@ fos_rest:
     format_listener: true
     view:
         view_response_listener: true
+
+genemu_form:
+    date: ~
