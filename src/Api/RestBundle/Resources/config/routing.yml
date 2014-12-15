@@ -1,0 +1,26 @@
+papillon_all_users:
+    pattern:  /api/users
+    defaults: { _controller: ApiRestBundle:User:all, _format: json }
+    requirements:
+        _method: GET
+
+papillon_one_user:
+    pattern:  /api/users/{id}
+    defaults: { _controller: ApiRestBundle:User:get, _format: json }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+
+papillon_all_tasks:
+    pattern:  /api/tasks
+    defaults: { _controller: ApiRestBundle:Task:all, _format: json }
+    requirements:
+        _method: GET
+
+
+papillon_all_projects:
+    pattern: /projects
+    defaults: { _controller: ApiRestBundle:Projects:all, _format: json }
+    requirements:
+        _method: GET

@@ -18,7 +18,10 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Papillon\UserBundle\PapillonUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new FOS\RestBundle\FOSRestBundle(),
             new Papillon\TasksBundle\PapillonTasksBundle(),
+            new Api\RestBundle\ApiRestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

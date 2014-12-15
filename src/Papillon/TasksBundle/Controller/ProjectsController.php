@@ -2,6 +2,8 @@
 
 namespace Papillon\TasksBundle\Controller;
 
+use Papillon\TasksBundle\Entity\Projects;
+use Papillon\TasksBundle\Form\ProjectsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -29,7 +31,24 @@ class ProjectsController extends Controller
      */
     public function newAction(Request $request)
     {
-        return array();
+        $project = new Projects();
+        $form = $this->createForm(new ProjectsType(), $project);
+        $form->handleRequest($request);
+        //var_dump($request->request->get('projects'));die;
+        if ($request->isMethod('POST')) {
+           // var_dump($request->request->get('projects'));die;
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($project);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Project added.');
+            return $this->redirect($this->generateUrl('projects'));
+        }
+
+        return $this->render('PapillonTasksBundle:Projects:new.html.twig', array(
+            'entity' => $project,
+            'form' => $form->createView(),
+        ));
     }
 
 }

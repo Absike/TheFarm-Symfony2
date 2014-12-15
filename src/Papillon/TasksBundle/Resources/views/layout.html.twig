@@ -31,7 +31,7 @@
                     </ul>
                 </li>
 
-                <li class=""><a href="#">Projets <span class="badge">5 </span></a></li>
+                <li class="{% if current_route == 'projects' %}active{% endif %}"><a href="{{ path('projects') }}">Projets <span class="badge" id="badge_project"></span></a></li>
 
                 <!-- Dropdown -->
                 <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
@@ -44,7 +44,7 @@
                                 <li><a href="{{ path('new_user') }}">New User</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown-submenu {% if current_route == 'projets' %}active{% endif %}">
+                        <li class="dropdown-submenu {% if current_route == 'projects' %}active{% endif %}">
                             <a href="#">Projets <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ path('projects') }}">All projets</a></li>
@@ -67,8 +67,8 @@
 
 
                 <!-- E-mail dropdown -->
-                <li class="dropdown {% if current_route == 'projects' %}active{% endif %}">
-                    <a href="{{ path('projects') }}" class="dropdown-toggle" data-toggle="dropdown">others <span class="badge">14 </span><span class="caret"></span></a>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">others <span class="badge">14 </span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Compose Mail</a></li>
                         <li><a href="#">Inbox <span class="badge">10</span></a></li>

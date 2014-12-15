@@ -4,16 +4,44 @@
 
 {% block content %}
 
-    <div id="content_wrapper">
+    <div class="container">
 
         <div class="newtask">
             <h2>Mes projets</h2>
         </div>
 
-        <fieldset class="filtre">
-
-        </fieldset>
-
+        <table id="tasks_list" class="dataTable  table table-striped" cellspacing="1" width="100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Customer</th>
+                <th>Opening</th>
+                <th>Closing</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+
+            ajaxCall('{{ path('papillon_all_projects') }}', {method: 'get', params: {}}
+            ).done(function (data) {
+                        var tasks = [];
+                        $('#badge_project').html(data.length);
+                        $.each(data, function (key, value) {
+                            tasks.push([
+                                value['name'],
+                                value['type'],
+                                value['customers']['name'],
+                                value['date_closing'],
+                                value['date_opening'],
+                            ]);
+                        });
+
+                        buildDataTable('#tasks_list', tasks);
+                    })
+        });
+    </script>
 {% endblock %}

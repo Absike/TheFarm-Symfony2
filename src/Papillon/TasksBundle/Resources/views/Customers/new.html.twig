@@ -1,46 +1,74 @@
 {% extends "PapillonTasksBundle::layout.html.twig" %}
 
-{% block title %}Papillon | Clients {% endblock title %}
+{% block title %}Papillon | New Customer {% endblock title %}
 
 {% block content %}
 
-    <div id="content_wrapper">
 
-        <blockquote>
-            <h2>New client</h2>
-        </blockquote>
+    <blockquote>
+        <h2>New Customer </h2>
+    </blockquote>
 
-        <form role="form">
+    <div class="row">
+        <div class="col-md-11">
+            <form class="form-horizontal" role="form" action="{{ path('new_customer') }}" method="post">
+                <fieldset>
 
-            <div class="required-field-block">
-                <input type="text" placeholder="Name" class="form-control">
+                    {{ form_errors(form) }}
 
-                <div class="required-icon">
-                    <div class="text">*</div>
-                </div>
-            </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput">name :</label>
 
-            <div class="required-field-block">
-                <input type="text" placeholder="Email" class="form-control">
+                        <div class="col-sm-10">
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control' }}) }}
+                        </div>
+                    </div>
 
-                <div class="required-icon">
-                    <div class="text">*</div>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput">Adresse:</label>
 
-            <input type="text" placeholder="Phone" class="form-control">
+                        <div class="col-sm-10">
+                            {{ form_widget(form.adresse, {'attr': {'class': 'form-control' }}) }}
+                        </div>
+                    </div>
 
-            <div class="required-field-block">
-                <textarea rows="3" class="form-control" placeholder="Message"></textarea>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput">Phone :</label>
 
-                <div class="required-icon">
-                    <div class="text">*</div>
-                </div>
-            </div>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.phone, {'attr': {'class': 'form-control' }}) }}
+                        </div>
+                    </div>
 
-            <button class="btn btn-primary">Send</button>
-        </form>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput">info :</label>
 
-    </div>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.info, {'attr': {'class': 'form-control' }}) }}
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="textinput">Fax :</label>
+
+                        <div class="col-sm-10">
+                            {{ form_widget(form.fax, {'attr': {'class': 'form-control' }}) }}
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="pull-right">
+                                        <a class="btn btn-default" href="{{ path('tasks') }}">Cancel</a>
+                                        <button type="submit" class="btn btn-info">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                </fieldset>
+            </form>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div><!-- /.row -->
 {% endblock %}
+
+
