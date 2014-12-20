@@ -31,13 +31,15 @@
                         var tasks = [];
                         $('#badge_project').html(data.length);
                         $.each(data, function (key, value) {
+
                             tasks.push([
                                 value['name'],
                                 value['type'],
                                 value['customers']['name'],
-                                value['date_closing'],
-                                value['date_opening'],
+                                dateFormatter(value['date_closing']),
+                                dateFormatter(value['date_opening']),
                             ]);
+
                         });
 
                         buildDataTable('#tasks_list', tasks);
