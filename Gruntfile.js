@@ -34,7 +34,7 @@ module.exports = function (grunt) {
             images: {
                 files: {
                     'images': 'datatables/media/images/*',
-                    'images': 'jquery-ui/themes/flick/images/*'
+                    'css/images': 'jquery-ui/themes/flick/images/*'
                 }
             }
         }
