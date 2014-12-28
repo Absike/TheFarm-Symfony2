@@ -1,3 +1,24 @@
+
+/**
+ *
+ * @param proxy
+ * @param apiUrl
+ * @param apiParams
+ * @returns {*}
+ */
+var sendAjaxRequest = function(proxy , apiUrl , apiParams){
+    return $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: proxy,
+        data: {
+            restUrl : apiUrl,
+            method: 'POST',
+            params: apiParams
+        }
+    });
+}
+
 /**
  * Proceed Ajax calling
  * @param pUrl
