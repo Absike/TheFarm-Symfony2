@@ -12,8 +12,38 @@
 
         <fieldset class="filtre">
 
+            {# total items count #}
+            <div class="count">
+                {{ pUsers.currentPageNumber ~ ' / ' ~ pUsers.getTotalItemCount }}
+            </div>
+
+            <table class="table table-striped" cellspacing="1" width="100%">
+
+                <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(pUsers, 'Id', 'a.id') }}</th>
+                    <th{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username', 'a.username') }}</th>
+                    <th{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</th>
+                    <th>Enabled</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in pUsers %}
+                        <tr {% if loop.index is odd %}class="color"{% endif %}>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.active }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(pUsers) }}
+            </div>
         </fieldset>
-
     </div>
-
 {% endblock %}

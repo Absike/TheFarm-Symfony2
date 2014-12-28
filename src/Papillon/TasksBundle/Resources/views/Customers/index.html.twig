@@ -4,16 +4,41 @@
 
 {% block content %}
 
-    <div id="content_wrapper">
+    <div class="container">
 
         <div class="newtask">
-            <h2>Mes clients</h2>
+            <h2>Mes Clients</h2>
         </div>
 
-        <fieldset class="filtre">
-
-        </fieldset>
-
+        <table id="customers_list" class="dataTable  table table-striped" cellspacing="1" width="100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Adresse</th>
+                <th>Phone</th>
+                <th>Fax</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+
+            ajaxCall('{{ path('papillon_all_client') }}', {method: 'get', params: {}}
+            ).done(function (data) {
+                        var customers = [];
+                        $.each(data, function (key, value) {
+                            customers.push([
+                                value['name'],
+                                value['adresse'],
+                                value['phone'],
+                                value['fax'],
+                            ]);
+                        });
+
+                        buildDataTable('#customers_list', customers);
+                    })
+        });
+    </script>
 {% endblock %}

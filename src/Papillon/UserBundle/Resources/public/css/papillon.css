@@ -488,3 +488,11 @@ body {
 .tile-stats.tile-aqua {
     background: #00c0ef;
 }
+
+.ui-datepicker-trigger {
+    cursor: pointer;
+}
+
+div.ui-datepicker{
+    font-size:14px;
+}

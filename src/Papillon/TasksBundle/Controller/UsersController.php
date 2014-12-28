@@ -18,9 +18,19 @@ class UsersController extends Controller
      * @Route("/users",name="users")
      * @Template("PapillonTasksBundle:Users:index.html.twig")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return array();
+
+        $oUsers = $this->getDoctrine()->getRepository('PapillonUserBundle:User')->getAllUser();
+        $paginator  = $this->get('knp_paginator');
+
+        $usersPagination = $paginator->paginate(
+            $oUsers,
+            $request->query->get('page', 1),
+            $this->container->getParameter('max_users_per_page')
+        );
+
+        return $this->render('PapillonTasksBundle:Users:index.html.twig', array('pUsers' => $usersPagination));
     }
 
     /**
