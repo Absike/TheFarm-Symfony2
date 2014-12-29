@@ -22,14 +22,18 @@
         "twbs/bootstrap": "3.2.*",
         "components/jquery": "1.9.*",
 
+        "friendsofsymfony/rest-bundle": "@stable",
+        "friendsofsymfony/jsrouting-bundle": "@stable",
+
         "jms/serializer-bundle": "@stable",
         "jms/di-extra-bundle": "@stable",
-        "friendsofsymfony/rest-bundle": "@stable",
+
         "stof/doctrine-extensions-bundle": "@stable",
         "doctrine/doctrine-fixtures-bundle": "2.1.*@dev",
         "doctrine/migrations": "1.0.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "genemu/form-bundle": "@stable",
+
         "knplabs/knp-paginator-bundle": "@stable"
     },
     "require-dev": {

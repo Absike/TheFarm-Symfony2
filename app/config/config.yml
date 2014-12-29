@@ -108,3 +108,6 @@ fos_rest:
 
 genemu_form:
     date: ~
+
+parameters:
+    max_users_per_page: 6

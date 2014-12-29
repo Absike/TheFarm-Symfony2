@@ -44,12 +44,12 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Opening in :</label>
                         <div class="col-sm-4">
-                            {{ form_widget(form.dateOpening, {'attr': {'class': 'form-control' , 'disabled':'disabled' }}) }}
+                            {{ form_widget(form.dateOpening, {'attr': {'class': 'form-control'}}) }}
                         </div>
 
                         <label class="col-sm-2 control-label" for="textinput">Closing in :</label>
                         <div class="col-sm-4">
-                            {{ form_widget(form.dateClosing, {'attr': {'class': 'form-control' , 'disabled':'disabled' }}) }}
+                            {{ form_widget(form.dateClosing, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
 
@@ -80,21 +80,25 @@
 
         $(function () {
 
-            $("#projects_dateOpening").datepicker({
-                dateFormat: 'yy-m-dd',
-                showOn: "buttom",
-                buttonImage : '{{ asset('bundles/papillontasks/images/icon-calender.gif') }}',
-                buttonImageOnly: true,
-                buttonText: "Choose your date"
+            jQuery('#projects_dateOpening').datetimepicker({
+                format:'Y-m-d H:i',
+                lang:'fr',
+                mask:true
             });
 
-            $("#projects_dateClosing").datepicker({
-                dateFormat: 'yy-m-dd',
-                showOn: "buttom",
-                buttonImage : '{{ asset('bundles/papillontasks/images/icon-calender.gif') }}',
-                buttonImageOnly: true,
-                buttonText: "Choose your date"
+            jQuery('#projects_dateClosing').datetimepicker({
+                format:'Y-m-d H:i',
+                lang:'fr',
+                mask:true
             });
+
+            {#$("#projects_dateClosing").datepicker({#}
+                {#dateFormat: 'yy-m-dd',#}
+                {#showOn: "buttom",#}
+                {#buttonImage : '{{ asset('bundles/papillontasks/images/icon-calender.gif') }}',#}
+                {#buttonImageOnly: true,#}
+                {#buttonText: "Choose your date"#}
+            {#});#}
         })
 
     </script>

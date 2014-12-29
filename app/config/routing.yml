@@ -1,4 +1,4 @@
-api_proxy:
+_ajaxProxy:
     resource: "@ApiProxyBundle/Controller/"
     type:     annotation
     prefix:   /
@@ -24,3 +24,6 @@ PapillonTasksBundle:
     resource: "@PapillonTasksBundle/Controller/"
     type: annotation
     prefix: /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
