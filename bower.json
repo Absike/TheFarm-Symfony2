@@ -27,7 +27,8 @@
     "underscore": "1.7.*",
     "highcharts": "4.0.*",
     "font-awesome": "latest",
-    "datatables": "latest"
+    "datatables": "latest",
+    "datetimepicker": "https://github.com/xdan/datetimepicker.git#~2.4.1"
   },
   "homepage": "https://github.com/Absike/bowersiko",
   "resolutions": {

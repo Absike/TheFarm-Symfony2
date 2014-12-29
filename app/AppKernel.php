@@ -19,11 +19,13 @@ class AppKernel extends Kernel
             new Papillon\UserBundle\PapillonUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new FOS\RestBundle\FOSRestBundle(),
             new Papillon\TasksBundle\PapillonTasksBundle(),
             new Api\RestBundle\ApiRestBundle(),
-            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Api\ProxyBundle\ApiProxyBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -25,7 +25,7 @@
     <script type="text/javascript" charset="utf-8">
         $(function () {
 
-            ajaxCall('{{ path('papillon_all_client') }}', {method: 'get', params: {}}
+            sendAjaxRequest('{{ path('papillon_all_client') }}'
             ).done(function (data) {
                         var customers = [];
                         $.each(data, function (key, value) {
@@ -38,7 +38,8 @@
                         });
 
                         buildDataTable('#customers_list', customers);
-                    })
+                    });
+
         });
     </script>
 {% endblock %}

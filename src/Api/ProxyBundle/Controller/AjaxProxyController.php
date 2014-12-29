@@ -17,7 +17,7 @@ class AjaxProxyController extends Controller
 
 
     /**
-     * @Route("/ajax/proxy", name="_ajaxProxy")
+     * @Route("/ajax/proxy", name="_ajaxProxy", options={"expose"=true})
      * @Template()
      */
     public function proxyAction(Request $request)

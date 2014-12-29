@@ -8,6 +8,7 @@
             '@bootstrap_css'
             'assets/css/jquery.dataTables.css'
             'assets/css/jquery-ui.min.css'
+            'assets/css/jquery.datetimepicker.css'
 
             '@PapillonUserBundle/Resources/public/css/papillon.css'
             '@PapillonUserBundle/Resources/public/css/custom-forms.css' %}
@@ -30,10 +31,14 @@
             'assets/js/underscore-min.js'
             'assets/js/moment.min.js'
             'assets/js/jquery.dataTables.js'
+            'assets/js/jquery.datetimepicker.js'
 
             '@PapillonUserBundle/Resources/public/js/main.js'
             '@PapillonUserBundle/Resources/public/js/papi-graph.js' %}
             <script src="{{ asset_url }}"></script>
+
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
             {% endjavascripts %}
         {% endblock %}
