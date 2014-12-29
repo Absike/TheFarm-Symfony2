@@ -4,58 +4,69 @@
 
 {% block content %}
 
-    <div class="container">
 
-        <div class="newtask">
-            <h2>mes activités</h2>
+    <div class="newtask">
+        <h2>mes Activités</h2>
+    </div>
+
+
+    <div class="nonborderbox">
+        <div class="box-element">
+            <div class="box-head-light"><h5>Tasks</h5></div>
+            <div class="box-content no-padding grey-bg">
+                <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0">
+                    <thead>
+                    <tr>
+                        <th>{{ 'dateCreated'|trans }}</th>
+                        <th>Temps passé</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for item in tasks %}
+                        <tr>
+                            <td>{{ item.createdAt|date("d F Y") }}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info" style="width: {{ item.timeSpent }}%;"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="label label-{{ item.priority }}">{{ item.priority|trans }}</span>
+                                <span class="label label-{{ item.priority }}">{{ item.status }}</span>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-remove-sign"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="loiding...">
+
+                <div class="clearfix"></div>
+            </div>
         </div>
-
-        <table id="example" class="dataTable  table table-striped" cellspacing="1" width="100%" rowsS>
-            <thead>
-            <tr>
-                <th>{{ 'dateCreated'|trans }}</th>
-                <th>Temps passé</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-
-            {% for item in tasks %}
-                <tr>
-                    <td>{{ item.createdAt|date("d F Y") }}</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info" style="width: {{ item.timeSpent }}%;"></div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="label label-{{ item.priority }}">{{ item.priority|trans }}</span>
-                        <span class="label label-{{ item.priority }}">{{ item.status }}</span>
-                    </td>
-                    <td>
-                        <div class="text-center">
-                            <a href="#">
-                                <span class="glyphicon glyphicon-edit"></span>
-                            </a>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-remove-sign"></span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
     </div>
 
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
 
-
-            var oTable = $('#example').dataTable({
+            var oTable = $('#tasks_list').dataTable({
                 //"sPaginationType": "full_numbers",
                 "bFilter": true,
                 "bSort": true,
@@ -84,6 +95,7 @@
                 }
             });
 
+            $('#preloading').remove();
             // For demo to fit into DataTables site builder...
             /*$('#example')
                     .removeClass('display')
