@@ -58,6 +58,7 @@ var buildDataTable = function (container,aData) {
         "bLengthChange": true,
         "iDisplayLength": 10,
         "aaData": aData,
+        "sPaginationType": "full_numbers",
         fnDrawCallback: function () {
             var wrapper = this.parent();
             var rowsPerPage = this.fnSettings()._iDisplayLength;
@@ -77,6 +78,8 @@ var buildDataTable = function (container,aData) {
             }
         }
     });
+
+    $('#preloading').remove();
 
     return oTable;
 };

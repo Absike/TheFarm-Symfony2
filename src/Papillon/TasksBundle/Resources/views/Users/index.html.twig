@@ -17,28 +17,36 @@
                 {{ pUsers.currentPageNumber ~ ' / ' ~ pUsers.getTotalItemCount }}
             </div>
 
-            <table class="table table-striped" cellspacing="1" width="100%">
 
-                <thead>
-                <tr>
-                    <th>{{ knp_pagination_sortable(pUsers, 'Id', 'a.id') }}</th>
-                    <th{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username', 'a.username') }}</th>
-                    <th{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</th>
-                    <th>Enabled</th>
-                </tr>
-                </thead>
+            <div class="box-element">
+                <div class="box-head-light"><h5>Users</h5></div>
+                <div class="box-content no-padding">
+                    <table class="i-table fullwidth">
 
-                <tbody>
-                    {% for user in pUsers %}
-                        <tr {% if loop.index is odd %}class="color"{% endif %}>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.active }}</td>
+                        <thead>
+                        <tr>
+                            <td>{{ knp_pagination_sortable(pUsers, 'Id', 'a.id') }}</td>
+                            <td{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username', 'a.username') }}</td>
+                            <td{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</td>
+                            <td>Enabled</td>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                        </thead>
+
+                        <tbody>
+                        {% for user in pUsers %}
+                            <tr class="{% if loop.index is odd %}dark{% else %}light{%  endif %}">
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.active }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
 
             {# display navigation #}
             <div class="navigation">
