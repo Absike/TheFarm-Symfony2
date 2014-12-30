@@ -15,20 +15,18 @@ class Curl
     {
         $defaults = array(
             CURLOPT_URL => $url . (strpos($url, '?') === FALSE ? '?' : '') . http_build_query($get),
-            CURLOPT_POST => true,
-            CURLOPT_RETURNTRANSFER => true
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_TIMEOUT => 50,
         );
 
-        session_write_close();
-
         $ch = curl_init();
-        curl_setopt_array($ch, ($get + $defaults));
-        if (!$result = curl_exec($ch))
-        {
-            trigger_error(curl_error($ch));
+        curl_setopt_array($ch, $defaults);
+        if ( ! $result = curl_exec($ch)) {
+            throw new Exception(
+                'Curl call error at ' . $url . ' : ' . curl_error($ch)
+            );
         }
         curl_close($ch);
-
         return $result;
     }
 

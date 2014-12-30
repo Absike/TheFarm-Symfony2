@@ -4,13 +4,9 @@
 
 {% block content %}
 
-    <div class="newtask">
-        <h2>Mes projets</h2>
-    </div>
-
     <div class="nonborderbox">
         <div class="box-element">
-            <div class="box-head-light"><h5>Projets</h5></div>
+            <div class="box-head-light"><h5>Mes projets</h5></div>
             <div class="box-content no-padding grey-bg">
                 <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0">
                     <thead>
@@ -24,8 +20,7 @@
                     </thead>
                 </table>
 
-                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block"
-                     alt="loiding...">
+                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="Loading...">
 
                 <div class="clearfix"></div>
             </div>
@@ -37,24 +32,30 @@
 
         $(function () {
 
-            sendAjaxRequest('{{ path('papillon_all_projects') }}'
-            ).done(function (data) {
-                        var tasks = [];
-                        $('#badge_project').html(data.length);
-                        $.each(data, function (key, value) {
 
-                            tasks.push([
-                                value['name'],
-                                value['type'],
-                                value['customers']['name'],
-                                dateFormatter(value['date_closing']),
-                                dateFormatter(value['date_opening']),
-                            ]);
+            sendAjaxRequest('{{ path('papillon_all_projects') }}').done(function (data) {
 
-                        });
+                var aData = [];
+                $('#badge_project').html(data.length);
 
-                        buildDataTable('#tasks_list', tasks);
-                    })
+                $.each(data, function (key, value) {
+
+                    aData.push([
+                        value['name'],
+                        value['type'],
+                        value['customers']['name'],
+                        dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
+                        dateFormatterZone(value['date_opening'], 'DD MMM YYYY'),
+                    ]);
+
+                });
+
+
+                buildDataTable('#tasks_list', {
+                    oSorting: [[0, 'desc']],
+                    oData: aData
+                });
+            })
 
         });
 

@@ -48,7 +48,33 @@ var ajaxCall = function (aUrl,aOption) {
  * @param aData
  * @returns {*|jQuery}
  */
-var buildDataTable = function (container,aData) {
+var buildDataTable = function (container,config) {
+
+    if (!$(container).length) return;
+
+    // Sort by first column ascending
+    var oSorting = [
+        [ 0, "asc" ]
+    ];
+
+    if (!_.isUndefined(config.oSorting)) {
+        oSorting = config.oSorting;
+    }
+
+    var oColumns = null;
+    if (!_.isUndefined(config.oColumns)) {
+        oColumns = config.oColumns;
+    }
+
+    var oData = null;
+    if (!_.isUndefined(config.oData)) {
+        oData = config.oData;
+    }
+
+    var oColumnDefs = [];
+    if (!_.isUndefined(config.oColumnDefs)) {
+        oColumnDefs = config.oColumnDefs;
+    }
 
     var oTable = $(container).dataTable({
 
@@ -57,8 +83,11 @@ var buildDataTable = function (container,aData) {
         "bInfo": true,
         "bLengthChange": true,
         "iDisplayLength": 10,
-        "aaData": aData,
+        "aaSorting": oSorting,             // Sort by column descending or ascending
+        "aoColumns": oColumns,
+        "aaData": oData,
         "sPaginationType": "full_numbers",
+        "columnDefs": oColumnDefs,
         fnDrawCallback: function () {
             var wrapper = this.parent();
             var rowsPerPage = this.fnSettings()._iDisplayLength;
@@ -86,11 +115,17 @@ var buildDataTable = function (container,aData) {
 
 /**
  * Convert UTC time to normal time format using Moment js
- * @param s
+ * @param date date
+ * @param format string
  * @returns {*}
  */
-function dateFormatter(s) {
-    return moment.parseZone(s).format('D MMM YYYY');
+function dateFormatterZone(date,format) {
+
+    if (_.isUndefined(format)){
+        format = 'YYYY-MM-DD'
+    }
+
+    return moment.parseZone(date).format(format);
 }
 
 

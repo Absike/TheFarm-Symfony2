@@ -22,34 +22,23 @@ class AjaxProxyController extends Controller
      */
     public function proxyAction(Request $request)
     {
-
         // Forbid every request but jquery's XHR
         if ($request->isXmlHttpRequest()) {
 
             $restUrl = $request->get('restUrl');
-            $method = $request->get('method');
-            $params = $request->get('params', array());
+            $method  = $request->get('method', 'get');
 
-            if ($restUrl == null || $method == null || !in_array($method, array('GET', 'POST', 'DELETE'))
-            ) {
+            if ($restUrl == null || $method == null || !in_array($method, array('GET', 'POST', 'DELETE'))){
                 return new Response('', 404, array('Content-Type' => 'application/json'));
             }
 
             $url = 'http://' . $request->getHttpHost() . $restUrl;
-            if ($method == 'POST') {
-                $result = curl::post($url, $params);
-            }
+            $result = curl::$method($url, $request->get('params', array()));
 
-            if ($method == 'GET') {
-                $result = curl::get($url, $params);
-            }
+            $response = new Response($result);
+            $response->headers->set('Content-Type', 'application/json');
 
-            if ($result) {
-                return new Response($result, 200, array('Content-Type' => 'application/json'));
-            } else {
-                return new Response('', 404, array('Content-Type' => 'application/json'));
-            }
-
+            return $response;
         }
     }
 }
