@@ -48,6 +48,14 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     outline: none;
 }
 
+
+
+.navbar #user-data  {
+    /*background: url("../img/icons/32/user.png") no-repeat scroll left 8px transparent;*/
+    font-size: 12px;
+    color: #FFF;
+}
+
 .box-element {
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -262,12 +270,11 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 }
 
 .navbar-inverse .navbar-right .dropdown-menu {
-    background: #E4E4E8;
+    background: #34495E;
 }
 
 .navbar-inverse .navbar-brand {
-    font-family: 'Oleo Script Swash Caps', cursive;
-    color: #FFFFFF;
+    color: #FFF;
     transition: color .5s;
 }
 
@@ -325,9 +332,9 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 }
 
 .navbar-inverse .btn:hover {
-    border-color: #00D9C0;
-    background: #00D9C0;
-    color: #FFFFFF;
+    border-color: #00C0EF;
+    background: #00C0EF;
+    color: #FFF;
 }
 
 .navbar-inverse .btn:focus {
@@ -613,7 +620,14 @@ table.i-table tr.dark td {
     width: 40%;
 }
 
+.button-action{
+    width: 210px;
+    text-align: center;
 
+}
+.button-action a{
+    margin-bottom: 5px
+}
 .navigation {
     float: right;
     padding: 10px 20px;
