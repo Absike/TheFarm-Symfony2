@@ -12,10 +12,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('dashboard') }}">
-                {#<img src="{{ asset('bundles/papillonuser/images/me.jpeg') }}" alt="" class="img-circle"/>#}
-                Hassan
-            </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-4">
@@ -31,36 +27,28 @@
                     </ul>
                 </li>
 
-                <li class="{% if current_route == 'projects' %}active{% endif %}"><a href="{{ path('projects') }}">Projets <span class="badge" id="badge_project"></span></a></li>
-
                 <!-- Dropdown -->
                 <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
-                    <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+                    <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu {% if current_route == 'users' %}active{% endif %}">
-                            <a href="#">Users <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <a href="{{ path('users') }}">Users {#<b class="caret"></b>#}</a>
+                     {#       <ul class="dropdown-menu">
                                 <li><a href="{{ path('users') }}">All Users</a></li>
                                 <li><a href="{{ path('new_user') }}">New User</a></li>
-                            </ul>
+                            </ul>#}
                         </li>
                         <li class="dropdown-submenu {% if current_route == 'projects' %}active{% endif %}">
-                            <a href="#">Projets <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ path('projects') }}">All projets</a></li>
-                                <li><a href="{{ path('new_project') }}">New projet</a></li>
-                            </ul>
+                            <a href="{{ path('projects') }}">Projects <span class="badge" id="badge_project"></span></a>
                         </li>
                         <li class="dropdown-submenu {% if current_route == 'customers' %}active{% endif %}">
-                            <a href="#">Clients <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <a href="{{ path('customers') }}">Clients {#<b class="caret"></b>#}</a>
+                            {#<ul class="dropdown-menu">
                                 <li><a href="{{ path('customers') }}">All clients</a></li>
                                 <li><a href="{{ path('new_customer') }}">New client</a></li>
-                            </ul>
+                            </ul>#}
                         </li>
-                        <li class="divider"></li>
-                        <li><a href="{{ path('bootstrap') }}">Bootstrap stuff</a></li>
-                        <li><a href="{{ path('forms') }}">Forms stuff</a></li>
+
                     </ul>
                 </li>
 
@@ -68,17 +56,13 @@
 
                 <!-- E-mail dropdown -->
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">others <span class="badge">14 </span><span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Config <span class="badge">14 </span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Compose Mail</a></li>
-                        <li><a href="#">Inbox <span class="badge">10</span></a></li>
-                        <li><a href="#">Starred <span class="badge">1</span></a></li>
-                        <li><a href="#">Important</a></li>
-                        <li><a href="#">Drafts <span class="badge">2</span></a></li>
-                        <li><a href="#">Sent Mail</a></li>
+                        <li><a href="{{ path('bootstrap') }}">Bootstrap stuff</a></li>
+                        <li><a href="{{ path('forms') }}">Forms stuff</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Spam</a></li>
-                        <li><a href="#">Trash <span class="badge">1</span></a></li>
+                        <li><a href="#">Inbox <span class="badge">10</span></a></li>
+                        <li><a href="#">Important</a></li>
                     </ul>
                 </li>
             </ul>
@@ -103,17 +87,13 @@
                                </ul>
                            </li>#}
 
-                <li>
-                    <a href="{{ path('signout') }}">Déconnexion</a>
-                </li>
-
                 <!-- Search form dropdown -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search</a>
                     <ul class="dropdown-menu">
                         <form class="navbar-form" role="search">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" placeholder="Search" style="width: 200px">
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="button">Go!</button>
 									</span>
@@ -121,6 +101,19 @@
                         </form>
                     </ul>
                 </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                        <div id="user-data">
+                            <span class="glyphicon glyphicon-user"></span> {{ app.user.email }}
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My account</a></li>
+                        <li><a href="{{ path('signout') }}">Logout</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav><!-- /.navbar -->
