@@ -51,7 +51,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 .box-element {
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    margin-bottom: 20px;
+    margin: 30px 0px 20px 20px;
 }
 
 .form-signin {
@@ -463,8 +463,8 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 }
 
 .flash_message .close_button {
-    background: url("../images/close_message.png") no-repeat scroll center top transparent;
-    margin: -18px 0px 0px 0;
+    /*background: url("../images/close_message.png") no-repeat scroll center top transparent;*/
+    margin: -18px 0px 0px 0px;
     cursor: pointer;
     height: 18px;
     width: 18px;
@@ -590,8 +590,7 @@ table.i-table.border {
 }
 
 table.i-table td {
-    padding: 7px;
-    padding-left: 20px;
+    padding: 7px 0px 0px 20px;
 }
 
 table.i-table tr:hover td {
@@ -606,3 +605,50 @@ table.i-table tr.dark td {
     background-color: #F9F9F9;
 }
 
+.table_info{
+    float: left;
+    height: 22px;
+    line-height: 22px;
+    padding: 10px 20px;
+    width: 40%;
+}
+
+
+.navigation {
+    float: right;
+    padding: 10px 20px;
+    text-align: right;
+    line-height: 22px;
+}
+
+.navigation span{
+    background-color: #F5F5F5;
+    border: 1px solid #E7E7E7;
+    border-bottom:1px solid #D7D7D7;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 2px 5px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.navigation a{
+    text-decoration : none;
+    color: #444;
+}
+
+.navigation .pagination{
+    margin: 0px;
+}
+
+.navigation span:hover {
+    box-shadow:0 1px 0 #FFFFFF inset, 0 1px 3px rgba(0, 0, 0, 0.15);
+    background-color: #F9F9F9;
+}
+
+.navigation span.current {
+    background-color: #60912B;
+    color:#fff;
+    text-shadow: 0px 1px 0px #000;
+}

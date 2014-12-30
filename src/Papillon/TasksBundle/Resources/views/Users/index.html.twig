@@ -4,54 +4,49 @@
 
 {% block content %}
 
-    <div id="content_wrapper">
+    <div class="nonborderbox">
+        <div class="box-element">
+            <div class="box-head-light"><h5>Tasks</h5></div>
+            <div class="box-content no-padding grey-bg">
 
-        <div class="newtask">
-            <h2>Adminstration</h2>
-        </div>
+                <table class="i-table fullwidth">
 
-        <fieldset class="filtre">
+                    <thead>
+                    <tr>
+                        <td>{{ knp_pagination_sortable(pUsers, 'No.', 'a.id') }}</td>
+                        <td{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username', 'a.username') }}</td>
+                        <td{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</td>
+                        <td>Enabled</td>
+                        <td></td>
+                    </tr>
+                    </thead>
 
-            {# total items count #}
-            <div class="count">
-                {{ pUsers.currentPageNumber ~ ' / ' ~ pUsers.getTotalItemCount }}
-            </div>
-
-
-            <div class="box-element">
-                <div class="box-head-light"><h5>Users</h5></div>
-                <div class="box-content no-padding">
-                    <table class="i-table fullwidth">
-
-                        <thead>
-                        <tr>
-                            <td>{{ knp_pagination_sortable(pUsers, 'Id', 'a.id') }}</td>
-                            <td{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username', 'a.username') }}</td>
-                            <td{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</td>
-                            <td>Enabled</td>
+                    <tbody>
+                    {% for user in pUsers %}
+                        <tr class="{% if loop.index is odd %}dark{% else %}light{%  endif %}">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td class="text-center">{% if (user.active) %} <span class="glyphicon glyphicon-ok"></span> {% endif %}</td>
+                            <td class="text-center">
+                                <a href="#" type="button" class="btn btn-default btn-xs">View</a>
+                                <a href="#" type="button" class="btn btn-info btn-xs">Edit</a>
+                                <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
+                            </td>
                         </tr>
-                        </thead>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-                        <tbody>
-                        {% for user in pUsers %}
-                            <tr class="{% if loop.index is odd %}dark{% else %}light{%  endif %}">
-                                <td>{{ user.id }}</td>
-                                <td>{{ user.username }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.active }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                <div id="table_info" class="table_info">Showing {{ pUsers.currentPageNumber }} to {{ pUsers.getPaginationData.numItemsPerPage }} of {{ pUsers.getTotalItemCount }} entries</div>
+
+                <div class="navigation">
+                    {{ knp_pagination_render(pUsers) }}
                 </div>
+
+                <div class="clearfix"></div>
             </div>
-
-
-
-            {# display navigation #}
-            <div class="navigation">
-                {{ knp_pagination_render(pUsers) }}
-            </div>
-        </fieldset>
+        </div>
     </div>
+
 {% endblock %}
