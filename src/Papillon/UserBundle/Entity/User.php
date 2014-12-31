@@ -7,8 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Exclude;
 
 /**
@@ -17,7 +18,7 @@ use JMS\Serializer\Annotation\Exclude;
  * @UniqueEntity(fields={"username"}, message="Username already exists")
  * @UniqueEntity(fields={"email"}, message="Email already exists")
  */
-class User implements UserInterface
+class User implements AdvancedUserInterface, \Serializable
 {
 
     /**
@@ -45,6 +46,14 @@ class User implements UserInterface
      * @Assert\Length(max=15)
      */
     private $username;
+
+
+    /**
+     * @ORM\Column(type="string", length=80, nullable=true)
+     * @Assert\Length(min = "3", max="60");
+     * @Assert\Type(type="string")
+     */
+    private $fullname;
 
     /**
      * @var string $email
@@ -78,18 +87,11 @@ class User implements UserInterface
     private $active;
 
     /**
-     * @var boolean $admin
+     * @var datetime $createdAt
      *
-     * @ORM\Column(name="admin", type="boolean")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
-    private $admin;
-
-    /**
-     * @var datetime $expiresAt
-     *
-     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
-     */
-    private $expiresAt;
+    private $createdAt;
 
     /**
      * @Assert\NotBlank()
@@ -97,12 +99,20 @@ class User implements UserInterface
      */
     private $rawPassword;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     *
+     */
+    private $groups;
+
+
     public function __construct()
     {
+        $this->groups = new ArrayCollection();
         $this->tasks = new ArrayCollection();
-        $this->active  = true;
-        $this->admin   = false;
-        $this->expiresAt = new \DateTime('+30 days');
+        $this->active = true;
+        $this->createdAt = new \DateTime();
     }
 
     public function encodePassword(PasswordEncoderInterface $encoder)
@@ -117,13 +127,14 @@ class User implements UserInterface
         }
     }
 
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return Role[]|string[] The user roles
+     */
     public function getRoles()
     {
-        if ($this->admin) {
-            return array('ROLE_ADMIN');
-        }
-
-        return array('ROLE_PLAYER');
+        return $this->groups->toArray();
     }
 
     public function eraseCredentials()
@@ -177,6 +188,30 @@ class User implements UserInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+
+    /**
+     * Set fullname
+     *
+     * @param string $fullname
+     * @return User
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
     }
 
     /**
@@ -259,45 +294,30 @@ class User implements UserInterface
         return $this->active;
     }
 
+
     /**
-     * Set admin
+     * Set createdAt
      *
-     * @param boolean $admin
+     * @param \DateTime $createdAt
+     * @return User
      */
-    public function setAdmin($admin)
+    public function setCreatedAt($createdAt)
     {
-        $this->admin = $admin;
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
-     * Get admin
+     * Get createdAt
      *
-     * @return boolean
+     * @return \DateTime
      */
-    public function getAdmin()
+    public function getCreatedAt()
     {
-        return $this->admin;
+        return $this->createdAt;
     }
 
-    /**
-     * Set expiresAt
-     *
-     * @param datetime $expiresAt
-     */
-    public function setExpiresAt($expiresAt)
-    {
-        $this->expiresAt = $expiresAt;
-    }
-
-    /**
-     * Get expiresAt
-     *
-     * @return datetime
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
 
     /**
      * Add tasks
@@ -325,10 +345,95 @@ class User implements UserInterface
     /**
      * Get tasks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTasks()
     {
         return $this->tasks;
     }
+
+    /**
+     * Add groups
+     *
+     * @param \Papillon\UserBundle\Entity\User\Group $groups
+     * @return User
+     */
+    public function addGroup(\Papillon\UserBundle\Entity\Group $groups)
+    {
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \Papillon\UserBundle\Entity\User\Group $groups
+     */
+    public function removeGroup(\Papillon\UserBundle\Entity\Group $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->active;
+    }
+
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->active,
+            $this->username
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->active,
+            $this->username
+            ) = unserialize($serialized);
+    }
+
+    function __toString()
+    {
+        return $this->fullname();
+    }
+
 }
