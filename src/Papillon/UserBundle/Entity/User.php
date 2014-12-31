@@ -431,9 +431,9 @@ class User implements AdvancedUserInterface, \Serializable
             ) = unserialize($serialized);
     }
 
+
     function __toString()
     {
-        return $this->fullname();
+        return (($this->getFullname()) ? $this->getFullname()  : $this->getUsername());
     }
-
 }
