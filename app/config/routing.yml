@@ -8,6 +8,10 @@ api_rest:
     resource: "@ApiRestBundle/Resources/config/routing.yml"
     prefix:   /api
 
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
 papillon_tasks:
     resource: "@PapillonTasksBundle/Resources/config/routing.yml"
     prefix:   /
