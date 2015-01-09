@@ -75,3 +75,9 @@ input, textarea, button { margin-top:10px }
     color: #3276b1;
     background-color: #fff;
 }
+
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
+    margin-left: 5px;
+}

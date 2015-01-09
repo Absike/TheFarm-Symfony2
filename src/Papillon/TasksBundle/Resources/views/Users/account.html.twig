@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-1">
 
             <form action="{{ path('account') }}" method="post" accept-charset="utf-8" class="form" role="form">
 
@@ -22,7 +22,7 @@
                             </div>
                         {% endif %}
 
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label class="control-label" for="textinput">First name:</label>
                             {{ form_widget(account_form.first_name,{'attr': {'class': 'form-control'}})}}
                         </div>
@@ -35,7 +35,7 @@
                             </div>
                         {% endif %}
 
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label class="control-label" for="textinput">Last name:</label>
                             {{ form_widget(account_form.last_name,{'attr': {'class': 'form-control'}})}}
                         </div>
@@ -43,7 +43,6 @@
                 </div>
 
                 <div class="form-group">
-
                     {% if (form_errors(account_form.birth_date)) %}
                         <div class="alert alert-danger">
                             <strong>{{ form_errors(account_form.birth_date) }}</strong>
@@ -55,53 +54,82 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label" for="textinput">Phone :</label>
+                    {{ form_widget(account_form.phone, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
                    <button class="btn btn-info" type="submit">Update</button>
                 </div>
             </form>
 
             <form action="{{ path('update_pass') }}" method="post" accept-charset="utf-8" class="form" role="form">
 
-                <legend>Password</legend>
+                <legend>Change password</legend>
 
                 {{ form_widget(pass_form._token) }}
 
-                <div class="form-group">
+                <div class="form-group required">
                     {% if (form_errors(pass_form.oldPassword)) %}
                         <div class="alert alert-danger">
                             <strong>{{ form_errors(pass_form.oldPassword) }}</strong>
                         </div>
                     {% endif %}
-                    {{ form_widget(pass_form.oldPassword, {'attr': {'class': 'form-control' ,'placeholder':'Old Password' }}
-                    ) }}
+                    <div class="required-field-block">
+                        {{ form_widget(pass_form.oldPassword, {'attr': {'class': 'form-control' ,'placeholder':'Old Password' }})}}
+                        <div class="required-icon">
+                            <div class="text">*</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-
+                <div class="form-group required">
                     {% if (form_errors(pass_form.password.first)) %}
                         <div class="alert alert-danger">
                             <strong>{{ form_errors(pass_form.password.first) }}</strong>
                         </div>
                     {% endif %}
-
-                    {{ form_widget(pass_form.password.first, {'attr': {'class': 'form-control' ,'placeholder':'Password' }}
-                    ) }}
+                    <div class="required-field-block">
+                        {{ form_widget(pass_form.password.first, {'attr': {'class': 'form-control' ,'placeholder':'Password' }}) }}
+                        <div class="required-icon">
+                            <div class="text">*</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group required">
                     {% if (form_errors(pass_form.password.second)) %}
                         <div class="alert alert-danger">
                             <strong>{{ form_errors(pass_form.password.second) }}</strong>
                         </div>
                     {% endif %}
-
-                    {{ form_widget(pass_form.password.second, {'attr': {'class': 'form-control' ,'placeholder':'Confirm Password' }}
-                    ) }}
+                    <div class="required-field-block">
+                        {{ form_widget(pass_form.password.second, {'attr': {'class': 'form-control' ,'placeholder':'Confirm Password' }})}}
+                        <div class="required-icon">
+                            <div class="text">*</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <button class="btn btn-warning" type="submit">Update</button>
                 </div>
             </form>
+        </div>
+
+        <div class="col-md-4 col-md-offset-1">
+            <div id="sidebar">
+                <legend>My account</legend>
+
+                <p>
+                    Identifiant: <b><a href="#" class="user active">{{ app.user.username }}</a></b>
+                    <br/>
+                    Created at: {{ app.user.createdAt|date("d M Y") }}
+                </p>
+
+                <p><a href="#"> <span class="glyphicon glyphicon-trash"></span> Delete Account</a></p>
+
+            </div>
         </div>
     </div>
 

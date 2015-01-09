@@ -17,6 +17,7 @@ class AccountType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
+            ->add('phone')
             ->add('birth_date', 'datetime', array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd'

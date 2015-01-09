@@ -85,7 +85,14 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @ORM\Column(name="gender", type="boolean", nullable=true)
      */
-    private $gender ;
+    private $gender;
+
+
+    /**
+     * @ORM\Column(name="phone", type="string", length=55, nullable=true)
+     */
+    private $phone;
+
 
     /**
      * @var string $password
@@ -540,5 +547,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

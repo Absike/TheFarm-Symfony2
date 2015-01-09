@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Papillon\UserBundle\Entity\User;
 use Papillon\UserBundle\Entity\Group;
+use Symfony\Component\Validator\Constraints\Date;
 
 class LoadUserData implements FixtureInterface, ContainerAwareInterface
 {
@@ -49,17 +50,19 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
         $user1 = new User();
         $user1->setUsername("hassan");
-        $user1->setFullname('Hassan Absike');
+        $user1->setLastName('Hassan');
+        $user1->setFirstName('Absike');
+        $user1->setBirthDate(new \DateTime('1987-09-22'));
         $user1->setSalt(md5(uniqid()));
         $encoder = $this->container->get('security.encoder_factory')->getEncoder($user1);
         $user1->setPassword($encoder->encodePassword('hassan', $user1->getSalt()));
         $user1->setEmail("absike@gmail.com");
+        $user1->setPhone("+212 6 67 87 67 62");
         $user1->getGroups()->add($roleSA);
         $manager->persist($user1);
 
         $user2 = new User();
         $user2->setUsername("bsiko");
-        $user2->setFullname('Hassan bsiko');
         $user2->setSalt(md5(uniqid()));
         $encoder = $this->container->get('security.encoder_factory')->getEncoder($user2);
         $user2->setPassword($encoder->encodePassword('bsiko', $user2->getSalt()));

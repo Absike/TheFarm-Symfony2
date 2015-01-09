@@ -86,6 +86,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 .navbar {
     border: none;
     border-radius: 0px !important;
+    margin-bottom: 40px;
 }
 
 .dropdown-menu {
