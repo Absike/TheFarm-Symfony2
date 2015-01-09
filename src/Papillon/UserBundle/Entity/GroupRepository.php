@@ -1,6 +1,6 @@
 <?php
 
-namespace Papillon\UserBundle\Entity\User;
+namespace Papillon\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

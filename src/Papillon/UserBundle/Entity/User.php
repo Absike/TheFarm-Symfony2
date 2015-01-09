@@ -49,11 +49,18 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
-     * @ORM\Column(type="string", length=80, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Length(min = "3", max="60");
      * @Assert\Type(type="string")
      */
-    private $fullname;
+    private $first_name;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(min = "3", max="60");
+     * @Assert\Type(type="string")
+     */
+    private $last_name;
 
     /**
      * @var string $email
@@ -64,6 +71,28 @@ class User implements AdvancedUserInterface, \Serializable
      * @Assert\Email()
      */
     private $email;
+
+
+    /**
+     * @var date $birth_date
+     *
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
+     */
+    private $birth_date;
+
+    /**
+     * @var date $birth_date
+     *
+     * @ORM\Column(name="gender", type="boolean", nullable=true)
+     */
+    private $gender;
+
+
+    /**
+     * @ORM\Column(name="phone", type="string", length=55, nullable=true)
+     */
+    private $phone;
+
 
     /**
      * @var string $password
@@ -192,26 +221,13 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
-     * Set fullname
-     *
-     * @param string $fullname
-     * @return User
-     */
-    public function setFullname($fullname)
-    {
-        $this->fullname = $fullname;
-
-        return $this;
-    }
-
-    /**
      * Get fullname
      *
      * @return string
      */
     public function getFullname()
     {
-        return $this->fullname;
+        return $this->first_name .' '. $this->last_name;
     }
 
     /**
@@ -235,13 +251,17 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set password
-     *
+     * Set Password
      * @param string $password
+     * @return $this
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        if (!is_null($password)) {
+            $this->password = $password;
+        }
+
+        return $this;
     }
 
     /**
@@ -355,7 +375,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Add groups
      *
-     * @param \Papillon\UserBundle\Entity\User\Group $groups
+     * @param \Papillon\UserBundle\Entity\Group $groups
      * @return User
      */
     public function addGroup(\Papillon\UserBundle\Entity\Group $groups)
@@ -368,7 +388,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Remove groups
      *
-     * @param \Papillon\UserBundle\Entity\User\Group $groups
+     * @param \Papillon\UserBundle\Entity\Group $groups
      */
     public function removeGroup(\Papillon\UserBundle\Entity\Group $groups)
     {
@@ -434,6 +454,121 @@ class User implements AdvancedUserInterface, \Serializable
 
     function __toString()
     {
-        return (($this->getFullname()) ? $this->getFullname()  : $this->getUsername());
+        return $this->getUsername();
+    }
+
+    /**
+     * Set first_name
+     *
+     * @param string $firstName
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->first_name = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get first_name
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Set last_name
+     *
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get last_name
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * Set birth_date
+     *
+     * @param \DateTime $birthDate
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birth_date = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birth_date
+     *
+     * @return \DateTime 
+     */
+    public function getBirthDate()
+    {
+        return $this->birth_date;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param boolean $gender
+     * @return User
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return boolean 
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

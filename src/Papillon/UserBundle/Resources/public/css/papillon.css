@@ -48,6 +48,15 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     outline: none;
 }
 
+.alert{
+    padding: 0px !important;
+}
+
+.alert ul {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+}
+
 
 .navbar .user-info  {
     /*background: url("../img/icons/32/user.png") no-repeat scroll left 8px transparent;*/
@@ -77,6 +86,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 .navbar {
     border: none;
     border-radius: 0px !important;
+    margin-bottom: 40px;
 }
 
 .dropdown-menu {

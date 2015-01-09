@@ -38,23 +38,26 @@
 
         $(function () {
 
-
             sendAjaxRequest('{{ path('papillon_all_projects') }}').done(function (data) {
 
                 var aData = [];
                 $('#badge_project').html(data.length);
 
-                $.each(data, function (key, value) {
+                if (!data['error']['code']){
 
-                    aData.push([
-                        value['name'],
-                        value['type'],
-                        value['customers']['name'],
-                        dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
-                        dateFormatterZone(value['date_opening'], 'DD MMM YYYY'),
-                    ]);
+                    $.each(data, function (key, value) {
 
-                });
+                        aData.push([
+                            value['name'],
+                            value['type'],
+                            value['customers']['name'],
+                            dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
+                            dateFormatterZone(value['date_opening'], 'DD MMM YYYY'),
+                        ]);
+
+                    });
+
+                }
 
 
                 buildDataTable('#tasks_list', {

@@ -1,0 +1,8 @@
+Papillon\UserBundle\Entity\User:
+    properties :
+        first_name:
+            - NotBlank:
+                message: "This value should not be blank"
+        last_name:
+            - NotBlank:
+                message: "This value should not be blank"
