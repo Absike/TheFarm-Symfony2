@@ -3,15 +3,17 @@
 
 namespace Papillon\UserBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Papillon\UserBundle\Entity\User;
 use Papillon\UserBundle\Entity\Group;
-use Symfony\Component\Validator\Constraints\Date;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface , FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -63,6 +65,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
         $user2 = new User();
         $user2->setUsername("bsiko");
+        $user2->setLastName('user');
+        $user2->setFirstName('Bsiko');
         $user2->setSalt(md5(uniqid()));
         $encoder = $this->container->get('security.encoder_factory')->getEncoder($user2);
         $user2->setPassword($encoder->encodePassword('bsiko', $user2->getSalt()));
@@ -139,6 +143,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($user9);
 
         $manager->flush();
+
+        $this->addReference('admin', $user1);
+        $this->addReference('user', $user2);
     }
 
     /**

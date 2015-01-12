@@ -24,6 +24,7 @@
 
         "friendsofsymfony/rest-bundle": "@stable",
         "friendsofsymfony/jsrouting-bundle": "@stable",
+        "friendsofsymfony/oauth-server-bundle": "@stable",
 
         "jms/serializer-bundle": "@stable",
         "jms/di-extra-bundle": "@stable",
