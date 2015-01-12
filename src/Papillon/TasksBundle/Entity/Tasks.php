@@ -50,14 +50,21 @@ class Tasks
     private $status;
 
     /**
+     * @var string $subject
+     *
+     * @ORM\Column(name="subject", type="string", length=200, nullable=true)
+     */
+    private $subject;
+
+    /**
      * @var integer $time_spent
-     * @ORM\Column(name="time_spent", type="integer")
+     * @ORM\Column(name="time_spent", type="integer", nullable=true)
      */
     private $time_spent;
 
     /**
      * @var string $description
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -78,6 +85,7 @@ class Tasks
     public function __construct() {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
+        $this->setTimeSpent(0);
     }
 
     /**
@@ -289,5 +297,28 @@ class Tasks
     public function getAssignedBy()
     {
         return $this->assignedBy;
+    }
+
+    /**
+     * Set subject
+     *
+     * @param string $subject
+     * @return Tasks
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return string 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
     }
 }

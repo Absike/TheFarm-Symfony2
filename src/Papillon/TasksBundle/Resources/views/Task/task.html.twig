@@ -7,52 +7,40 @@
     <div style="text-align:right;width:100%;">
         <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export CSV</a>
         <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export PDF</a>
-        <a class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
+        <a href="{{ path('new_task') }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
     </div>
 
     <div class="nonborderbox">
         <div class="box-element">
             <div class="box-head-light"><h5>Tasks</h5></div>
             <div class="box-content no-padding grey-bg">
-                <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0">
+                <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0" style="text-align: center">
                     <thead>
                     <tr>
-                        <th>{{ 'dateCreated'|trans }}</th>
-                        <th>Temps passé</th>
-                        <th></th>
+                        <th>#</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Assigned to</th>
+                        <th>Updated</th>
                         <th></th>
                     </tr>
                     </thead>
 
                     <tbody>
-
                     {% for item in tasks %}
                         <tr>
-                            <td>{{ item.createdAt|date("d F Y") }}</td>
-                            <td>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-info" style="width: {{ item.timeSpent }}%;"></div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="label label-{{ item.priority }}">{{ item.priority|trans }}</span>
-                                <span class="label label-{{ item.priority }}">{{ item.status }}</span>
-                            </td>
-                            <td>
-                                <div class="text-center">
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-remove-sign"></span>
-                                    </a>
-                                </div>
+                            <td><a href="#">{{ item.id }}</a></td>
+                            <td><span class="label label-{{ item.status }}">{{ item.status }}</span></td>
+                            <td><span class="label label-{{ item.status }}">{{ item.priority|trans }}</span></td>
+                            <td><a href="#">{{ item.author }}</a></td>
+                            <td>{{ item.updatedAt|date("d M Y H:i") }}</td>
+                            <td class="button-action">
+                                <a href="#" type="button" class="btn btn-info btn-xs">Edit</a>
+                                <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}
-
                     </tbody>
-
                 </table>
 
                 <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="loiding...">

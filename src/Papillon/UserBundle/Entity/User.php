@@ -227,7 +227,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getFullname()
     {
-        return $this->first_name .' '. $this->last_name;
+        return ($this->first_name && $this->last_name) ? $this->first_name .' '. $this->last_name : null;
     }
 
     /**
@@ -454,7 +454,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     function __toString()
     {
-        return $this->getUsername();
+        return ($this->getFullname()) ? $this->getFullname() : $this->getUsername();
     }
 
     /**

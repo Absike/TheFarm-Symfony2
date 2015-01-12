@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "108b70e619e81c14a7a477292a66f2a8",
+    "hash": "a9d8855f059216015b8c46411e748e2a",
     "packages": [
         {
             "name": "components/jquery",
@@ -467,12 +467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "48a3f32bbd798dd175f6fca74d595a85fded281e"
+                "reference": "751709de4a5001aa21521308d25430e23e173b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/48a3f32bbd798dd175f6fca74d595a85fded281e",
-                "reference": "48a3f32bbd798dd175f6fca74d595a85fded281e",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/751709de4a5001aa21521308d25430e23e173b54",
+                "reference": "751709de4a5001aa21521308d25430e23e173b54",
                 "shasum": ""
             },
             "require": {
@@ -538,7 +538,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2014-12-31 18:08:35"
+            "time": "2015-01-09 14:13:39"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1045,6 +1045,129 @@
                 "routing"
             ],
             "time": "2014-01-23 21:25:39"
+        },
+        {
+            "name": "friendsofsymfony/oauth-server-bundle",
+            "version": "1.4.2",
+            "target-dir": "FOS/OAuthServerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle.git",
+                "reference": "9e15c229eff547443d686445d629e9356ab0672e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/9e15c229eff547443d686445d629e9356ab0672e",
+                "reference": "9e15c229eff547443d686445d629e9356ab0672e",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofsymfony/oauth2-php": "~1.1.0",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/security-bundle": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.0",
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "doctrine/orm": ">=2.2,<2.5-dev",
+                "symfony/class-loader": "~2.1",
+                "symfony/yaml": "~2.1",
+                "willdurand/propel-typehintable-behavior": "1.0.*"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/mongodb-odm-bundle": "*",
+                "propel/propel-bundle": "If you want to use Propel with Symfony2, then you will have to install the PropelBundle",
+                "willdurand/propel-typehintable-behavior": "The Typehintable behavior is useful to add type hints on generated methods, to be compliant with interfaces"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\OAuthServerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arnaud Le Blanc",
+                    "email": "arnaud.lb@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/contributors"
+                }
+            ],
+            "description": "Symfony2 OAuth Server Bundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "oauth",
+                "oauth2",
+                "server"
+            ],
+            "time": "2014-10-31 13:44:14"
+        },
+        {
+            "name": "friendsofsymfony/oauth2-php",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/oauth2-php.git",
+                "reference": "23e76537c4a02e666ab4ba5abe67a69a886a0310"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/oauth2-php/zipball/23e76537c4a02e666ab4ba5abe67a69a886a0310",
+                "reference": "23e76537c4a02e666ab4ba5abe67a69a886a0310",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/http-foundation": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OAuth2\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arnaud Le Blanc",
+                    "email": "arnaud.lb@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/oauth2-php/contributors"
+                }
+            ],
+            "description": "OAuth2 library",
+            "homepage": "https://github.com/FriendsOfSymfony/oauth2-php",
+            "keywords": [
+                "oauth",
+                "oauth2"
+            ],
+            "time": "2014-11-03 10:21:20"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -3207,6 +3330,7 @@
         "doctrine/doctrine-bundle": 20,
         "friendsofsymfony/rest-bundle": 0,
         "friendsofsymfony/jsrouting-bundle": 0,
+        "friendsofsymfony/oauth-server-bundle": 0,
         "jms/serializer-bundle": 0,
         "jms/di-extra-bundle": 0,
         "nelmio/api-doc-bundle": 0,
