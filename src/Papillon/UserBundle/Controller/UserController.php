@@ -13,36 +13,12 @@ use Symfony\Component\Security\Core\SecurityContext;
 class UserController extends Controller
 {
 
-    /**
-     * @Route("/signup", name="signup")
-     * @Template("PapillonUserBundle:User:signup.html.twig")
-     */
-    public function signupAction(Request $request)
-    {
-        $user = new User();
-        $form = $this->createForm(new UserType(), $user);
-
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $user->encodePassword($encoder);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('signin'));
-        }
-
-        return array('form' => $form->createView());
-    }
-
 
     /**
-     * @Route("/signin", name="signin")
-     * @Template("PapillonUserBundle:User:signin.html.twig")
+     * @Route("/login", name="login")
+     * @Template("PapillonUserBundle:User:login.html.twig")
      */
-    public function signinAction(Request $request)
+    public function loginAction(Request $request)
     {
         $session = $request->getSession();
         // get the login error if there is one
@@ -62,5 +38,30 @@ class UserController extends Controller
         );
 
     }
+
+    /**
+     * @Route("/signup", name="signup")
+     * @Template("PapillonUserBundle:User:signup.html.twig")
+     */
+    /*public function signupAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user);
+
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $user->encodePassword($encoder);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('signin'));
+        }
+
+        return array('form' => $form->createView());
+    }*/
+
 
 }

@@ -15,8 +15,9 @@ module.exports = function (grunt) {
                     'js/moment.min.js':        'moment/min/moment.min.js',
                     'js/jquery.dataTables.js': 'datatables/media/js/jquery.dataTables.js',
                     'js/jquery-ui.min.js':     'jquery-ui/ui/minified/jquery-ui.min.js',
-                    'js/jquery.datetimepicker.js': 'datetimepicker/jquery.datetimepicker.js'
-                }
+                    'js/jquery.datetimepicker.js': 'datetimepicker/jquery.datetimepicker.js',
+                    'js/jquery.validate.min.js': 'jquery-validation/dist/jquery.validate.min.js'
+            }
             },
             stylesheets: {
                 files: {

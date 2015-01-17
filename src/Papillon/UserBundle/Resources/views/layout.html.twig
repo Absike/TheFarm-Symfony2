@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Signin to your account{% endblock %}</title>
+    {% stylesheets output='css/login.min.css'
+    'assets/css/bootstrap.min.css'
+    '@PapillonUserBundle/Resources/public/css/login.css' %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+
+    {% block javascripts %}
+        {% javascripts
+        'assets/js/jquery.js'
+        'assets/js/jquery.validate.min.js'
+        '@PapillonUserBundle/Resources/public/js/login.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+
+<body class="login">
+
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        {% block signin %}
+        {% endblock %}
+        <!-- END LOGIN FORM -->
+
+        <!-- BEGIN REGISTRATION FORM -->
+        {% block signup %}
+        {% endblock %}
+        <!-- END REGISTRATION FORM -->
+
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        {% block forgot %}
+        {% endblock %}
+        <!-- END FORGOT PASSWORD FORM -->
+    </div>
+
+<div class="copyright">
+    2015 &copy; Bsiko. Papillon v2.0
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        Login.init();
+    });
+</script>
+
+</body>
+</html>

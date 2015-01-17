@@ -43,7 +43,7 @@
 
                         var customers = [];
 
-                        if (!data['error']['code']) {
+                        if (_.isUndefined(data['error']['code'])) {
 
                             $.each(data, function (key, value) {
                                 customers.push([
