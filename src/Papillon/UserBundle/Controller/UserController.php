@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+
 class UserController extends Controller
 {
 
@@ -34,7 +35,7 @@ class UserController extends Controller
 
         return array(
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error
+            'error' => $error
         );
 
     }
@@ -43,12 +44,13 @@ class UserController extends Controller
      * @Route("/signup", name="signup")
      * @Template("PapillonUserBundle:User:signup.html.twig")
      */
-    /*public function signupAction(Request $request)
+    public function signUpAction(Request $request)
     {
         $user = new User();
         $form = $this->createForm(new UserType(), $user);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
             $user->encodePassword($encoder);
@@ -57,11 +59,13 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('signin'));
+            return $this->redirect($this->generateUrl('login'));
         }
 
-        return array('form' => $form->createView());
-    }*/
+        return array(
+            'form_signup' => $form->createView()
+        );
+    }
 
 
 }

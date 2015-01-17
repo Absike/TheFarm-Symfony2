@@ -242,3 +242,7 @@ Login page
         font-size: 13px;
     }
 }
+
+.uppercase{
+    text-transform: uppercase;
+}

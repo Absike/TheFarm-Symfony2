@@ -21,16 +21,15 @@ class UserType extends AbstractType
             ->add('email')
             ->add('birth_date')
             ->add('gender')
+            ->add('phone')
             ->add('password', 'repeated', array(
                 'type' => 'password',
-                'invalid_message' => 'Password fields do not match',
+                'mapped' => false,
+                'invalid_message' => 'The password fields must match.',
+                'required' => true,
                 'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('salt')
-            ->add('active')
-            ->add('createdAt')
-            ->add('groups')
         ;
     }
     
@@ -49,6 +48,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'papillon_userbundle_user';
+        return 'sign_up_user';
     }
 }
