@@ -81,8 +81,6 @@ class User implements AdvancedUserInterface, \Serializable
     private $birth_date;
 
     /**
-     * @var date $birth_date
-     *
      * @ORM\Column(name="gender", type="boolean", nullable=true)
      */
     private $gender;
@@ -123,7 +121,6 @@ class User implements AdvancedUserInterface, \Serializable
     private $createdAt;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=5)
      */
     private $rawPassword;
@@ -142,6 +139,7 @@ class User implements AdvancedUserInterface, \Serializable
         $this->tasks = new ArrayCollection();
         $this->active = true;
         $this->createdAt = new \DateTime();
+        $this->salt = sha1(uniqid(mt_rand()));
     }
 
     public function encodePassword(PasswordEncoderInterface $encoder)

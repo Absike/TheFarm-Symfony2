@@ -6,7 +6,7 @@
 
 
 {% block signup %}
-    {% render(controller("PapillonUserBundle:User:signUp")) %}
+    {{ include('PapillonUserBundle:User:signup.html.twig' ,{'form_signup': form_signup}) }}
 {% endblock %}
 
 

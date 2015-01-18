@@ -44,8 +44,24 @@
 </div>
 
 <script type="text/javascript">
-    jQuery(document).ready(function () {
+
+    $(document).ready(function () {
+
+        var route = "{{ app.request.attributes.get('_route') }}";
         Login.init();
+
+
+        switch(route) {
+            case "signup":
+                $('.login-form').hide();
+                $('.register-form').show();
+                break;
+            case "forgot":
+                $('.login-form').hide();
+                $('.forget-form').show();
+                break;
+        }
+
     });
 </script>
 

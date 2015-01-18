@@ -246,3 +246,7 @@ Login page
 .uppercase{
     text-transform: uppercase;
 }
+
+.alert{
+    padding: 10px 0px 0px 0px !important;
+}

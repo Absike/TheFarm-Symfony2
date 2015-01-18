@@ -11,9 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
+/**
+ * @Route("/secured")
+ */
 class UserController extends Controller
 {
-
 
     /**
      * @Route("/login", name="login")
@@ -21,6 +23,8 @@ class UserController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $form_signup = $this->createForm(new UserType());
+
         $session = $request->getSession();
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
@@ -35,35 +39,65 @@ class UserController extends Controller
 
         return array(
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error' => $error
+            'error' => $error,
+            'form_signup' => $form_signup->createView(),
         );
 
     }
 
     /**
+     * @Route("/login_check", name="login_check")
+     */
+    public function securityCheckAction()
+    {
+        // The security layer will intercept this request
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+        // The security layer will intercept this request
+    }
+
+
+    /**
      * @Route("/signup", name="signup")
-     * @Template("PapillonUserBundle:User:signup.html.twig")
+     * @Template("PapillonUserBundle:User:login.html.twig")
      */
     public function signUpAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm(new UserType(), $user);
+        $form_signup = $this->createForm(new UserType(),$user);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($request->isMethod('POST')) {
 
-            $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $user->encodePassword($encoder);
+            $form_signup->handleRequest($request);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            if ($form_signup->isValid()) {
 
-            return $this->redirect($this->generateUrl('login'));
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+
+                $newSalt = md5(uniqid());
+                $user->setSalt($newSalt);
+                $user->setPassword($encoder->encodePassword($form_signup['password']->getData(), $newSalt));
+
+                //TODO: Temporary add role to user
+                $user->addGroup($this->getDoctrine()->getRepository('PapillonUserBundle:Group')->findOneByName('User'));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('success', 'Your account has been created.');
+            }
         }
 
+        // bind template variables
         return array(
-            'form_signup' => $form->createView()
+            'form_signup' => $form_signup->createView(),
+            'error' => null,
         );
     }
 

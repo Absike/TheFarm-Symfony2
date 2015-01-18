@@ -1,10 +1,17 @@
-<form accept-charset="UTF-8" role="form" action="{{ path("signup") }}" method="post" class="register-form" {{ form_enctype(form_signup) }}>
+<form accept-charset="UTF-8" role="form" action="{{ path("signup") }}" method="post" class="register-form">
     <h3>Sign Up</h3>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            <span> {{ flashMessage }}</span>
+        </div>
+    {% endfor %}
 
     <p class="hint">
         Enter your personal details below:
     </p>
 
+    {{ form_widget(form_signup._token) }}
     {{ form_errors(form_signup) }}
 
     <div class="form-group">
@@ -26,14 +33,29 @@
     </p>
 
     <div class="form-group">
+        {% if (form_errors(form_signup.username)) %}
+            <div class="alert alert-danger">
+                <span>{{ form_errors(form_signup.username) }}</span>
+            </div>
+        {% endif %}
         {{ form_widget(form_signup.username, {'attr': {'class': 'form-control placeholder-no-fix' , 'placeholder':'Username' , 'autocomplete':'off' }}) }}
     </div>
 
     <div class="form-group">
+        {% if (form_errors(form_signup.password.first)) %}
+            <div class="alert alert-danger">
+                <span>{{ form_errors(form_signup.password.first) }}</span>
+            </div>
+        {% endif %}
         {{ form_widget(form_signup.password.first, {'attr': {'class': 'form-control placeholder-no-fix' , 'placeholder':'Password' , 'autocomplete':'off' }}) }}
     </div>
 
     <div class="form-group">
+        {% if (form_errors(form_signup.password.second)) %}
+            <div class="alert alert-danger">
+                <span>{{ form_errors(form_signup.password.second) }}</span>
+            </div>
+        {% endif %}
         {{ form_widget(form_signup.password.second, {'attr': {'class': 'form-control placeholder-no-fix' , 'placeholder':'Re-type Your Password' , 'autocomplete':'off' }}) }}
     </div>
 
