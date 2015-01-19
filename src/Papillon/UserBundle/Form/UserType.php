@@ -21,11 +21,12 @@ class UserType extends AbstractType
             ->add('email')
             ->add('gender')
             ->add('phone')
-            ->add('password', 'repeated', array(
+            ->add('gender','choice',array(
+                'choices'   => array('male' => 'Male', 'female' => 'Female')
+            ))
+            ->add('rawPassword', 'repeated', array(
                 'type' => 'password',
-                'mapped' => false,
                 'invalid_message' => 'The password fields must match.',
-                'required' => true,
                 'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))

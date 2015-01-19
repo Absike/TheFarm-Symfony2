@@ -71,17 +71,11 @@ class UserController extends Controller
         $user = new User();
         $form_signup = $this->createForm(new UserType(),$user);
 
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && $form_signup->submit($request)->isValid()) {
 
-            $form_signup->handleRequest($request);
-
-            if ($form_signup->isValid()) {
-
-                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-
-                $newSalt = md5(uniqid());
-                $user->setSalt($newSalt);
-                $user->setPassword($encoder->encodePassword($form_signup['password']->getData(), $newSalt));
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($user);
+                $user->encodePassword($encoder);
 
                 //TODO: Temporary add role to user
                 $user->addGroup($this->getDoctrine()->getRepository('PapillonUserBundle:Group')->findOneByName('User'));
@@ -91,7 +85,6 @@ class UserController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'Your account has been created.');
-            }
         }
 
         // bind template variables
