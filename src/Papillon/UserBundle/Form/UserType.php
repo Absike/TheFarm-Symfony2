@@ -22,7 +22,10 @@ class UserType extends AbstractType
             ->add('gender')
             ->add('phone')
             ->add('gender','choice',array(
-                'choices'   => array('male' => 'Male', 'female' => 'Female')
+                'expanded' => true,
+                'choices'   => array('male' => 'Male', 'female' => 'Female'),
+                'data' => 'male',
+                'label' => 'Gender'
             ))
             ->add('rawPassword', 'repeated', array(
                 'type' => 'password',
