@@ -10,40 +10,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+
+/**
+ * @Route("/secured")
+ */
 class UserController extends Controller
 {
 
     /**
-     * @Route("/signup", name="signup")
-     * @Template("PapillonUserBundle:User:signup.html.twig")
+     * @Route("/login", name="login")
+     * @Template("PapillonUserBundle:User:login.html.twig")
      */
-    public function signupAction(Request $request)
+    public function loginAction(Request $request)
     {
-        $user = new User();
-        $form = $this->createForm(new UserType(), $user);
+        $form_signup = $this->createForm(new UserType());
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $user->encodePassword($encoder);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('signin'));
-        }
-
-        return array('form' => $form->createView());
-    }
-
-
-    /**
-     * @Route("/signin", name="signin")
-     * @Template("PapillonUserBundle:User:signin.html.twig")
-     */
-    public function signinAction(Request $request)
-    {
         $session = $request->getSession();
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
@@ -58,9 +39,60 @@ class UserController extends Controller
 
         return array(
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error
+            'error' => $error,
+            'form_signup' => $form_signup->createView(),
         );
 
     }
+
+    /**
+     * @Route("/login_check", name="login_check")
+     */
+    public function securityCheckAction()
+    {
+        // The security layer will intercept this request
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+        // The security layer will intercept this request
+    }
+
+
+    /**
+     * @Route("/signup", name="signup")
+     * @Template("PapillonUserBundle:User:login.html.twig")
+     */
+    public function signUpAction(Request $request)
+    {
+        $user = new User();
+        $form_signup = $this->createForm(new UserType(),$user);
+
+        if ($request->isMethod('POST') && $form_signup->submit($request)->isValid()) {
+
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($user);
+                $user->encodePassword($encoder);
+
+                //TODO: Temporary add role to user
+                $user->addGroup($this->getDoctrine()->getRepository('PapillonUserBundle:Group')->findOneByName('User'));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('success', 'Your account has been created.');
+        }
+
+        // bind template variables
+        return array(
+            'form_signup' => $form_signup->createView(),
+            'error' => null,
+        );
+    }
+
 
 }

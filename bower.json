@@ -21,6 +21,7 @@
   "dependencies": {
     "jquery": "1.11.*",
     "jquery-ui": "1.10.*",
+    "jquery-validation": "1.13.*",
     "bootstrap": "3.2.*",
     "moment": "2.8.*",
     "numeral": "1.5.*",

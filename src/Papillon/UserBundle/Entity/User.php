@@ -81,9 +81,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $birth_date;
 
     /**
-     * @var date $birth_date
-     *
-     * @ORM\Column(name="gender", type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=1, nullable=true)
+     * @Assert\Choice(choices = {"male", "female", null})
      */
     private $gender;
 
@@ -124,7 +123,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max=5)
+     * @Assert\Length(min=4)
      */
     private $rawPassword;
 
@@ -251,17 +250,13 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set Password
+     * Set password
+     *
      * @param string $password
-     * @return $this
      */
     public function setPassword($password)
     {
-        if (!is_null($password)) {
-            $this->password = $password;
-        }
-
-        return $this;
+        $this->password = $password;
     }
 
     /**

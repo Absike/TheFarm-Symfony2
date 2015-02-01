@@ -1,0 +1,15 @@
+{% extends "PapillonUserBundle::layout.html.twig" %}
+
+{% block signin %}
+    {{ include('PapillonUserBundle:User:signin.html.twig') }}
+{% endblock %}
+
+
+{% block signup %}
+    {{ include('PapillonUserBundle:User:signup.html.twig' ,{'form_signup': form_signup}) }}
+{% endblock %}
+
+
+{% block forgot %}
+    {{ include('PapillonUserBundle:User:forgot.html.twig') }}
+{% endblock %}

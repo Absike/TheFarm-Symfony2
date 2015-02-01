@@ -38,7 +38,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @Route("/account",name="account")
+     * @Route("/myaccount",name="account")
      */
     public function accountAction(Request $request){
 
