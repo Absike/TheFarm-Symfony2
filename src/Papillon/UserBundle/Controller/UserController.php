@@ -84,6 +84,9 @@ class UserController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                $html = $this->renderView('PapillonTasksBundle:Stuff:email.html.twig', array('message' => 'Your account has been created.'));
+                $this->get('mail_helper')->sendEmail('absike@gmail.com', $html, 'Welcome to papillon v2');
+
                 $this->get('session')->getFlashBag()->add('success', 'Your account has been created.');
         }
 

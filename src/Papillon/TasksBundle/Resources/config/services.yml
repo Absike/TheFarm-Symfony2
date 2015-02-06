@@ -1,5 +1,5 @@
 ## Helpers ##
-papillon.helper.email:
-  class: Papillon\TasksBundle\Helper\MailHelper
-  arguments:
-      service: "@service_container"
+services:
+    mail_helper:
+        class: Papillon\TasksBundle\Helper\MailHelper
+        arguments: ['@mailer']

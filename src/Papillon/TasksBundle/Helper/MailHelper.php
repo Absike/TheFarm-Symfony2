@@ -23,25 +23,20 @@ class MailHelper
      * @var object
      */
     protected $service;
- 
+
     /**
-     * init service
-     *
-     * @param object $service
-     * @return $this
+     * @param \Swift_Mailer $mailer
      */
-    public function __construct($service) {
-        $this->service = $service;
- 
-        return $this;
+    public function __construct(\Swift_Mailer $mailer) {
+        $this->mailer = $mailer;
     }
- 
+
     /**
-     * Send email
-     *
-     * @param string $to
-     * @param twig $view
+     * @param $to
+     * @param $view
      * @param string $subject
+     * @return bool
+     * @throws \Exception
      */
     public function sendEmail($to, $view, $subject = 'Email from Papillon')
     {
@@ -51,14 +46,14 @@ class MailHelper
         } 
 
         //we create a new instance of the Swift_Message class  
-        $message = \Swift_Message::newInstance()->setContentType('text/html')
+        $message = \Swift_Message::newInstance()
         ->setSubject($subject)
         ->setFrom(self::EMAIL_FROM)
         ->setTo($to)
-        ->setBody($view);
+        ->setBody($view,'text,html');
  
         // then we send the message.
-        $send = $this->service->get('mailer')->send($message);
+        $send = $this->mailer->send($message);
 
         if($send){
             return true;

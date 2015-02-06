@@ -19,8 +19,6 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        $html = $this->renderView('PapillonTasksBundle:Stuf:email.html.twig', array('message' => 'This is a message'));
-        $this->get('papillon.helper.email')->sendEmail('absike@gmail.com', $html, 'This is a test subject');
         return array();
     }
 
