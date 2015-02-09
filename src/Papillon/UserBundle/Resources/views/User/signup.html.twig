@@ -63,6 +63,12 @@
         {{ form_widget(form_signup.rawPassword.second, {'attr': {'class': 'form-control placeholder-no-fix' , 'placeholder':'Re-type Your Password' , 'autocomplete':'off' }}) }}
     </div>
 
+    <div class="form-group">
+        <!-- BEGIN: ReCAPTCHA implementation example. -->
+        <div class="g-recaptcha" data-sitekey="6LcYbwETAAAAAAuoWCfwjGPkEW8cHwqUX6NoO3Vt" style="margin: 17px !important;"></div>
+        <!-- END: ReCAPTCHA implementation example. -->
+    </div>
+
     <div class="form-actions">
         <button type="button" id="register-back-btn" class="btn btn-default">Back</button>
         <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
