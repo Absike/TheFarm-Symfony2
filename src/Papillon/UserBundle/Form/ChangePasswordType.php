@@ -35,4 +35,5 @@ class ChangePasswordType extends AbstractType
     {
         return 'change_passwd';
     }
+
 }
