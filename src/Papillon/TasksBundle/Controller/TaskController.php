@@ -26,7 +26,7 @@ class TaskController extends Controller
      */
     public function taskAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser()->getId();
+        //$user = $this->get('security.context')->getToken()->getUser()->getId();
         $em = $this->getDoctrine()->getManager();
         //$oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->getTasksByUser($user);
         $oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->findAll();
