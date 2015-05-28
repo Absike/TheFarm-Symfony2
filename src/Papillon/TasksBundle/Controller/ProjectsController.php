@@ -34,9 +34,8 @@ class ProjectsController extends Controller
         $project = new Projects();
         $form = $this->createForm(new ProjectsType(), $project);
         $form->handleRequest($request);
-        //var_dump($request->request->get('projects'));die;
+
         if ($request->isMethod('POST')) {
-           // var_dump($request->request->get('projects'));die;
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
