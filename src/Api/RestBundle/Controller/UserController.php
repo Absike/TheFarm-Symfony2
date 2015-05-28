@@ -5,9 +5,7 @@ namespace Api\RestBundle\Controller;
 use Papillon\UserBundle\Entity\User;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use FOS\RestBundle\Controller\FOSRestController;
 
 class UserController extends Controller
 {
