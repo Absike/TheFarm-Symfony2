@@ -22,9 +22,7 @@ class Curl
         $ch = curl_init();
         curl_setopt_array($ch, $defaults);
         if ( ! $result = curl_exec($ch)) {
-            throw new Exception(
-                'Curl call error at ' . $url . ' : ' . curl_error($ch)
-            );
+            throw new HttpException(400, 'Curl call error at ' . $url . ' : ' . curl_error($ch));
         }
         curl_close($ch);
         return $result;

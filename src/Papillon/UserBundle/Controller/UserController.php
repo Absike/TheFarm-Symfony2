@@ -77,7 +77,7 @@ class UserController extends Controller
                 $encoder = $factory->getEncoder($user);
                 $user->encodePassword($encoder);
 
-                //TODO: Temporary add role to user
+                //Temporary add role to user
                 $user->addGroup($this->getDoctrine()->getRepository('PapillonUserBundle:Group')->findOneByName('User'));
 
                 $em = $this->getDoctrine()->getManager();
