@@ -2,8 +2,6 @@
 
 namespace Papillon\TasksBundle\Controller;
 
-use Papillon\UserBundle\Entity\User;
-use Papillon\UserBundle\Form\UserType;
 use Papillon\UserBundle\Form\AccountType;
 use Papillon\UserBundle\Form\ChangePasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
