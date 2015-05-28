@@ -56,4 +56,5 @@ class Curl
 
         return $result;
     }
+
 }
