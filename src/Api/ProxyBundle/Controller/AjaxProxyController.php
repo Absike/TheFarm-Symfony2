@@ -27,7 +27,7 @@ class AjaxProxyController extends Controller
             $method  = $request->get('method', 'get');
 
             if ( !$restUrl  || !$method || !in_array($method, array('GET', 'POST', 'DELETE'))){
-                return new Response('', 404, array('Content-Type' => 'application/json'));
+                return new Response('Error in api calls', 404, array('Content-Type' => 'application/json'));
             }
 
             $url = 'http://' . $request->getHttpHost() . $restUrl;

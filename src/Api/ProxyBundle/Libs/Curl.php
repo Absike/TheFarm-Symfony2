@@ -40,13 +40,10 @@ class Curl
 
         $curlConfig = array(
             CURLOPT_URL => $url,
-            CURLOPT_HEADER => 0,
+            CURLOPT_HEADER => false,
             CURLOPT_RETURNTRANSFER => TRUE,
-            CURLOPT_TIMEOUT => 5000,
-            CURLOPT_COOKIESESSION => TRUE,
-            CURLOPT_CONNECTTIMEOUT => 0,
-            /*CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => http_build_query($post)*/
+            CURLOPT_POST => count($post),
+            CURLOPT_POSTFIELDS => http_build_query($post)
         );
 
         curl_setopt_array($ch, $curlConfig);
