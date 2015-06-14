@@ -13,14 +13,7 @@ class ProjectsController extends Controller {
      */
     public function allAction()
     {
-        $oTasks = $this->getDoctrine()->getRepository("PapillonTasksBundle:Projects")->findAll();
-
-        if(!$oTasks)
-        {
-            throw $this->createNotFoundException('No projects found.');
-        }
-
-        return $oTasks;
+        return $this->get('_query')->_query("PapillonTasksBundle:Projects");
     }
 
 

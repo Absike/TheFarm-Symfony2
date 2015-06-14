@@ -6,10 +6,14 @@
  * @param apiParams
  * @returns {*}
  */
-var sendAjaxRequest = function(apiUrl , apiParams ){
+var sendAjaxRequest = function(apiUrl , method , apiParams){
 
     if (_.isUndefined(apiParams)) {
         apiParams = {};
+    }
+
+    if (_.isUndefined(method)) {
+        method = 'GET'
     }
 
     return $.ajax({
@@ -18,7 +22,7 @@ var sendAjaxRequest = function(apiUrl , apiParams ){
         url: Routing.generate('_ajaxProxy'),
         data: {
             restUrl : apiUrl,
-            method: 'POST',
+            method: method,
             params: apiParams
         }
     });
