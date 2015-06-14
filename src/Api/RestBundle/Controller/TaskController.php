@@ -13,14 +13,7 @@ class TaskController extends Controller {
      */
     public function allAction()
     {
-        $oTasks = $this->getDoctrine()->getRepository("PapillonTasksBundle:Tasks")->findAll();
-
-        if(!$oTasks)
-        {
-            throw $this->createNotFoundException('No task found.');
-        }
-
-        return $oTasks;
+        return $this->get('_query')->_query("PapillonTasksBundle:Tasks");
     }
 
 

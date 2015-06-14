@@ -13,14 +13,7 @@ class CustomerController extends Controller {
      */
     public function allAction()
     {
-        $oCustomers = $this->getDoctrine()->getRepository("PapillonTasksBundle:Customers")->findAll();
-
-        if(!$oCustomers)
-        {
-            throw $this->createNotFoundException('No Customers found.');
-        }
-
-        return $oCustomers;
+        return $this->get('_query')->_query("PapillonTasksBundle:Customers");
     }
 
 

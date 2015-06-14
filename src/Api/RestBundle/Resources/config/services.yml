@@ -1,4 +1,6 @@
+## Helpers ##
 services:
-#    api_rest.example:
-#        class: Api\RestBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    _query:
+        class: Api\RestBundle\Lib\RepositoryQuery
+        factory_service: doctrine
+        arguments: ['@doctrine.orm.entity_manager','@logger']
