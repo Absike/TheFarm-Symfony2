@@ -37,17 +37,27 @@ class RepositoryQuery
      */
     public function _query($entity, $filter = array(), $params = array())
     {
+        //creating a QueryBuilder instance
         $qb = $this->getRepository($entity)->createQueryBuilder('q');
 
+        //Filter
         if (count($filter)) {
             foreach ($filter as $key => $value) {
-                $qb->andWhere('q.' . $key . '=' . ':' . $key);
-                $qb->setParameter($key, $value);
+                $qb->->andWhere('q.' . $key . '=' . ':' . $key)->setParameter($key, $value);
             }
         }
 
-        if (isset($params['orderby'])) $qb->orderBy($params['orderby']);
-        if (isset($params['limit'])) $qb->setMaxResults($params['limit']);
+        //OrderBy
+        if (count($params['orderby'])) {
+            foreach ($params['orderby'] as $sort => $order) {
+               // Default $order = 'ASC' $order = null
+               $qb->->addOrderBy('q.'.$sort , $order);
+            }
+        }
+
+        if (isset($params['groupby'])) $qb->groupBy('q.'.$params['groupby']);
+        if (isset($params['limit']))   $qb->setMaxResults((int)$params['limit']);
+        if (isset($params['offset']))  $qb->setFirstResult((int)$params['offset']);
 
         //Logger query
         $this->logger->info(sprintf('Query executed ' . $qb->getQuery()->getSQL()));
