@@ -27,6 +27,8 @@ framework:
 
 # Twig Configuration
 twig:
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
@@ -120,6 +122,8 @@ knp_paginator:
     template:
         pagination: PapillonTasksBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: PapillonTasksBundle:Pagination:sortable_link.html.twig # sort link template
+
+ornicar_gravatar: ~
 
 parameters:
     max_users_per_page: 6

@@ -92,7 +92,7 @@
                            </li>#}
 
                 <!-- Search form dropdown -->
-                <li class="dropdown">
+                {#<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search</a>
                     <ul class="dropdown-menu">
                         <form class="navbar-form" role="search">
@@ -104,13 +104,15 @@
                             </div>
                         </form>
                     </ul>
-                </li>
-
+                </li>#}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-                        <div class="user-info">
-                            <span class="glyphicon glyphicon-user"></span>{{ app.user.fullname | default(app.user.email) }}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-owns="user-dropdown" class="aui-dropdown2-trigger" aria-controls="user-dropdown">
+                        <div class="aui-avatar aui-avatar-small">
+                            <div class="aui-avatar-inner">
+                                <img src="{{ gravatar(app.user.email , 32) }}" alt="Logged in as {{ app.user.fullname | default(app.user.email) }}"/>
+                            </div>
                         </div>
+                        <b class="caret">{#{{ app.user.fullname | default(app.user.email) }} #}</b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('account') }}">My account</a></li>
