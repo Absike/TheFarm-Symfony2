@@ -11,10 +11,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
+use FOS\UserBundle\Controller\SecurityController as BaseController;
+
 /**
  * @Route("/secured")
  */
-class UserController extends Controller
+class SecurityController  extends BaseController
 {
 
     /**
@@ -23,50 +25,18 @@ class UserController extends Controller
      */
     public function loginAction(Request $request)
     {
-        $form_signup = $this->createForm(new UserType());
+        //$form_signup = $this->createForm(new UserType());
 
-        $session = $request->getSession();
-        // get the login error if there is one
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(
-                SecurityContext::AUTHENTICATION_ERROR
-            );
-        } else {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }
+        $response = parent::loginAction($request);
 
+        //do something else;
 
-        return array(
-            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error' => $error,
-            'form_signup' => $form_signup->createView(),
-        );
+        return $response;
 
     }
 
-    /**
-     * @Route("/login_check", name="login_check")
-     */
-    public function securityCheckAction()
-    {
-        // The security layer will intercept this request
-    }
 
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutAction()
-    {
-        // The security layer will intercept this request
-    }
-
-
-    /**
-     * @Route("/signup", name="signup")
-     * @Template("PapillonUserBundle:User:login.html.twig")
-     */
-    public function signUpAction(Request $request)
+   /* public function signUpAction(Request $request)
     {
         $user = new User();
         $form_signup = $this->createForm(new UserType(),$user);
@@ -95,7 +65,7 @@ class UserController extends Controller
             'form_signup' => $form_signup->createView(),
             'error' => null,
         );
-    }
+    }*/
 
 
 }

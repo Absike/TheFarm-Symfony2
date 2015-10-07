@@ -19,11 +19,6 @@ papillon_tasks:
 papillon_login:
     resource: "@PapillonUserBundle/Resources/config/routing.yml"
 
-PapillonUserBundle:
-    resource: "@PapillonUserBundle/Controller/"
-    type: annotation
-    prefix: /
-
 PapillonTasksBundle:
     resource: "@PapillonTasksBundle/Controller/"
     type: annotation

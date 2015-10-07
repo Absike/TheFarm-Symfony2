@@ -26,6 +26,7 @@
         "friendsofsymfony/rest-bundle": "@stable",
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "friendsofsymfony/oauth-server-bundle": "@stable",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
 
         "jms/serializer-bundle": "@stable",
         "jms/di-extra-bundle": "@stable",
@@ -40,6 +41,7 @@
 
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "ornicar/gravatar-bundle" : "dev-master"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

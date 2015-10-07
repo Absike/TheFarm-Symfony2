@@ -1,13 +1,19 @@
-<form class="forget-form" action="index.html" method="post">
+<form class="forget-form" action="{{ path('fos_user_resetting_send_email') }}"  method="post">
     <h3>Forget Password ?</h3>
 
     <p>
         Enter your e-mail address below to reset your password.
     </p>
 
+    {% if error %}
+        <div class="alert alert-danger">
+            <span>{{ error.message|trans }}</span>
+        </div>
+    {% endif %}
+
     <div class="form-group">
         <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email"
-               name="email"/>
+               name="_email"/>
     </div>
     <div class="form-actions">
         <button type="button" id="back-btn" class="btn btn-default">Back</button>

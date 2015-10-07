@@ -1,50 +1,37 @@
 security:
     encoders:
-        Papillon\UserBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: sha512
     providers:
-        user:
-            entity: { class: PapillonUserBundle:User }
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN: [ROLE_USER , ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js|fonts)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         login:
-            pattern:  ^/secured/login$
-            security: false
+            pattern: ^/(login$|register|resetting)
+            anonymous: true
 
-        secured_area:
-            pattern:    ^/
-            anonymous: ~
+        main:
+            pattern: ^/
             form_login:
-                login_path: login
-                check_path: login_check
-                default_target_path: /dashboard/home
-                always_use_default_target_path: true
-                use_referer: true
-                post_only: true
-
-            logout:
-                path:   logout
-                target: login
-
+                provider: fos_userbundle
+                remember_me: true
             remember_me:
-                key:      "%secret%"
-                lifetime: 31536000 # 365 days in seconds
-                path:     /
-                domain:   ~ # Defaults to the current domain from $_SERVER
+                key: %secret%
+            anonymous:    false
+            logout:       true
 
 
     access_control:
-        - { path: ^/secured/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/users, roles: ROLE_ADMIN }
-        - { path: ^/, role: ROLE_USER }
-        #- { path: ^/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        # URL of FOSUserBundle which need to be available to anonymous users
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
