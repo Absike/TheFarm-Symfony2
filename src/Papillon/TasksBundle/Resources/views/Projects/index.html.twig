@@ -17,8 +17,7 @@
                 <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
+                        <th>Project</th>
                         <th>Customer</th>
                         <th>Opening</th>
                         <th>Closing</th>
@@ -49,10 +48,9 @@
 
                         aData.push([
                             value['name'],
-                            value['type'],
                             value['customers']['name'],
-                            dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
                             dateFormatterZone(value['date_opening'], 'DD MMM YYYY'),
+                            dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
                         ]);
 
                     });
@@ -62,8 +60,14 @@
 
                 buildDataTable('#tasks_list', {
                     oSorting: [[0, 'desc']],
-                    oData: aData
-                });
+                    oData: aData,
+                    "aoColumns": [
+                        null,
+                        null,
+                        {"sClass": "center"},
+                        {"sClass": "center"}
+                    ]
+                } );
             })
 
         });

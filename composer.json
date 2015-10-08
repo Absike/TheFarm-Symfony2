@@ -35,12 +35,13 @@
 
         "stof/doctrine-extensions-bundle": "@stable",
         "doctrine/doctrine-fixtures-bundle": "2.1.*@dev",
-        "doctrine/migrations": "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
         "genemu/form-bundle": "@stable",
 
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
-        "ornicar/gravatar-bundle" : "dev-master"
+        "ornicar/gravatar-bundle" : "dev-master",
+        "fzaninotto/faker": "^1.5"
 
     },
     "require-dev": {
