@@ -9,7 +9,8 @@
             CSV</a>
         <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export
             PDF</a>
-        <a href="{{ path('new_customer') }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
+        <a href="{{ path('new_customer') }}" class="btn btn-info btn-sm" role="button"><span
+                    class="glyphicon glyphicon-plus"></span> Add</a>
     </div>
 
     <div class="nonborderbox">
@@ -19,17 +20,15 @@
                 <table id="customers_list" class="display" cellspacing="0" cellpadding="0" border="0">
                     <thead>
                     <tr>
+                        <th>id</th>
                         <th>Name</th>
                         <th>Adresse</th>
                         <th>Phone</th>
                         <th>Fax</th>
+                        <th></th>
                     </tr>
                     </thead>
                 </table>
-
-                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block"
-                     alt="loiding...">
-
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -39,22 +38,44 @@
     <script type="text/javascript" charset="utf-8">
         $(function () {
 
-            sendAjaxRequest('{{ path('papillon_all_client') }}').done(function (data) {
-
-                        var customers = [];
-
-                        if (data) {
-                            $.each(data, function (key, value) {
-                                customers.push([
-                                    value['name'],
-                                    value['adresse'],
-                                    value['phone'],
-                                    value['fax'],
-                                ]);
-                            });
-                        }
-                        buildDataTable('#customers_list', customers);
+            $("#customers_list").dataTable({
+                "bDestroy": true,
+                "aaSorting": [[1, "asc"]],
+                "oLanguage": {
+                    sLoadingRecords: '<img src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="loiding...">',
+                },
+                "sAjaxSource": Routing.generate('_ajaxProxy'),
+                "fnServerData": function (sUrl, aoData, fnCallback) {
+                    $.ajax({
+                        dataType: 'json',
+                        type: "POST",
+                        url: sUrl,
+                        data: {restUrl: "{{ path('papillon_all_client') }}", method: 'GET'}
+                    }).done(function (data) {
+                        fnCallback(data);
                     });
+                },
+                "aoColumns": [
+                    {"bVisible": false},
+                    {"sTitle": "Name", "sWidth": "40%"},
+                    {"sTitle": "Adresse", "sWidth": "30%"},
+                    {"sTitle": "Phone", "sWidth": "20%"},
+                    {"sTitle": "Fax", "sWidth": "20%"},
+                    {"mData": null, "sWidth": "10%", "bSearchable": false, "bSortable": false}
+                ],
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                    var bAction = '<div data-id="' + aData[0] + '" style="float: right">';
+                    bAction += '<a href="#" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span></a>&nbsp';
+                    bAction += '<a href="#" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>';
+                    bAction += '</div>';
+
+                    $('td:eq(4)', nRow).html(bAction);
+                    return nRow;
+                }
+            });
+
+
         });
     </script>
 
