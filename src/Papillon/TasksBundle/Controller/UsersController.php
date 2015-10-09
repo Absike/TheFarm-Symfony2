@@ -82,11 +82,14 @@ class UsersController extends Controller
 
         if ($pass_form->isSubmitted() && $pass_form->isValid()) {
 
+            /*
             $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-
             $newSalt = md5(uniqid());
             $user->setSalt($newSalt);
             $user->setPassword($encoder->encodePassword($pass_form['password']->getData(), $newSalt));
+            */
+
+            $user->setPlainPassword($pass_form['password']->getData());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -102,6 +105,8 @@ class UsersController extends Controller
         ));
 
     }
+
+
 
     /**
      * @Route("/users/new", name="new_user")

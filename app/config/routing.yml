@@ -1,8 +1,3 @@
-_ajaxProxy:
-    resource: "@ApiProxyBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 api_rest:
     type : rest
     resource: "@ApiRestBundle/Resources/config/routing.yml"

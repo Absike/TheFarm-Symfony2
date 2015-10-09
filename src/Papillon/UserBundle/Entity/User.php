@@ -50,6 +50,20 @@ class User extends BaseUser
     private $phone;
 
     /**
+     * @var date $birth_date
+     *
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
+     */
+    private $birth_date;
+
+    /**
+     * @var datetime $createdAt
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Papillon\TasksBundle\Entity\Tasks",mappedBy="User")
@@ -62,6 +76,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->tasks = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
 
@@ -204,5 +219,52 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set birth_date
+     *
+     * @param \DateTime $birthDate
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birth_date = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birth_date
+     *
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birth_date;
+    }
+
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

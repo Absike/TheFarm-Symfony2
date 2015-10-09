@@ -24,6 +24,8 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    serializer:
+        enabled: true
 
 # Twig Configuration
 twig:
@@ -133,7 +135,7 @@ knp_paginator:
 ornicar_gravatar: ~
 
 parameters:
-    max_users_per_page: 6
+    max_users_per_page: 12
 
 
 
