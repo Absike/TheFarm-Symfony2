@@ -7,12 +7,12 @@ NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
 
+papillon_login:
+    resource: "@PapillonUserBundle/Resources/config/routing.yml"
+
 papillon_tasks:
     resource: "@PapillonTasksBundle/Resources/config/routing.yml"
     prefix:   /
-
-papillon_login:
-    resource: "@PapillonUserBundle/Resources/config/routing.yml"
 
 PapillonTasksBundle:
     resource: "@PapillonTasksBundle/Controller/"

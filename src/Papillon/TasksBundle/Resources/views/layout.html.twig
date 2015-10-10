@@ -27,36 +27,11 @@
                     </ul>
                 </li>
 
-                <!-- Dropdown -->
-                <li class="dropdown {% if current_route == 'users' %}active{% endif %}">
-                    <a href="{{ path('users') }}" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu {% if current_route == 'users' %}active{% endif %}">
-
-                            {% if is_granted('ROLE_ADMIN') %}
-                               <a href="{{ path('users') }}">Users</a>
-                            {% endif %}
-
-                     {#       <ul class="dropdown-menu">
-                                <li><a href="{{ path('users') }}">All Users</a></li>
-                                <li><a href="{{ path('new_user') }}">New User</a></li>
-                            </ul>#}
-                        </li>
-                        <li class="dropdown-submenu {% if current_route == 'projects' %}active{% endif %}">
-                            <a href="{{ path('projects') }}">Projects <span class="badge" id="badge_project"></span></a>
-                        </li>
-                        <li class="dropdown-submenu {% if current_route == 'customers' %}active{% endif %}">
-                            <a href="{{ path('customers') }}">Clients {#<b class="caret"></b>#}</a>
-                            {#<ul class="dropdown-menu">
-                                <li><a href="{{ path('customers') }}">All clients</a></li>
-                                <li><a href="{{ path('new_customer') }}">New client</a></li>
-                            </ul>#}
-                        </li>
-
-                    </ul>
-                </li>
-
-
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="{% if current_route == 'users' %}active{% endif %}"><a href="{{ path('users') }}">Users</a></li>
+                    <li class="{% if current_route == 'projects' %}active{% endif %}"><a href="{{ path('projects') }}">Projects <span class="badge" id="badge_project"></span></a></li>
+                    <li class="{% if current_route == 'customers' %}active{% endif %}"><a href="{{ path('customers') }}">Customers</a></li>
+                {% endif %}
 
                 <!-- E-mail dropdown -->
                 <li class="dropdown">

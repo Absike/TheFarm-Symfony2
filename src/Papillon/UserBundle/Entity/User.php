@@ -64,10 +64,9 @@ class User extends BaseUser
     private $createdAt;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection $tasks
      *
-     * @ORM\OneToMany(targetEntity="Papillon\TasksBundle\Entity\Tasks",mappedBy="User")
-     * @Exclude
+     * @ORM\OneToMany(targetEntity="Papillon\TasksBundle\Entity\Tasks", mappedBy="author", cascade={"persist", "remove", "merge"})
      */
     private $tasks;
 
@@ -166,9 +165,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get tasks
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection $tasks
      */
     public function getTasks()
     {

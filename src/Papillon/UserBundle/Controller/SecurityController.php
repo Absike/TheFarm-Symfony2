@@ -13,9 +13,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 use FOS\UserBundle\Controller\SecurityController as BaseController;
 
-/**
- * @Route("/secured")
- */
+
 class SecurityController  extends BaseController
 {
 

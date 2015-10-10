@@ -1,0 +1,73 @@
+{% extends "PapillonTasksBundle::layout.html.twig" %}
+
+{% block title %}Papillon | Tasks {% endblock title %}
+
+{% block content %}
+
+    <div style="text-align:right;width:100%;">
+        <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export CSV</a>
+        <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export PDF</a>
+        <a href="{{ path('new_task') }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
+    </div>
+
+    <div class="nonborderbox">
+        <div class="box-element">
+            <div class="box-head-light"><h5>Admin tasks</h5></div>
+            <div class="box-content no-padding grey-bg">
+                <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Subject</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Last update</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for item in tasks %}
+                        <tr>
+                            <td><a href="#">{{ item.id }}</a></td>
+                            <td>{{ item.subject }}</td>
+                            <td>{{ item.timespent }}</td>
+                            <td><span class="label label-{{ item.status }}">{{ item.status }}</span></td>
+                            <td><span class="label label-{{ item.status }}">{{ item.priority|trans }}</span></td>
+                            <td>{{ item.updatedAt|date("d M Y H:i") }}</td>
+                            <td class="button-action">
+                                <a href="#" type="button" class="btn btn-info btn-xs">Edit</a>
+                                <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="loiding...">
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+
+            DataTableBuilder.init('#tasks_list', {
+                "aaSorting": [[1, "asc"]],
+                "aoColumns": [
+                    { "bSortable": false },
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    {"sWidth": "10%" , "bSearchable": false, "bSortable": false}
+                ]
+            } );
+
+        });
+    </script>
+{% endblock %}

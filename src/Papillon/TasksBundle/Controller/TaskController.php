@@ -26,15 +26,8 @@ class TaskController extends Controller
      */
     public function taskAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser()->getId();
-
-        //var_dump($this->get('security.context')->isGranted('ROLE_ADMIN'));
-        $em = $this->getDoctrine()->getManager();
-        $oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->getTasksByUser($user);
-        //$oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->findAll();
-
         return $this->render('PapillonTasksBundle:Task:task.html.twig', array(
-            'tasks' => $oTasks
+            'tasks' => $this->get('security.context')->getToken()->getUser()->getTasks()
         ));
     }
 
