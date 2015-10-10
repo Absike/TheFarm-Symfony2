@@ -73,21 +73,21 @@ class UserController extends Controller
 
         if ($request->isMethod('POST') && $form_signup->submit($request)->isValid()) {
 
-                $factory = $this->get('security.encoder_factory');
-                $encoder = $factory->getEncoder($user);
-                $user->encodePassword($encoder);
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $user->encodePassword($encoder);
 
-                //Temporary add role to user
-                $user->addGroup($this->getDoctrine()->getRepository('PapillonUserBundle:Group')->findOneByName('User'));
+            //Temporary add role to user
+            $user->addGroup($this->getDoctrine()->getRepository('PapillonUserBundle:Group')->findOneByName('User'));
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
-                $html = $this->renderView('PapillonTasksBundle:Stuff:email.html.twig', array('message' => 'Your account has been created.'));
-                $this->get('mail_helper')->sendEmail('absike@gmail.com', $html, 'Welcome to papillon v2');
+            $html = $this->renderView('PapillonTasksBundle:Stuff:email.html.twig', array('message' => 'Your account has been created.'));
+            $this->get('mail_helper')->sendEmail('absike@gmail.com', $html, 'Welcome to papillon v2');
 
-                $this->get('session')->getFlashBag()->add('success', 'Your account has been created.');
+            $this->get('session')->getFlashBag()->add('success', 'Your account has been created.');
         }
 
         // bind template variables

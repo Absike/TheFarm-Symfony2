@@ -9,32 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Class UsersController
- * @package Papillon\TasksBundle\Controller
- */
-class UsersController extends Controller
+
+class AccountController extends Controller
 {
-
-    /**
-     * @Route("/users",name="users")
-     * @Template("PapillonTasksBundle:Users:index.html.twig")
-     */
-    public function indexAction(Request $request)
-    {
-
-        $oUsers = $this->getDoctrine()->getRepository('PapillonUserBundle:User')->getAllUser();
-        $paginator  = $this->get('knp_paginator');
-
-        $usersPagination = $paginator->paginate(
-            $oUsers,
-            $request->query->get('page', 1),
-            $this->container->getParameter('max_users_per_page')
-        );
-
-        return $this->render('PapillonTasksBundle:Users:index.html.twig', array('pUsers' => $usersPagination));
-    }
-
     /**
      * @Route("/myaccount",name="account")
      */
@@ -82,15 +59,15 @@ class UsersController extends Controller
 
         if ($pass_form->isSubmitted() && $pass_form->isValid()) {
 
+            /*
             $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-
             $newSalt = md5(uniqid());
             $user->setSalt($newSalt);
-            $user->setPassword($encoder->encodePassword($pass_form['password']->getData(), $newSalt));
+            $user->setPassword($encoder->encodePassword($pass_form['password']->getData(), $newSalt));*/
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $user->setPlainPassword($pass_form['password']->getData());
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($user, true);
 
             $this->get('session')->getFlashBag()->add('success', 'Your password has been updated.');
             return $this->redirect($this->generateUrl('account'));
@@ -102,14 +79,4 @@ class UsersController extends Controller
         ));
 
     }
-
-    /**
-     * @Route("/users/new", name="new_user")
-     * @Template("PapillonTasksBundle:Users:new.html.twig")
-     */
-    public function newAction(Request $request)
-    {
-        return array();
-    }
-
 }

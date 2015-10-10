@@ -7,11 +7,42 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class AdminController
- * @package Papillon\TasksBundle\Controller
+ * @Route("/admin")
  */
 class AdminController extends Controller
 {
+
+    /**
+     * @Route("/tasks", name="all_tasks")
+     * @Template("PapillonTasksBundle:Admin:tasks.html.twig")
+     */
+    public function allTasksAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        return array(
+            'tasks' => $em->getRepository('PapillonTasksBundle:Tasks')->findAll()
+        );
+    }
+
+    /**
+     * @Route("/users",name="users")
+     * @Template("PapillonTasksBundle:Users:index.html.twig")
+     */
+    public function indexAction(Request $request)
+    {
+
+        $oUsers = $this->getDoctrine()->getRepository('PapillonUserBundle:User')->getAllUser();
+        $paginator  = $this->get('knp_paginator');
+
+        $usersPagination = $paginator->paginate(
+            $oUsers,
+            $request->query->get('page', 1),
+            $this->container->getParameter('max_users_per_page')
+        );
+
+        return $this->render('PapillonTasksBundle:Users:index.html.twig', array('pUsers' => $usersPagination));
+    }
 
     /**
      * @Route("/bootstrap" , name="bootstrap")

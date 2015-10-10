@@ -12,16 +12,17 @@
 
     <div class="nonborderbox">
         <div class="box-element">
-            <div class="box-head-light"><h5>Mes projets</h5></div>
+            <div class="box-head-light"><h5>{{ 'My projets'|trans }}</h5></div>
             <div class="box-content no-padding grey-bg">
                 <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
+                        <th></th>
+                        <th>Project</th>
                         <th>Customer</th>
                         <th>Opening</th>
                         <th>Closing</th>
+                        <th></th>
                     </tr>
                     </thead>
                 </table>
@@ -48,22 +49,37 @@
                     $.each(data, function (key, value) {
 
                         aData.push([
+                            '<a href="#">'+value['id']+'</a>',
                             value['name'],
-                            value['type'],
                             value['customers']['name'],
-                            dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
                             dateFormatterZone(value['date_opening'], 'DD MMM YYYY'),
+                            dateFormatterZone(value['date_closing'], 'DD MMM YYYY'),
                         ]);
 
                     });
 
                 }
 
+                DataTableBuilder.init('#tasks_list', {
+                    "aaSorting": [[1, "asc"]],
+                    "aaData": aData,
+                    "aoColumns": [
+                        {"sClass": "center" , "bSortable": false },
+                        null,
+                        null,
+                        {"sClass": "center"},
+                        {"sClass": "center"},
+                        {"mData": null, "sWidth": "10%" ,"sClass": "center", "bSearchable": false, "bSortable": false}
+                    ],
+                    "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
-                buildDataTable('#tasks_list', {
-                    oSorting: [[0, 'desc']],
-                    oData: aData
-                });
+                        var bAction = '<a href="#" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span></a>&nbsp';
+                            bAction += '<a href="#" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>';
+
+                        $('td:eq(5)', nRow).html(bAction);
+                        return nRow;
+                    }
+                } );
             })
 
         });

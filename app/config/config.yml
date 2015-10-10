@@ -1,6 +1,6 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: security.yml }
+    - { resource: security_fos.yml }
 
 framework:
     #esi:             ~
@@ -24,6 +24,8 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    serializer:
+        enabled: true
 
 # Twig Configuration
 twig:
@@ -83,6 +85,8 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
+        mapping_types:
+           enum: string
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -108,6 +112,11 @@ fos_rest:
     view:
         view_response_listener: true
 
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Papillon\UserBundle\Entity\User
+
 nelmio_api_doc: ~
 genemu_form:
     date: ~
@@ -126,7 +135,7 @@ knp_paginator:
 ornicar_gravatar: ~
 
 parameters:
-    max_users_per_page: 6
+    max_users_per_page: 12
 
 
 

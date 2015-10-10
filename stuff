@@ -1,0 +1,7 @@
+$this->get('security.context')->getToken()->getUser()->getId();
+
+$this->get('security.context')->isGranted('ROLE_ADMIN')
+
+$em = $this->getDoctrine()->getManager();
+$oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->getTasksByUser($user);
+$oTasks = $em->getRepository('PapillonTasksBundle:Tasks')->findAll();

@@ -3,50 +3,25 @@
 namespace Papillon\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as Serializer;
+use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
 
+
 /**
- * @ORM\Table(name="pp_users")
+ * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="Papillon\UserBundle\Entity\UserRepository")
- * @UniqueEntity(fields={"username"}, message="Username already exists")
- * @UniqueEntity(fields={"email"}, message="Email already exists")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User extends BaseUser
 {
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Papillon\TasksBundle\Entity\Tasks",mappedBy="User")
-     * @Exclude
-     */
-    private $tasks;
-
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id()
+     * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string $username
-     *
-     * @ORM\Column(name="username", type="string", length=15, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=15)
-     */
-    private $username;
-
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -63,25 +38,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $last_name;
 
     /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", length=60, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=60)
-     * @Assert\Email()
-     */
-    private $email;
-
-
-    /**
-     * @var date $birth_date
-     *
-     * @ORM\Column(name="birth_date", type="date", nullable=true)
-     */
-    private $birth_date;
-
-    /**
-     * @ORM\Column(type="string", length=1, nullable=true)
+     * @ORM\Column(type="string", columnDefinition="enum('male', 'femelle')" , nullable=true )
      * @Assert\Choice(choices = {"male", "female", null})
      */
     private $gender;
@@ -92,27 +49,12 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $phone;
 
-
     /**
-     * @var string $password
+     * @var date $birth_date
      *
-     * @ORM\Column(name="password", type="string", length=150)
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
      */
-    private $password;
-
-    /**
-     * @var string $salt
-     *
-     * @ORM\Column(name="salt", type="string", length=40)
-     */
-    private $salt;
-
-    /**
-     * @var boolean $active
-     *
-     * @ORM\Column(name="active", type="boolean")
-     */
-    private $active;
+    private $birth_date;
 
     /**
      * @var datetime $createdAt
@@ -122,100 +64,18 @@ class User implements AdvancedUserInterface, \Serializable
     private $createdAt;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(min=4)
-     */
-    private $rawPassword;
-
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @var ArrayCollection $tasks
      *
+     * @ORM\OneToMany(targetEntity="Papillon\TasksBundle\Entity\Tasks", mappedBy="author", cascade={"persist", "remove", "merge"})
      */
-    private $groups;
+    private $tasks;
 
 
     public function __construct()
     {
-        $this->groups = new ArrayCollection();
+        parent::__construct();
         $this->tasks = new ArrayCollection();
-        $this->active = true;
         $this->createdAt = new \DateTime();
-    }
-
-    public function encodePassword(PasswordEncoderInterface $encoder)
-    {
-        if ($this->rawPassword) {
-            $this->salt = sha1(uniqid(mt_rand()));
-            $this->password = $encoder->encodePassword(
-                $this->rawPassword,
-                $this->salt
-            );
-            $this->rawPassword = null;
-        }
-    }
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     * @return Role[]|string[] The user roles
-     */
-    public function getRoles()
-    {
-        return $this->groups->toArray();
-    }
-
-    public function eraseCredentials()
-    {
-        $this->rawPassword = null;
-    }
-
-    /**
-     * @Assert\True(message="The password should not contain your username.")
-     */
-    public function isRawPasswordValid()
-    {
-        return false === strpos($this->rawPassword, $this->username);
-    }
-
-    public function setRawPassword($password)
-    {
-        $this->rawPassword = $password;
-    }
-
-    public function getRawPassword()
-    {
-        return $this->rawPassword;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
 
@@ -226,113 +86,60 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getFullname()
     {
-        return ($this->first_name && $this->last_name) ? $this->first_name .' '. $this->last_name : null;
+        return ($this->first_name && $this->last_name) ? $this->first_name . ' ' . $this->last_name : null;
     }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     */
-    public function setEmail($email)
+
+    function __toString()
     {
-        $this->email = $email;
+        return ($this->getFullname()) ? $this->getFullname() : $this->getUsername();
     }
 
     /**
-     * Get email
+     * Set first_name
      *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set active
-     *
-     * @param boolean $active
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
-    }
-
-    /**
-     * Get active
-     *
-     * @return boolean
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
-
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
+     * @param string $firstName
      * @return User
      */
-    public function setCreatedAt($createdAt)
+    public function setFirstName($firstName)
     {
-        $this->createdAt = $createdAt;
+        $this->first_name = $firstName;
 
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get first_name
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getCreatedAt()
+    public function getFirstName()
     {
-        return $this->createdAt;
+        return $this->first_name;
     }
 
+    /**
+     * Set last_name
+     *
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get last_name
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
 
     /**
      * Add tasks
@@ -358,167 +165,11 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get tasks
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection $tasks
      */
     public function getTasks()
     {
         return $this->tasks;
-    }
-
-    /**
-     * Add groups
-     *
-     * @param \Papillon\UserBundle\Entity\Group $groups
-     * @return User
-     */
-    public function addGroup(\Papillon\UserBundle\Entity\Group $groups)
-    {
-        $this->groups[] = $groups;
-
-        return $this;
-    }
-
-    /**
-     * Remove groups
-     *
-     * @param \Papillon\UserBundle\Entity\Group $groups
-     */
-    public function removeGroup(\Papillon\UserBundle\Entity\Group $groups)
-    {
-        $this->groups->removeElement($groups);
-    }
-
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->active;
-    }
-
-
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->active,
-            $this->username
-        ));
-    }
-
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->active,
-            $this->username
-            ) = unserialize($serialized);
-    }
-
-
-    function __toString()
-    {
-        return ($this->getFullname()) ? $this->getFullname() : $this->getUsername();
-    }
-
-    /**
-     * Set first_name
-     *
-     * @param string $firstName
-     * @return User
-     */
-    public function setFirstName($firstName)
-    {
-        $this->first_name = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get first_name
-     *
-     * @return string 
-     */
-    public function getFirstName()
-    {
-        return $this->first_name;
-    }
-
-    /**
-     * Set last_name
-     *
-     * @param string $lastName
-     * @return User
-     */
-    public function setLastName($lastName)
-    {
-        $this->last_name = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * Get last_name
-     *
-     * @return string 
-     */
-    public function getLastName()
-    {
-        return $this->last_name;
-    }
-
-    /**
-     * Set birth_date
-     *
-     * @param \DateTime $birthDate
-     * @return User
-     */
-    public function setBirthDate($birthDate)
-    {
-        $this->birth_date = $birthDate;
-
-        return $this;
-    }
-
-    /**
-     * Get birth_date
-     *
-     * @return \DateTime 
-     */
-    public function getBirthDate()
-    {
-        return $this->birth_date;
     }
 
     /**
@@ -537,7 +188,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Get gender
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getGender()
     {
@@ -548,7 +199,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Set phone
      *
      * @param string $phone
-     * @return User
+     * @return string
      */
     public function setPhone($phone)
     {
@@ -560,10 +211,57 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set birth_date
+     *
+     * @param \DateTime $birthDate
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birth_date = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birth_date
+     *
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birth_date;
+    }
+
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

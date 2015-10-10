@@ -12,9 +12,9 @@ class Tasks
 
 
     /**
-     * @var Author
+     * @var Author $author
      *
-     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User", inversedBy="Tasks")
+     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User",cascade={"persist", "remove", "merge"})
      * @ORM\JoinColumn(name="author_id",referencedColumnName="id")
      */
     private $author;

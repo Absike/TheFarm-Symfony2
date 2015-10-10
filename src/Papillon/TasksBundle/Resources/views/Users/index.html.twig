@@ -15,29 +15,31 @@
             <div class="box-head-light"><h5>Tasks</h5></div>
             <div class="box-content no-padding grey-bg">
 
-                <table class="i-table fullwidth">
+                <table id="users_list" class="display" cellspacing="0" cellpadding="0" border="0">
 
                     <thead>
                     <tr>
-                        <td>{{ knp_pagination_sortable(pUsers, 'No.', 'a.id') }}</td>
-                        <td{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username', 'a.username') }}</td>
-                        <td{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</td>
-                        <td>Enabled</td>
-                        <td></td>
+                        <th></th>
+                        <th{% if pUsers.isSorted('a.Username') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Username.', 'a.username') }}</th>
+                        <th{% if pUsers.isSorted('a.Email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Email', 'a.email') }}</th>
+                        <th{% if pUsers.isSorted('a.Phone') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pUsers, 'Phone', 'a.phone') }}</th>
+                        <th></th>
                     </tr>
                     </thead>
 
                     <tbody>
                     {% for user in pUsers %}
                         <tr class="{% if loop.index is odd %}dark{% else %}light{%  endif %}">
-                            <td>{{ user.id }}</td>
+                            <td><a href="#">{{ user.id }}</a></td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-                            <td class="text-center">{% if (user.active) %} <span class="glyphicon glyphicon-ok"></span> {% endif %}</td>
+                            <td>{{ user.phone }}</td>
                             <td class="button-action">
-                                <a href="#" type="button" class="btn btn-default btn-xs">View</a>
-                                <a href="#" type="button" class="btn btn-info btn-xs">Edit</a>
-                                <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
+                                {% if not (user.enabled) %}
+                                    <a href="#" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-lock"></span></a>
+                                {% endif %}
+                                <a href="#" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="#" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -54,5 +56,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

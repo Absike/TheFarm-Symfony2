@@ -1,3 +1,8 @@
+_ajaxProxy:
+    resource: "@ApiProxyBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 papillon_all_users:
     pattern:  /users
     defaults: { _controller: ApiRestBundle:User:all, _format: json }

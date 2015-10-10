@@ -45,7 +45,7 @@ class Projects
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=20)
+     * @ORM\Column(name="type", type="string", length=20 , nullable=true)
      */
     private $type;
 

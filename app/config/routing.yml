@@ -1,8 +1,3 @@
-_ajaxProxy:
-    resource: "@ApiProxyBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 api_rest:
     type : rest
     resource: "@ApiRestBundle/Resources/config/routing.yml"
@@ -12,17 +7,12 @@ NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
 
-papillon_tasks:
-    resource: "@PapillonTasksBundle/Resources/config/routing.yml"
-    prefix:   /
-
 papillon_login:
     resource: "@PapillonUserBundle/Resources/config/routing.yml"
 
-PapillonUserBundle:
-    resource: "@PapillonUserBundle/Controller/"
-    type: annotation
-    prefix: /
+papillon_tasks:
+    resource: "@PapillonTasksBundle/Resources/config/routing.yml"
+    prefix:   /
 
 PapillonTasksBundle:
     resource: "@PapillonTasksBundle/Controller/"

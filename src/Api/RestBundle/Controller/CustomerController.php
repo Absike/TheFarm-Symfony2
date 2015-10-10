@@ -13,7 +13,22 @@ class CustomerController extends Controller {
      */
     public function allAction()
     {
-        return $this->get('_query')->_query("PapillonTasksBundle:Customers");
+        $data = $this->get('_query')->_query("PapillonTasksBundle:Customers");
+
+        $aData = array();
+        foreach($data as $item){
+
+            array_push($aData , array(
+                $item->getId(),
+                $item->getName() ,
+                $item->getAdresse(),
+                $item->getPhone(),
+                $item->getFax()
+            ));
+        }
+
+        $_aData['aaData'] = $aData;
+        return $_aData;
     }
 
 

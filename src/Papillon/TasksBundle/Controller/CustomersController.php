@@ -10,8 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class CustomersController
- * @package Papillon\TasksBundle\Controller
+ * @Route("/admin")
  */
 class CustomersController extends Controller
 {

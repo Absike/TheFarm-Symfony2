@@ -43,15 +43,15 @@ class RepositoryQuery
         //Filter
         if (count($filter)) {
             foreach ($filter as $key => $value) {
-                $qb->->andWhere('q.' . $key . '=' . ':' . $key)->setParameter($key, $value);
+                $qb->andWhere('q.' . $key . '=' . ':' . $key)->setParameter($key, $value);
             }
         }
 
         //OrderBy
-        if (count($params['orderby'])) {
+        if (isset($params['orderby'])) {
             foreach ($params['orderby'] as $sort => $order) {
                // Default $order = 'ASC' $order = null
-               $qb->->addOrderBy('q.'.$sort , $order);
+               $qb->addOrderBy('q.'.$sort , $order);
             }
         }
 
