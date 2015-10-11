@@ -22,11 +22,16 @@ class TasksType extends AbstractType
         $builder
             ->add('priority','choice', array('choices'   => $priority,'data' => 'new','required'  => true,'empty_value' => 'Choose something'))
             ->add('status','choice', array('choices'   => $status,'required'  => true,'empty_value' => 'Choose something...'))
-            ->add('description', 'textarea')
+            ->add('description',"textarea", array(
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'medium' // simple, advanced, bbcode
+                )
+            ))
             ->add('author', 'entity', array(
                 'class' => 'PapillonUserBundle:User',
-                'query_builder' => function(UserRepository $repository) { return $repository->getAllUser(); },
-                'empty_value' => 'Assigned to ...',
+                //'query_builder' => function(UserRepository $repository) { return $repository->getAllUser(); },
+                'empty_value' => '',
             ))
         ;
     }

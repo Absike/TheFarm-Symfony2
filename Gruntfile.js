@@ -16,7 +16,8 @@ module.exports = function (grunt) {
                     'js/jquery.dataTables.js': 'datatables/media/js/jquery.dataTables.js',
                     'js/jquery-ui.min.js':     'jquery-ui/ui/minified/jquery-ui.min.js',
                     'js/jquery.datetimepicker.js': 'datetimepicker/jquery.datetimepicker.js',
-                    'js/jquery.validate.min.js': 'jquery-validation/dist/jquery.validate.min.js'
+                    'js/jquery.validate.min.js': 'jquery-validation/dist/jquery.validate.min.js',
+                    'js/select2.min.js':'select2/dist/js/select2.min.js',
             }
             },
             stylesheets: {
@@ -25,7 +26,8 @@ module.exports = function (grunt) {
                     'css/font-awesome.css':      'font-awesome/css/font-awesome.css',
                     'css/jquery.dataTables.css': 'datatables/media/css/jquery.dataTables.css',
                     'css/jquery-ui.min.css': 'jquery-ui/themes/flick/jquery-ui.min.css',
-                    'css/jquery.datetimepicker.css': 'datetimepicker/jquery.datetimepicker.css'
+                    'css/jquery.datetimepicker.css': 'datetimepicker/jquery.datetimepicker.css',
+                    'css/select2.min.css':'select2/dist/css/select2.min.css'
                 }
             },
             fonts: {
