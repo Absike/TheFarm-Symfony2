@@ -118,8 +118,6 @@ fos_user:
     user_class: Papillon\UserBundle\Entity\User
 
 nelmio_api_doc: ~
-genemu_form:
-    date: ~
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
@@ -137,5 +135,9 @@ ornicar_gravatar: ~
 parameters:
     max_users_per_page: 12
 
-
-
+genemu_form:
+    date: ~
+    select2: ~
+    autocomplete: ~
+    tinymce:
+        enabled: true

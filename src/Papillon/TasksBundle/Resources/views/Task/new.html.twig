@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput"></label>
                         <div class="col-sm-10">
-                            {{ form_widget(form.author, {'attr': {'class': 'form-control' }}) }}
+                            {{ form_widget(form.author, {'attr': {'class': 'select2' }}) }}
                         </div>
                     </div>
 
@@ -56,6 +56,19 @@
             </form>
         </div><!-- /.col-lg-12 -->
     </div><!-- /.row -->
+
+
+    <script type="text/javascript">
+        $(function(){
+
+            $(".select2").select2({
+                placeholder: "Select a user",
+                allowClear: true
+            });
+
+        })
+    </script>
+
 {% endblock %}
 
 

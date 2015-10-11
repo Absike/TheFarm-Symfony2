@@ -14,7 +14,7 @@ class Tasks
     /**
      * @var Author $author
      *
-     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User",cascade={"persist", "remove", "merge"})
+     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User",inversedBy="tasks",cascade={"persist", "remove", "merge"})
      * @ORM\JoinColumn(name="author_id",referencedColumnName="id")
      */
     private $author;
@@ -22,7 +22,7 @@ class Tasks
     /**
      * @var AssignedBy
      *
-     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User", inversedBy="Tasks")
+     * @ORM\ManyToOne(targetEntity="Papillon\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assigned_by",referencedColumnName="id")
      */
     private $assignedBy;
