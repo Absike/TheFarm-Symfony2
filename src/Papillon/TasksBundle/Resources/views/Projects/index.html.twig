@@ -10,27 +10,30 @@
         <a href="{{ path('new_project') }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
     </div>
 
-    <div class="nonborderbox">
-        <div class="box-element">
-            <div class="box-head-light"><h5>{{ 'My projets'|trans }}</h5></div>
-            <div class="box-content no-padding grey-bg">
-                <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Project</th>
-                        <th>Customer</th>
-                        <th>Opening</th>
-                        <th>Closing</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                </table>
 
-                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="Loading...">
+    <div class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions"></div>
+            <h5 class="panel-title">{{ 'My projets'|trans }}</h5>
+        </header>
+        <div class="panel-body">
+            <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable" id="project_list">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Project</th>
+                    <th>Customer</th>
+                    <th>Opening</th>
+                    <th>Closing</th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
 
-                <div class="clearfix"></div>
-            </div>
+            <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="Loading...">
+
+            <div class="clearfix"></div>
+
         </div>
     </div>
 
@@ -60,7 +63,7 @@
 
                 }
 
-                DataTableBuilder.init('#tasks_list', {
+                DataTableBuilder.init('#project_list', {
                     "aaSorting": [[1, "asc"]],
                     "aaData": aData,
                     "aoColumns": [
@@ -69,7 +72,7 @@
                         null,
                         {"sClass": "center"},
                         {"sClass": "center"},
-                        {"mData": null, "sWidth": "10%" ,"sClass": "center", "bSearchable": false, "bSortable": false}
+                        {"mData": null, "sWidth": "5%" ,"sClass": "center", "bSearchable": false, "bSortable": false}
                     ],
                     "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 

@@ -10,45 +10,48 @@
         <a href="{{ path('new_task') }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
     </div>
 
-    <div class="nonborderbox">
-        <div class="box-element">
-            <div class="box-head-light"><h5>Tasks</h5></div>
-            <div class="box-content no-padding grey-bg">
-                <table id="tasks_list" class="display" cellspacing="0" cellpadding="0" border="0" style="text-align: center">
-                    <thead>
+
+    <div class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions"></div>
+            <h5 class="panel-title">{{ 'Tasks'|trans }}</h5>
+        </header>
+        <div class="panel-body">
+            <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable" id="tasks_list">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Subject</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Last update</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for item in tasks %}
                     <tr>
-                        <th></th>
-                        <th>Subject</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th>Priority</th>
-                        <th>Last update</th>
-                        <th></th>
+                        <td><a href="#">{{ item.id }}</a></td>
+                        <td>{{ item.subject }}</td>
+                        <td>{{ item.timespent }}</td>
+                        <td><span class="label label-{{ item.status }}">{{ item.status }}</span></td>
+                        <td><span class="label label-{{ item.status }}">{{ item.priority|trans }}</span></td>
+                        <td>{{ item.updatedAt|date("d M Y H:i") }}</td>
+                        <td class="button-action">
+                            <a href="#" type="button" class="btn btn-info btn-xs">Edit</a>
+                            <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
+                        </td>
                     </tr>
-                    </thead>
+                {% endfor %}
+                </tbody>
+            </table>
 
-                    <tbody>
-                    {% for item in tasks %}
-                        <tr>
-                            <td><a href="#">{{ item.id }}</a></td>
-                            <td>{{ item.subject }}</td>
-                            <td>{{ item.timespent }}</td>
-                            <td><span class="label label-{{ item.status }}">{{ item.status }}</span></td>
-                            <td><span class="label label-{{ item.status }}">{{ item.priority|trans }}</span></td>
-                            <td>{{ item.updatedAt|date("d M Y H:i") }}</td>
-                            <td class="button-action">
-                                <a href="#" type="button" class="btn btn-info btn-xs">Edit</a>
-                                <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="Loading...">
 
-                <img id="preloading" src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="loiding...">
+            <div class="clearfix"></div>
 
-                <div class="clearfix"></div>
-            </div>
         </div>
     </div>
 

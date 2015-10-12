@@ -22,8 +22,7 @@ class CustomerController extends Controller {
                 $item->getId(),
                 $item->getName() ,
                 $item->getAdresse(),
-                $item->getPhone(),
-                $item->getFax()
+                $item->getPhone()
             ));
         }
 
