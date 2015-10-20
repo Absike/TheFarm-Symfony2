@@ -13,6 +13,9 @@ table, tbody, thead, tr, th, td {
     font-family: inherit;
 }
 
+body{
+    background-color: #ecf0f5;
+}
 
 body p {
     font-size: 12px;
@@ -667,7 +670,7 @@ table.i-table tr.dark td {
 }
 
 .navigation span.current {
-    background-color: #60912B;
+    background-color: #60912b;
     color:#fff;
     text-shadow: 0px 1px 0px #000;
 }

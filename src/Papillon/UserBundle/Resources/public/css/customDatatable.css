@@ -27,10 +27,16 @@
     background-color: transparent !important;
 }
 
+
+.pagination>li>a{
+    color: #34495E;
+}
+
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
     color: #fff;
-    background-color: #62a8ea;
-    border-color: #62a8ea;
+    background-color: #60912b;
+    border-color: #60912b;
     cursor: default;
 }
+

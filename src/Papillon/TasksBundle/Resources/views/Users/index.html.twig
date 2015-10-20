@@ -4,14 +4,16 @@
 
 {% block content %}
 
+
+    <div style="padding-bottom: 10px;" class="pull-right">
+        <a class="btn btn-success btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export CSV</a>
+        <a class="btn btn-success btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export PDF</a>
+        <a href="{{ path('new_customer') }}" class="btn btn-success btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
+    </div>
+
+    <div class="clearfix"></div>
+
     <div class="panel">
-
-        <div style="text-align:right;width:100%;">
-            <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export CSV</a>
-            <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export PDF</a>
-            <a class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
-        </div>
-
         <header class="panel-heading">
             <div class="panel-actions"></div>
             <h5 class="panel-title">{{ 'Users'|trans }}</h5>
