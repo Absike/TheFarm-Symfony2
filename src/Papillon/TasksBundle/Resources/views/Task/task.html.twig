@@ -15,8 +15,15 @@
 
     <div class="panel">
         <header class="panel-heading">
-            <div class="panel-actions"></div>
-            <h5 class="panel-title">{{ 'Tasks'|trans }}</h5>
+            <div class="panel-actions">
+                <div class="form-inline">
+                    <div class="col-sm-12 text-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search"  class="dataTables_filter form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
         <div class="panel-body">
             <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable" id="tasks_list">
@@ -62,6 +69,7 @@
 
             DataTableBuilder.init('#tasks_list', {
                 "aaSorting": [[1, "asc"]],
+                "sDom" : 'ltipr',
                 "aoColumns": [
                     { "bSortable": false },
                     null,

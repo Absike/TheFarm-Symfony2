@@ -15,8 +15,15 @@
     <!-- Panel Basic -->
     <div class="panel">
         <header class="panel-heading">
-            <div class="panel-actions"></div>
-            <h3 class="panel-title">Customers</h3>
+            <div class="panel-actions">
+                <div class="form-inline">
+                    <div class="col-sm-12 text-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search"  class="dataTables_filter form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
         <div class="panel-body">
             <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable" id="customers_list">
@@ -28,9 +35,10 @@
     <script type="text/javascript" charset="utf-8">
         $(function () {
 
-            $("#customers_list").dataTable({
+            var oTable = $("#customers_list").dataTable({
                 "responsive": true,
                 "bDestroy": true,
+                "sDom" : 'ltipr',
                 //"sDom": "t" , // just show table, no other controls
                 "aaSorting": [[1, "asc"]],
                 "oLanguage": {
@@ -52,7 +60,7 @@
                     {"sTitle": "Name"},
                     {"sTitle": "Adresse"},
                     {"sTitle": "Phone"},
-                    {"mData": null, "sWidth": "5%" , "sClass": "center" , "bSearchable": false, "bSortable": false}
+                    {"mData": null, "sWidth": "10%" , "sClass": "center" , "bSearchable": false, "bSortable": false}
                 ],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
@@ -66,6 +74,10 @@
                     $('td:eq(4)', nRow).html(bAction);
                     return nRow;
                 }
+            });
+
+            $('.dataTables_filter').on('keyup',function(){
+                oTable.fnFilter($(this).val());
             });
 
 

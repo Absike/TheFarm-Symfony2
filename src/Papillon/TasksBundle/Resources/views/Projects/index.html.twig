@@ -13,9 +13,17 @@
 
     <div class="panel">
         <header class="panel-heading">
-            <div class="panel-actions"></div>
-            <h5 class="panel-title">{{ 'My projets'|trans }}</h5>
+            <div class="panel-actions">
+                <div class="form-inline">
+                    <div class="col-sm-12 text-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search"  class="dataTables_filter form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
+
         <div class="panel-body">
             <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable" id="project_list">
                 <thead>
@@ -63,16 +71,17 @@
 
                 }
 
-                DataTableBuilder.init('#project_list', {
+                var oTable = DataTableBuilder.init('#project_list', {
                     "aaSorting": [[1, "asc"]],
                     "aaData": aData,
+                    "sDom" : 'ltipr',
                     "aoColumns": [
                         {"sClass": "center" , "bSortable": false },
                         null,
                         null,
                         {"sClass": "center"},
                         {"sClass": "center"},
-                        {"mData": null, "sWidth": "5%" ,"sClass": "center", "bSearchable": false, "bSortable": false}
+                        {"mData": null, "sWidth": "10%" ,"sClass": "center", "bSearchable": false, "bSortable": false}
                     ],
                     "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 
@@ -83,6 +92,7 @@
                         return nRow;
                     }
                 } );
+
             })
 
         });
