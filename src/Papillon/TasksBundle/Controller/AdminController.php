@@ -33,16 +33,17 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
 
-        $oUsers = $this->getDoctrine()->getRepository('PapillonUserBundle:User')->getAllUser();
+        /*$oUsers = $this->getDoctrine()->getRepository('PapillonUserBundle:User')->getAllUser();
         $paginator  = $this->get('knp_paginator');
 
         $usersPagination = $paginator->paginate(
             $oUsers,
             $request->query->get('page', 1),
             $this->container->getParameter('max_users_per_page')
-        );
+        );*/
 
-        return $this->render('PapillonTasksBundle:Users:index.html.twig', array('pUsers' => $usersPagination));
+        $oUsers = $this->getDoctrine()->getRepository('PapillonUserBundle:User')->findAll();
+        return $this->render('PapillonTasksBundle:Users:index.html.twig', array('pUsers' => $oUsers));
     }
 
     /**

@@ -16,6 +16,10 @@ var DataTableBuilder =
 
         var oTable = $(container).dataTable(config);
 
+        $('.dataTables_filter').on('keyup',function(){
+            oTable.fnFilter($(this).val());
+        });
+
         return oTable;
 
     },

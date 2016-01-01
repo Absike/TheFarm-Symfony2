@@ -4,42 +4,42 @@
 
 {% block content %}
 
-    <div style="text-align:right;width:100%;">
-        <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export
-            CSV</a>
-        <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export
-            PDF</a>
-        <a href="{{ path('new_customer') }}" class="btn btn-info btn-sm" role="button"><span
-                    class="glyphicon glyphicon-plus"></span> Add</a>
+    <div style="padding-bottom: 10px;" class="pull-right">
+        <a class="btn btn-success btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export CSV</a>
+        <a class="btn btn-success btn-sm" role="button"><span class="glyphicon glyphicon-download"></span> Export PDF</a>
+        <a href="{{ path('new_customer') }}" class="btn btn-success btn-sm" role="button"><span class="glyphicon glyphicon-plus"></span> Add</a>
     </div>
 
-    <div class="nonborderbox">
-        <div class="box-element">
-            <div class="box-head-light"><h5>Mes Clients</h5></div>
-            <div class="box-content no-padding grey-bg">
-                <table id="customers_list" class="display" cellspacing="0" cellpadding="0" border="0">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Name</th>
-                        <th>Adresse</th>
-                        <th>Phone</th>
-                        <th>Fax</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                </table>
-                <div class="clearfix"></div>
+    <div class="clearfix"></div>
+
+    <!-- Panel Basic -->
+    <div class="panel">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <div class="form-inline">
+                    <div class="col-sm-12 text-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search"  class="dataTables_filter form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
             </div>
+        </header>
+        <div class="panel-body">
+            <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable" id="customers_list">
+            </table>
         </div>
     </div>
-
+    <!-- End Panel Basic -->
 
     <script type="text/javascript" charset="utf-8">
         $(function () {
 
-            $("#customers_list").dataTable({
+            var oTable = $("#customers_list").dataTable({
+                "responsive": true,
                 "bDestroy": true,
+                "sDom" : 'ltipr',
+                //"sDom": "t" , // just show table, no other controls
                 "aaSorting": [[1, "asc"]],
                 "oLanguage": {
                     sLoadingRecords: '<img src="{{ asset('bundles/papillonuser/images/preloader.gif') }}" class="center-block" alt="loiding...">',
@@ -56,14 +56,15 @@
                     });
                 },
                 "aoColumns": [
-                    {"bVisible": false},
+                    {"sTitle": "#" , "bSortable": false  , "sClass": "center"},
                     {"sTitle": "Name"},
                     {"sTitle": "Adresse"},
                     {"sTitle": "Phone"},
-                    {"sTitle": "Fax"},
                     {"mData": null, "sWidth": "10%" , "sClass": "center" , "bSearchable": false, "bSortable": false}
                 ],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+
+                    $('td:eq(0)', nRow).html('<a href="">'+aData[0]+'</a>');
 
                     var bAction = '<div data-id="' + aData[0] + '">';
                     bAction += '<a href="#" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span></a>&nbsp';
@@ -73,6 +74,10 @@
                     $('td:eq(4)', nRow).html(bAction);
                     return nRow;
                 }
+            });
+
+            $('.dataTables_filter').on('keyup',function(){
+                oTable.fnFilter($(this).val());
             });
 
 

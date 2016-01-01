@@ -13,6 +13,9 @@ table, tbody, thead, tr, th, td {
     font-family: inherit;
 }
 
+body{
+    background-color: #ecf0f5;
+}
 
 body p {
     font-size: 12px;
@@ -22,6 +25,9 @@ body, button, input, select, textarea, .ui-widget {
     font-family: "Lucida Grande", verdana, "Lucida Sans Unicode", sans-serif;
     color: #222;
 }
+
+
+
 
 .nonborderbox *
 {
@@ -509,16 +515,6 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     background-color: #cda70d;
 }
 
-/******* CUSTOM PAGINATION *******/
-
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover, .pagination > .active > span:hover,
-.pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #60912b !important;
-    border-color: #60912b !important;
-}
-
 /******* Dashboard ************/
 
 .tile-stats {
@@ -674,7 +670,7 @@ table.i-table tr.dark td {
 }
 
 .navigation span.current {
-    background-color: #60912B;
+    background-color: #60912b;
     color:#fff;
     text-shadow: 0px 1px 0px #000;
 }
@@ -706,3 +702,37 @@ table.i-table tr.dark td {
 .container {
     margin-top: 50px;
 }
+
+/* icons */
+
+.btn-icon.btn-sm, .btn.icon.btn-sm {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.btn-icon, .btn.icon {
+    padding: 10px;
+    line-height: 1em;
+}
+
+.btn-flat {
+    background: 0 0;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+/* Table */
+
+.table {
+    color: #76838B;
+}
+
+.table thead tr th {
+    border-bottom: 1px solid #e4eaec;
+    font-weight: 400;
+    color: #526069;
+    vertical-align: bottom;
+    border-bottom: 2px solid #e4eaec;
+}
+
